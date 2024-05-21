@@ -1,0 +1,28 @@
+.summarizer-settlement-component {
+  border-radius: 7px;
+  padding: 10px;
+  background-color: var(--uwb-card-background-color);
+}
+
+::ng-deep .p-card {
+  background: transparent !important;
+  // border-color: transparent !important;
+  box-shadow: 10px 9px 35px -1px rgba(0, 0, 0, 0.2), 10px 20px 1px 0 rgba(0, 0, 0, 0.14), 10px 25px 3px 0 rgba(0, 0, 0, 0.12);
+  color:darkgray;
+}
+
+::ng-deep .p-card .p-card-body{
+  padding: 0.1rem 1.25rem;
+}
+
+::ng-deep .component-price-in {
+  .p-card {
+    border-color: var(--uwb-price-in-light-color);
+  }
+}
+
+::ng-deep .component-price-out {
+  .p-card {
+    border-color: var(--uwb-price-out-light-color);
+  }
+}

@@ -1,0 +1,27 @@
+<ng-container [ngSwitch]="dateChangerType">
+  <ng-container *ngSwitchCase="'month'">
+    <p-toolbar>
+      <i class="pi pi-angle-left text-4xl" (click)="onDateChange('previous')"></i>
+      <div class="flex flex-column align-items-center">
+        <span class="text-base">
+        {{ date.getFullYear() }}
+        </span>
+        <span class="text-3xl font-bold">
+        {{ getMonthName() }}
+        </span>
+      </div>
+      <i class="pi pi-angle-right text-4xl" (click)="onDateChange('next')"></i>
+    </p-toolbar>
+  </ng-container>
+  <ng-container *ngSwitchCase="'year'">
+    <p-toolbar class="year-date-changer">
+      <i class="pi pi-angle-left text-4xl" (click)="onDateChange('previous')"></i>
+      <div class="flex flex-column align-items-center">
+        <span class="text-base font-bold text-3xl">
+        {{ date.getFullYear() }}
+        </span>
+      </div>
+      <i class="pi pi-angle-right text-4xl" (click)="onDateChange('next')"></i>
+    </p-toolbar>
+  </ng-container>
+</ng-container>

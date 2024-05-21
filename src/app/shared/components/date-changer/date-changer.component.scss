@@ -1,0 +1,15 @@
+::ng-deep .p-toolbar {
+  background-color: var(--uwb-card-background-color);
+}
+
+.pi {
+  color: var(--uwb-primary-light);
+}
+
+.pi:hover {
+  transform: scale(1.5);
+}
+
+// ::ng-deep .year-date-changer .p-toolbar {
+//   width: 20%;
+// }

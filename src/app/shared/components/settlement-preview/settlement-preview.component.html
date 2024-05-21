@@ -1,0 +1,48 @@
+<div class="mt-2" [ngClass]="getComponentStyle('component-price-')">
+  <p-fieldset [legend]="getTitle()" [toggleable]="true">
+    <div class="component-settlement-preview"
+    [ngClass]="getComponentStyle('component-price-')">
+    <div class="navbar mt-2 w-full flex justify-content-end">
+      <div class="add-button mx-1">
+        <p-button icon="pi pi-plus" (onClick)="onButtonClick('add')"></p-button>
+      </div>
+      <div class="edit-button mx-1">
+        <p-button class="edit-button" icon="pi pi-pencil" [disabled]="!selectedSettlement" (onClick)="onButtonClick('edit')"></p-button>
+      </div>
+      <div class="delete-button mx-1">
+        <p-button class="delete-button" icon="pi pi-trash" [disabled]="!selectedSettlement" (onClick)="onButtonClick('delete')"></p-button>
+      </div>
+    </div>
+    <p-divider type="solid" />
+
+    <div class="middle">
+      <div class="p-2" *ngFor="let settlement of settlements">
+        <div class="list-item w-full flex align-items-center justify-content-between p-1"
+          [ngClass]="settlement === selectedSettlement ? getComponentStyle('selected-settlement selected-price-') : ''"
+          (click)="onSettlementSelected(settlement)"
+          >
+          <span>{{ settlement.description }}</span>
+          <span class="flex align-items-center text-2xl font-bold"
+            [ngClass]="getComponentStyle('price-') ">
+            <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>
+            {{ settlement.price }}
+            <i class="pi pi-dollar text-base font-bold"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- <div class="footer"
+    [ngStyle]="{'background-color': getPriceColor('var(--uwb-price-?-color)')}">
+    <span class="text-4xl">
+      <span class="flex justify-content-center align-items-center text-2xl font-bold">
+        <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>
+        {{ countAllPrices() }}
+        <i class="pi pi-dollar text-base font-bold"></i>
+      </span>
+    </span>
+  </div> -->
+
+  </p-fieldset>
+</div>

@@ -1,0 +1,174 @@
+.component-settlement-preview {
+  margin: 10px;
+  margin-bottom: 0px;
+  // border: 2px solid;
+  // border-radius: 7px;
+  // height: 300px;
+  overflow-y: auto;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.middle {
+  height: 200px;
+  overflow: auto;
+}
+
+.list-item {
+  color: darkgray;
+  font-size:14px;
+}
+
+
+::ng-deep .component-price-in {
+  border-color: var(--uwb-price-in-color);
+  .p-fieldset {
+    border-color: var(--uwb-price-in-color);
+  }
+  .p-fieldset .p-fieldset-legend {
+    border-color: var(--uwb-price-in-color);
+  }
+  .p-fieldset .p-fieldset-legend{
+    background-color: var(--uwb-price-in-color);
+    color: darkgray;
+    font-size: 20px;
+  }
+  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+    color: darkgray;
+  }
+}
+
+
+::ng-deep .component-price-out {
+  border-color: var(--uwb-price-out-color);
+  .p-fieldset {
+    border-color: var(--uwb-price-out-color);
+  }
+  .p-fieldset .p-fieldset-legend {
+    border-color: var(--uwb-price-out-color);
+  }
+  .p-fieldset .p-fieldset-legend {
+    background-color: var(--uwb-price-out-color);
+    color: darkgray;
+    font-size: 20px;
+  }
+  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+    color: darkgray;
+  }
+}
+
+::ng-deep .component-price-save {
+  border-color: var(--uwb-price-save-color);
+  .p-fieldset {
+    border-color: var(--uwb-price-save-color);
+  }
+  .p-fieldset .p-fieldset-legend {
+    border-color: var(--uwb-price-save-color);
+  }
+  .p-fieldset .p-fieldset-legend {
+    background-color: var(--uwb-price-save-color);
+    color: darkgray;
+    font-size: 20px;
+  }
+  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+    color: darkgray;
+  }
+}
+
+
+.price-in {
+  color: var(--uwb-price-in-color);
+}
+
+.price-in .pi {
+  color: var(--uwb-price-in-color);
+}
+
+.price-out {
+  color: var(--uwb-price-out-color);
+}
+
+.price-out .pi {
+  color: var(--uwb-price-out-color);
+}
+
+.price-save .pi {
+  color: var(--uwb-price-save-color);
+}
+
+.price-save {
+  color: var(--uwb-price-save-color);
+}
+
+.selected-settlement {
+  border-radius: 5px;
+  transition: background-color 0.5s ease-in-out, background-image 0.5s ease-in-out;
+}
+
+.selected-price-in {
+  background: rgb(114,149,135);
+  background: linear-gradient(95deg, rgba(114,149,135,1) 64%, rgba(199,104,255,0) 85%);
+}
+
+.selected-price-out {
+  background: rgb(253,135,109);
+  background: linear-gradient(95deg, rgba(253,135,109,1) 64%, rgba(199,104,255,0) 85%);
+}
+
+.selected-price-save {
+  background: rgb(175,159,100);
+  background: linear-gradient(95deg, rgba(175,159,100,1) 64%, rgba(199,104,255,0) 85%);
+}
+
+.footer {
+  margin: 0 10px;
+  border-radius: 7px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  color: var(--uwb-button-text-color);
+}
+
+::ng-deep .p-button {
+  background: transparent;
+  height: 30px !important;
+  width: 30px !important;
+}
+
+::ng-deep .add-button .p-button:hover {
+  background-color: var(--uwb-price-in-color) !important;
+  color: white;
+}
+
+::ng-deep .add-button .p-button {
+  border-color: var(--uwb-price-in-color) !important;
+}
+
+::ng-deep .edit-button .p-button:hover {
+  background-color: var(--uwb-price-save-color) !important;
+  color: white;
+}
+
+::ng-deep .edit-button .p-button {
+  border-color: var(--uwb-price-save-color) !important;
+}
+
+::ng-deep .delete-button .p-button:hover {
+  background-color: var(--uwb-price-out-color) !important;
+  color: white;
+}
+
+::ng-deep .delete-button .p-button {
+  border-color: var(--uwb-price-out-color) !important;
+}
+
+::ng-deep .p-fieldset {
+  background-color: var(--uwb-card-background-color);
+}
+
+::ng-deep .p-fieldset .p-fieldset-content {
+  padding: 5px;
+}
+
+::ng-deep .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a .p-fieldset-toggler {
+  display: none;
+}

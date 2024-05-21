@@ -30,7 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/app-styles.scss",
+              "src/assets/scss/global.scss",
+              "src/assets/scss/primeng-theme.scss",
+              "node_modules/primeng/resources/primeng.css",
+              "node_modules/primeflex/primeflex.css"
             ],
             "scripts": []
           },

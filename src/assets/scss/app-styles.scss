@@ -1,0 +1,95 @@
+/*GLOBAL COLORS*/
+$uwb-primary: #009688; // turkusowy
+$uwb-primary-light: #4db6ac; // jaśniejszy turkusowy
+$uwb-secondary: #00796b; // ciemniejszy turkusowy
+$uwb-primary-second-lighter: #80cbc4; // bardzo jasny turkusowy
+$uwb-background: #e0f7fa; // bardzo jasny błękitny
+
+$uwb-menu-scrollbar-track: #80cbc4;
+$uwb-menu-scrollbar-thumb: #4db6ac;
+$uwb-menu-scrollbar-thumb-hover: #00796b;
+$uwb-checkbox-marked: #004d40;
+
+/*TABLE COLORS*/
+$uwb-label-color: #ffffff;
+$uwb-table-header-background-color: #b2dfdb; // bardzo jasny turkusowy
+$uwb-table-header-color: #006064; // ciemny turkusowy
+$uwb-selected-row-light-text: #ffffff;
+$uwb-selected-row-light-bg: #00838f; // turkusowy
+$uwb-table-row-even-highlight-background: #00838f; // turkusowy
+$uwb-table-row-even-highlight-text: #004d40; // ciemny turkusowy
+$uwb-table-row-even-selected-background: #00838f; // turkusowy
+$uwb-tab-background: #e0f2f1; // bardzo jasny turkusowy
+$uwb-tab-content-background: #ffffff;
+$uwb-tab-frame: #e0f7fa; // bardzo jasny błękitny
+$uwb-internal-tab-font-color: #004d40; // ciemny turkusowy
+$uwb-internal-tab-header-background: #b2dfdb; // bardzo jasny turkusowy
+$uwb-front-tab-background: #e0f7fa; // bardzo jasny błękitny
+$uwb-front-tab-text-color: #004d40; // ciemny turkusowy
+
+/*BUTTONS COLORS*/
+$uwb-button-background: #009688; // turkusowy
+$uwb-button-border: #009688; // turkusowy
+$uwb-button-hover-background-color: #ffffff;
+$uwb-button-hover-text-color: #009688; // turkusowy
+$uwb-button-text-color: #ffffff;
+
+$wild-sand: #f4f4f4;
+$shady-lady: #9f9b9d;
+$mercury: #e7e7e7;
+$malibu: #67b0d1;
+$lochmara: #00a3a9;
+$congress-blue: #058b90;
+$cardinal: #c41e3a;
+$gray: #808080;
+$tundora: #3c3a3b;
+
+$price-in-color: #059058;
+$price-out-color: #901f05;
+$price-save-color: #9a7a06;
+$price-in-light-color: #67ab90;
+$price-out-light-color: #fd876d;
+$price-save-light-color: #af9f64;
+$card-background-color: #1c1c1d;
+
+:root {
+    --uwb-primary: #{$uwb-primary};
+    --uwb-secondary: #{$uwb-secondary};
+    --uwb-background: #{$uwb-background};
+    --uwb-tab-background: #{$uwb-tab-background};
+    --uwb-primary-second-lighter: #{$uwb-primary-second-lighter};
+    --uwb-tab-content-background: #{$uwb-tab-content-background};
+    --uwb-tab-frame: #{$uwb-tab-frame};
+    --uwb-internal-tab-font-color: #{$uwb-internal-tab-font-color};
+    --uwb-internal-tab-header-background: #{$uwb-internal-tab-header-background};
+    --uwb-front-tab-background: #{$uwb-front-tab-background};
+    --uwb-front-tab-text-color: #{$uwb-front-tab-text-color};
+    --uwb-button-text-color: #{$uwb-button-text-color};
+    --uwb-label-color: #{$uwb-label-color};
+    --uwb-font-size: 14px;
+    --uwb-font-size-larger: 16px;
+    --uwb-font-size-table: 12px;
+    --uwb-table-header-background-color: #{$uwb-table-header-background-color};
+    --uwb-table-header-color: #{$uwb-table-header-color};
+    --uwb-button-hover-background-color: #{$uwb-button-hover-background-color};
+    --uwb-selected-row-light-text: #{$uwb-selected-row-light-text};
+    --uwb-selected-row-light-bg: #{$uwb-selected-row-light-bg};
+    --uwb-button-hover-text-color: #{$uwb-button-hover-text-color};
+    --uwb-table-row-even-highlight-background: #{$uwb-table-row-even-highlight-background};
+    --uwb-table-row-even-highlight-text: #{$uwb-table-row-even-highlight-text};
+    --uwb-table-row-even-selected-background: #{$uwb-table-row-even-selected-background};
+    --uwb-button-background: #{$uwb-button-background};
+    --uwb-button-border: #{$uwb-button-border};
+    --uwb-primary-light: #{$uwb-primary-light};
+    --uwb-checkbox-marked: #{$uwb-checkbox-marked};
+    --uwb-menu-scrollbar-track: #{$uwb-menu-scrollbar-track};
+    --uwb-menu-scrollbar-thumb: #{$uwb-menu-scrollbar-thumb};
+    --uwb-menu-scrollbar-thumb-hover: #{$uwb-menu-scrollbar-thumb-hover};
+    --uwb-price-in-color: #{$price-in-color};
+    --uwb-price-out-color: #{$price-out-color};
+    --uwb-price-save-color: #{$price-save-color};
+    --uwb-price-in-light-color: #{$price-in-light-color};
+    --uwb-price-out-light-color: #{$price-out-light-color};
+    --uwb-price-save-light-color: #{$price-save-light-color};
+    --uwb-card-background-color: #{$card-background-color};
+}

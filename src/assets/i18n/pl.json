@@ -1,0 +1,14 @@
+{
+  "global": {
+    "buttons": {
+      "save": "Zapisz",
+      "cancel": "Anuluj"
+    }
+  },
+  "settlement": {
+    "description": "Opis",
+    "price": "Koszt",
+    "date": "Data od",
+    "toDate": "Data do"
+  }
+}

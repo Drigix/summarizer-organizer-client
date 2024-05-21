@@ -1,0 +1,29 @@
+<app-form [formGroup]="formGroup!" (ngSubmit)="onSave()" (cancel)="onCloseDialog()">
+  <app-form-grid form-body>
+    <app-form-control [styleClass]="'col-12'">
+      <span class="p-float-label">
+        <input pInputText id="description" formControlName="description" minlength="2" maxlength="100"/>
+        <label htmlFor="description">{{ 'settlement.description' | translate }}</label>
+      </span>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <span class="p-float-label">
+        <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
+        <label htmlFor="price">{{ 'settlement.price' | translate }}</label>
+      </span>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-6'">
+      <span class="p-float-label">
+        <p-calendar formControlName="date" view="month" dateFormat="mm/yy" appendTo="body" />
+        <label htmlFor="date">{{ 'settlement.date' | translate }}</label>
+      </span>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-6'">
+      <span class="p-float-label">
+        <p-calendar formControlName="toDate" view="month" dateFormat="mm/yy" appendTo="body" />
+        <label htmlFor="toDate">{{ 'settlement.toDate' | translate }}</label>
+      </span>
+    </app-form-control>
+  </app-form-grid>
+</app-form>
+
