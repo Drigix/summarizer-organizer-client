@@ -7,7 +7,7 @@
       <div *ngIf="showSaveButton" class="button_wrapper_text">
         <p-button
           styleClass="ui-button_size_125"
-          label="{{ submitButtonLabel | translate }}"
+          icon="pi pi-check"
           type="submit"
           [disabled]="!!formRef.invalid || disabledButtonOption"
         ></p-button>
@@ -15,8 +15,8 @@
       <div *ngIf="showCancelButton" class="button_wrapper_text">
         <p-button
           styleClass="ui-button_size_125"
+          icon="pi pi-times"
           type="button"
-          label="{{ 'global.buttons.cancel' | translate }}"
           data-dismiss="modal"
           (onClick)="cancel.emit()"
         ></p-button>

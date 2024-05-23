@@ -1,0 +1,65 @@
+$shady-lady: #9f9b9d;
+
+.element_bordered {
+  border: 1px solid $shady-lady;
+}
+.button_wrapper_text {
+  margin: 2px;
+  white-space: nowrap;
+}
+.button_wrapper_icon {
+  margin: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.button_wrapper_dialog {
+  width: 100px;
+  height: 30px;
+  margin: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.buttons-container_dialog {
+  display: inline-flex;
+}
+.buttons-container_center {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ui-button_special_icon {
+  height: 31px !important;
+  width: 31px !important;
+}
+.ui-button_size_100 {
+  width: 100px;
+}
+.ui-button_size_125 {
+  width: 125px;
+  height: 30px !important;
+}
+.ui-button_size_75 {
+  width: 75px;
+  height: 30px !important;
+}
+.ui-button_height_30 {
+  height: 30px !important;
+}
+.ui-button_size_150 {
+  width: 150px;
+}
+.ui-button_size_175 {
+  width: 175px;
+  font-size: 17px !important;
+}
+.ui-button_size_200 {
+  width: 200px;
+}
+.ui-button_size_250 {
+  width: 250px;
+}
+
+.ui-button_size_300.ui-button {
+  width: 300px;
+}

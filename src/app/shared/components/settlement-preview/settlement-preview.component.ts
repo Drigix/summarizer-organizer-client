@@ -95,4 +95,8 @@ export class SettlementPreviewComponent implements OnInit {
     });
     return sum;
   }
+
+  goToLink(linkUrl: string): void {
+    window.open(linkUrl, "_blank");
+  }
 }

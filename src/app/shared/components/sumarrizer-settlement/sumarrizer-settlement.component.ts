@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SummarizeSettlement } from '@entities/summarize-settlement.model';
+import { PriceType } from '@entities/types/price.types';
 
 @Component({
   selector: 'app-sumarrizer-settlement',
@@ -22,10 +23,11 @@ export class SumarrizerSettlementComponent implements OnInit {
   ngOnInit() {
   }
 
-  getComponentStyle(string: string, index: number): string {
-    switch(index) {
-      case 0: string += 'in'; break;
-      case 1: string += 'out'; break;
+  getComponentStyle(string: string, type: PriceType, value = 0): string {
+    if(type === 'save') {
+      string += value > 0 ? 'in': 'out';
+    } else {
+      string += type;
     }
     return string;
   }

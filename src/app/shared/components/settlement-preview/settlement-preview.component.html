@@ -21,7 +21,12 @@
           [ngClass]="settlement === selectedSettlement ? getComponentStyle('selected-settlement selected-price-') : ''"
           (click)="onSettlementSelected(settlement)"
           >
-          <span>{{ settlement.description }}</span>
+          <span>
+            <a *ngIf="settlement.linkUrl" (click)="goToLink(settlement.linkUrl)">
+              <i class="pi pi-external-link text-base font-bold mr-2"></i>
+            </a>
+            {{ settlement.description }}
+          </span>
           <span class="flex align-items-center text-2xl font-bold"
             [ngClass]="getComponentStyle('price-') ">
             <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>

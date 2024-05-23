@@ -22,6 +22,11 @@ form {
   align-items: center;
 }
 
+::ng-deep .buttons-container_center .p-button {
+  width: 100px !important;
+  height: 35px !important;
+}
+
 ::ng-deep .modal-body::-webkit-scrollbar {
   width: 12px;
 }

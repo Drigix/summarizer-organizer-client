@@ -3,12 +3,17 @@
       <ng-template pTemplate="label">
           <div class="flex flex-wrap gap-3">
               <ng-container *ngFor="let meterItem of values; let index = index">
-                <div [ngClass]="getComponentStyle('component-price-', index)">
+                <div [ngClass]="getComponentStyle('component-price-', meterItem.type!, meterItem.balance)">
                   <p-card class="flex-1">
                       <div class="flex justify-content-between gap-5">
                           <div class="flex flex-column gap-1">
                               <span class="text-secondary text-sm">{{ meterItem.label }}</span>
-                              <span class="font-bold text-lg">{{ meterItem.value }}%</span>
+                              <span *ngIf="meterItem.balance" class="font-bold text-lg">
+                                {{ meterItem.balance }} $
+                              </span>
+                              <span *ngIf="!meterItem.balance" class="font-bold text-lg">
+                                {{ meterItem.value }} %
+                              </span>
                           </div>
                           <span class="w-2rem h-2rem border-circle inline-flex justify-content-center align-items-center text-center" [style]="{ 'background-color': meterItem.color, color: '#ffffff' }">
                               <i [class]="meterItem.icon"></i>

@@ -7,6 +7,7 @@ import { SettlementDialogComponent } from './settlement-dialog/settlement-dialog
 import { SettlementsService } from '@services/settlement.service';
 import { SummarizeSettlement } from '@entities/summarize-settlement.model';
 import { ConfirmationService } from 'primeng/api';
+import { SettlementSavingDialogComponent } from './settlement-saving-dialog/settlement-saving-dialog.component';
 
 @Component({
   selector: 'app-settlements',
@@ -149,17 +150,31 @@ export class SettlementsComponent implements OnInit {
         key: 'mainDialog'
       });
     } else {
-      const ref = this.dialogService.open(SettlementDialogComponent, {
-        header: 'Test',
-        data: {
-          clickType: emitSettlementPreviewType.buttonClickType,
-          selectedSettlement: emitSettlementPreviewType.settlement,
-          priceType: emitSettlementPreviewType.priceType,
-          date: this.date
-        },
-        width: '50%'
-      });
-      ref.onClose.subscribe(res => this.onDialogResponse(res));
+      if(emitSettlementPreviewType.priceType === 'save') {
+        const ref = this.dialogService.open(SettlementSavingDialogComponent, {
+          header: 'Test',
+          data: {
+            clickType: emitSettlementPreviewType.buttonClickType,
+            selectedSettlement: emitSettlementPreviewType.settlement,
+            priceType: emitSettlementPreviewType.priceType,
+            date: this.date
+          },
+          width: '50%'
+        });
+        ref.onClose.subscribe(res => this.onDialogResponse(res));
+      } else {
+        const ref = this.dialogService.open(SettlementDialogComponent, {
+          header: 'Test',
+          data: {
+            clickType: emitSettlementPreviewType.buttonClickType,
+            selectedSettlement: emitSettlementPreviewType.settlement,
+            priceType: emitSettlementPreviewType.priceType,
+            date: this.date
+          },
+          width: '50%'
+        });
+        ref.onClose.subscribe(res => this.onDialogResponse(res));
+      }
     }
   }
 
@@ -176,6 +191,12 @@ export class SettlementsComponent implements OnInit {
   }
 
   onDialogResponse(res: any): void {
+    if(res.save) {
+      this.loadSettlements(this.date);
+    }
+  }
+
+  onDialogSavingResponse(res: any): void {
     if(res.save) {
       this.loadSettlements(this.date);
     }

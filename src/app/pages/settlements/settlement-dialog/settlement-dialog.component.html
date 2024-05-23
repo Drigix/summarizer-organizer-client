@@ -8,6 +8,12 @@
     </app-form-control>
     <app-form-control [styleClass]="'col-12'">
       <span class="p-float-label">
+        <input pInputText id="linkUrl" formControlName="linkUrl" minlength="10" maxlength="300"/>
+        <label htmlFor="linkUrl">{{ 'settlement.linkUrl' | translate }}</label>
+      </span>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <span class="p-float-label">
         <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
         <label htmlFor="price">{{ 'settlement.price' | translate }}</label>
       </span>

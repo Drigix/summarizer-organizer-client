@@ -7,8 +7,11 @@
   },
   "settlement": {
     "description": "Opis",
+    "linkUrl": "Link do elementu",
     "price": "Koszt",
     "date": "Data od",
-    "toDate": "Data do"
+    "toDate": "Data do",
+    "percent": "Procent",
+    "percentPeriod": "Okres przeliczenia"
   }
 }

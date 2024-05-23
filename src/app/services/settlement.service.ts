@@ -15,6 +15,10 @@ export class SettlementsService {
     return this.http.post(this.resourceUrl, settlement);
   }
 
+  updateSettlement(id: string, settlement: Settlement): Observable<any> {
+    return this.http.put(`${this.resourceUrl}/${id}`, settlement);
+  }
+
   getSettlementsBetweenDates(fromDate:string, toDate:string): Observable<any> {
     return this.http.get<any>(`${this.resourceUrl}/${fromDate}/${toDate}`);
   }

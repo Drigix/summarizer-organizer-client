@@ -5,6 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { SettlementDialogComponent } from './settlements/settlement-dialog/settlement-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SettlementsService } from '@services/settlement.service';
+import { SettlementSavingDialogComponent } from './settlements/settlement-saving-dialog/settlement-saving-dialog.component';
 
 
 @NgModule({
@@ -15,11 +16,13 @@ import { SettlementsService } from '@services/settlement.service';
   exports: [
     PagesRoutingModule,
     SettlementsComponent,
-    SettlementDialogComponent
+    SettlementDialogComponent,
+    SettlementSavingDialogComponent
   ],
   declarations: [
     SettlementsComponent,
-    SettlementDialogComponent
+    SettlementDialogComponent,
+    SettlementSavingDialogComponent
   ],
   providers: [
     SettlementsService

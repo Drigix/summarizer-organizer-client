@@ -22,6 +22,8 @@ import { ChartModule } from 'primeng/chart';
 import { SettlementYearChartComponent } from './settlement-year-chart/settlement-year-chart.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import { ConfirmationService } from 'primeng/api';
     MeterGroupModule,
     CardModule,
     ChartModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputNumberModule,
+    DropdownModule
   ],
   exports: [
     DateChangerComponent,
@@ -59,7 +63,9 @@ import { ConfirmationService } from 'primeng/api';
     CardModule,
     ChartModule,
     SettlementYearChartComponent,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputNumberModule,
+    DropdownModule
   ],
   declarations: [
     DateChangerComponent,
