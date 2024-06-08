@@ -41,7 +41,7 @@ export class SettlementPreviewComponent implements OnInit {
       case 'save': string += '% ';
       break;
     }
-    string += this.countAllPrices() + '$'
+    string += Math.round(this.countAllPrices()) + '$'
     return string;
   }
 

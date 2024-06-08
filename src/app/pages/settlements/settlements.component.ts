@@ -8,6 +8,11 @@ import { SettlementsService } from '@services/settlement.service';
 import { SummarizeSettlement } from '@entities/summarize-settlement.model';
 import { ConfirmationService } from 'primeng/api';
 import { SettlementSavingDialogComponent } from './settlement-saving-dialog/settlement-saving-dialog.component';
+import { SettlementSavingService } from '@services/settlement-saving.service';
+import { SettlementSaving } from '@entities/settlement-saving.model';
+import { DoughnutChartModel } from '@entities/doughnut-chart.model';
+import { VerticalBarModel } from '@entities/vertical-bar.model';
+import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 
 @Component({
   selector: 'app-settlements',
@@ -59,39 +64,41 @@ export class SettlementsComponent implements OnInit {
     }
   ];
 
-  settlementsSave: Settlement[] = [
+  settlementsSaving: SettlementSaving[] = [
     {
-      settlementId: 1,
       description: 'lokata',
       price: 17200,
       priceType: 'save'
     },
     {
-      settlementId: 2,
       description: 'obligacje',
       price: 60000,
       priceType: 'save'
     },
     {
-      settlementId: 3,
       description: 'złoto',
       price: 20000,
       priceType: 'save'
     }
   ];
   summarizeSettlements: SummarizeSettlement[] = [];
-  summarizeYearChartDataset: any;
+  summarizeSavingSettlements?: DoughnutChartModel;
+  summarizeYearChartDataset?: VerticalBarModel;
+  profitBondsAndDepositsChartDataset?: ProfitLineChartModel;
   date = new Date();
 
   constructor(
     private dialogService: DialogService,
     private settlementsService: SettlementsService,
+    private settlementsSavingService: SettlementSavingService,
     private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit():void {
     this.loadSettlements(this.date);
+    this.loadSavingSettlements(this.date);
     this.loadSummarizeYearChartDataset(this.date);
+    this.loadProfitForBondsAndDepositsToChart(this.date);
   }
 
   loadSettlements(date: Date): void {
@@ -103,13 +110,26 @@ export class SettlementsComponent implements OnInit {
         this.settlements = res;
         this.settlementsIn = this.settlements.filter(s => s.priceType === 'in');
         this.settlementsOut = this.settlements.filter(s => s.priceType === 'out');
-        this.settlementsSave = this.settlements.filter(s => s.priceType === 'save');
       },
       error: (err) => {
         console.log(err);
       }
     });
     this.loadSummarizeSettlements(fromDate, toDate);
+  }
+
+  loadSavingSettlements(date: Date): void {
+    this.date = date;
+    const toDate = DateUtil.getLastDayOfMonth(date);
+    this.settlementsSavingService.getSettlementsSavingToDate(toDate).subscribe({
+      next: (res) => {
+        this.settlementsSaving = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+    this.loadSummarizeSettlementsSaving(toDate);
   }
 
   loadSummarizeSettlements(fromDate: string, toDate: string): void {
@@ -123,6 +143,17 @@ export class SettlementsComponent implements OnInit {
     })
   }
 
+  loadSummarizeSettlementsSaving(toDate: string): void {
+    this.settlementsSavingService.getSummarizeSettlementsSavingToChart(toDate).subscribe({
+      next: (res) => {
+        this.summarizeSavingSettlements = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+  }
+
   loadSummarizeYearChartDataset(date: Date): void {
     this.settlementsService.getSummarizeYearChartDataset(date.getFullYear()).subscribe({
       next: (res) => {
@@ -130,6 +161,17 @@ export class SettlementsComponent implements OnInit {
       },
       error: (err) => {
         console.log(err);
+      }
+    })
+  }
+
+  loadProfitForBondsAndDepositsToChart(date: Date): void {
+    this.settlementsSavingService.getProfitForBondsAndDeposits(date.getFullYear()).subscribe({
+      next: (res) => {
+        this.profitBondsAndDepositsChartDataset = res;
+      },
+      error: (err) => {
+        console.error(err);
       }
     })
   }
@@ -161,7 +203,7 @@ export class SettlementsComponent implements OnInit {
           },
           width: '50%'
         });
-        ref.onClose.subscribe(res => this.onDialogResponse(res));
+        ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
       } else {
         const ref = this.dialogService.open(SettlementDialogComponent, {
           header: 'Test',
@@ -193,6 +235,12 @@ export class SettlementsComponent implements OnInit {
   onDialogResponse(res: any): void {
     if(res.save) {
       this.loadSettlements(this.date);
+    }
+  }
+
+  onSavingDialogResponse(res: any): void {
+    if(res?.save) {
+      this.loadSavingSettlements(this.date);
     }
   }
 

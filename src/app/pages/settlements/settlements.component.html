@@ -6,13 +6,22 @@
       <app-settlement-preview class="col-6" [settlements]="settlementsOut" [priceType]="'out'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
       <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie miesiąca'" [values]="summarizeSettlements"></app-sumarrizer-settlement>
     </div>
-    <app-settlement-preview class="col-4" [settlements]="settlementsSave" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
+    <div class="col-4 grid ">
+      <app-settlement-preview class="col-12" [settlements]="settlementsSaving" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
+      <app-settlement-saving-chart class="col-12" [data]="summarizeSavingSettlements"></app-settlement-saving-chart>
+    </div>
   </div>
   <div>
     <div class="flex justify-content-center">
-      <app-date-changer [dateChangerType]="'year'" (emitDateChange)="loadSummarizeYearChartDataset($event)"></app-date-changer>
+      <app-date-changer [dateChangerType]="'year'" (emitDateChange)="loadSummarizeYearChartDataset($event); loadProfitForBondsAndDepositsToChart($event)"></app-date-changer>
     </div>
-    <app-settlement-year-chart [data]="summarizeYearChartDataset"></app-settlement-year-chart>
+    <div class="grid">
+      <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
+      <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset"></app-profit-line-chart>
+    </div>
   </div>
+  <!-- <div>
+    <app-profit-line-chart></app-profit-line-chart>
+  </div> -->
 </div>
 

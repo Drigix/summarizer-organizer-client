@@ -24,6 +24,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { SettlementSavingChartComponent } from './settlement-saving-chart/settlement-saving-chart.component';
+import { ProfitLineChartComponent } from './profit-line-chart/profit-line-chart.component';
 
 @NgModule({
   imports: [
@@ -65,7 +67,9 @@ import { DropdownModule } from 'primeng/dropdown';
     SettlementYearChartComponent,
     ConfirmDialogModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    SettlementSavingChartComponent,
+    ProfitLineChartComponent
   ],
   declarations: [
     DateChangerComponent,
@@ -74,7 +78,9 @@ import { DropdownModule } from 'primeng/dropdown';
     FormGridComponent,
     FormControlComponent,
     SumarrizerSettlementComponent,
-    SettlementYearChartComponent
+    SettlementYearChartComponent,
+    SettlementSavingChartComponent,
+    ProfitLineChartComponent
   ],
   providers: [
     DialogService,

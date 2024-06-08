@@ -6,18 +6,20 @@ export class SettlementSaving {
   date?: Date;
   dateTo?: Date;
   description?: string;
+  linkUrl?: string;
   price?: number;
   savingType?: SettlementSavingType;
   percent?: number;
   percentPeriod?: number;
   priceType?: PriceType;
 
-  constructor(_id?: string, date?: Date, dateTo?: Date, description?: string, price?: number, savingType?: SettlementSavingType,
+  constructor(_id?: string, date?: Date, dateTo?: Date, description?: string, linkUrl?:string, price?: number, savingType?: SettlementSavingType,
     percent?: number, percentPeriod?: number, priceType?: PriceType) {
     this._id = _id;
     this.date = date;
     this.dateTo = dateTo;
     this.description = description;
+    this.linkUrl = linkUrl;
     this.price = price;
     this.savingType = savingType;
     this.percent = percent;
@@ -25,3 +27,5 @@ export class SettlementSaving {
     this.priceType = priceType;
   }
 }
+
+export type NewSettlementSaving = Omit<SettlementSaving, 'id'>;
