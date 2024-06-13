@@ -1,5 +1,5 @@
 <div class="h-full">
-  <app-date-changer (emitDateChange)="loadSettlements($event)"></app-date-changer>
+  <app-date-changer (emitDateChange)="onDateChange($event)"></app-date-changer>
   <div class="grid">
     <div class="col-8 grid">
       <app-settlement-preview class="col-6" [settlements]="settlementsIn" [priceType]="'in'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>

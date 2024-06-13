@@ -95,16 +95,24 @@ export class SettlementsComponent implements OnInit {
   ) { }
 
   ngOnInit():void {
-    this.loadSettlements(this.date);
-    this.loadSavingSettlements(this.date);
+    // this.loadSettlements(this.date);
+    // this.loadSavingSettlements(this.date);
+    this.onDateChange(this.date);
     this.loadSummarizeYearChartDataset(this.date);
     this.loadProfitForBondsAndDepositsToChart(this.date);
   }
 
-  loadSettlements(date: Date): void {
+  onDateChange(date: Date): void {
     this.date = date;
     const fromDate = DateUtil.getFirstDayOfMonth(date);
     const toDate = DateUtil.getLastDayOfMonth(date);
+    this.loadSettlements(fromDate, toDate);
+    this.loadSummarizeSettlements(fromDate, toDate);
+    this.loadSavingSettlements(toDate);
+    this.loadSummarizeSettlementsSaving(toDate);
+  }
+
+  loadSettlements(fromDate: string, toDate: string): void {
     this.settlementsService.getSettlementsBetweenDates(fromDate, toDate).subscribe({
       next: (res) => {
         this.settlements = res;
@@ -115,12 +123,9 @@ export class SettlementsComponent implements OnInit {
         console.log(err);
       }
     });
-    this.loadSummarizeSettlements(fromDate, toDate);
   }
 
-  loadSavingSettlements(date: Date): void {
-    this.date = date;
-    const toDate = DateUtil.getLastDayOfMonth(date);
+  loadSavingSettlements(toDate: string): void {
     this.settlementsSavingService.getSettlementsSavingToDate(toDate).subscribe({
       next: (res) => {
         this.settlementsSaving = res;
@@ -129,7 +134,6 @@ export class SettlementsComponent implements OnInit {
         console.log(err);
       }
     });
-    this.loadSummarizeSettlementsSaving(toDate);
   }
 
   loadSummarizeSettlements(fromDate: string, toDate: string): void {
@@ -223,8 +227,9 @@ export class SettlementsComponent implements OnInit {
   deleteSettlement(id: string): void {
     this.settlementsService.deleteSettlement(id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.loadSettlements(this.date);
+        const fromDate = DateUtil.getFirstDayOfMonth(this.date);
+        const toDate = DateUtil.getLastDayOfMonth(this.date);
+        this.loadSettlements(fromDate, toDate);
       },
       error: (err) => {
         console.log(err);
@@ -234,19 +239,22 @@ export class SettlementsComponent implements OnInit {
 
   onDialogResponse(res: any): void {
     if(res.save) {
-      this.loadSettlements(this.date);
+      const fromDate = DateUtil.getFirstDayOfMonth(this.date);
+      const toDate = DateUtil.getLastDayOfMonth(this.date);
+      this.loadSettlements(fromDate, toDate);
     }
   }
 
   onSavingDialogResponse(res: any): void {
     if(res?.save) {
-      this.loadSavingSettlements(this.date);
+      const toDate = DateUtil.getLastDayOfMonth(this.date);
+      this.loadSavingSettlements(toDate);
     }
   }
 
-  onDialogSavingResponse(res: any): void {
-    if(res.save) {
-      this.loadSettlements(this.date);
-    }
-  }
+  // onDialogSavingResponse(res: any): void {
+  //   if(res.save) {
+  //     this.loadSettlements(this.date);
+  //   }
+  // }
 }
