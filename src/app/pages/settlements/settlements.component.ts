@@ -16,9 +16,10 @@ import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 import { SettlementSavingEnum } from '@entities/enums/settlement-saving.enum';
 
 @Component({
-  selector: 'app-settlements',
-  templateUrl: './settlements.component.html',
-  styleUrls: ['./settlements.component.scss']
+    selector: 'app-settlements',
+    templateUrl: './settlements.component.html',
+    styleUrls: ['./settlements.component.scss'],
+    standalone: false
 })
 export class SettlementsComponent implements OnInit {
 

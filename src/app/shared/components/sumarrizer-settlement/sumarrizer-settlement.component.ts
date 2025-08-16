@@ -3,9 +3,10 @@ import { SummarizeSettlement } from '@entities/summarize-settlement.model';
 import { PriceType } from '@entities/types/price.types';
 
 @Component({
-  selector: 'app-sumarrizer-settlement',
-  templateUrl: './sumarrizer-settlement.component.html',
-  styleUrls: ['./sumarrizer-settlement.component.scss']
+    selector: 'app-sumarrizer-settlement',
+    templateUrl: './sumarrizer-settlement.component.html',
+    styleUrls: ['./sumarrizer-settlement.component.scss'],
+    standalone: false
 })
 export class SumarrizerSettlementComponent implements OnInit {
 

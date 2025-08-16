@@ -5,9 +5,10 @@ import { EmitSettlementPreviewType } from '@entities/types/emit-types';
 import { PriceType } from '@entities/types/price.types';
 
 @Component({
-  selector: 'app-settlement-preview',
-  templateUrl: './settlement-preview.component.html',
-  styleUrls: ['./settlement-preview.component.scss']
+    selector: 'app-settlement-preview',
+    templateUrl: './settlement-preview.component.html',
+    styleUrls: ['./settlement-preview.component.scss'],
+    standalone: false
 })
 export class SettlementPreviewComponent implements OnChanges {
 

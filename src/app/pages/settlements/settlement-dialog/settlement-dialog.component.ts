@@ -8,9 +8,10 @@ import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
-  selector: 'app-settlement-dialog',
-  templateUrl: './settlement-dialog.component.html',
-  styleUrls: ['./settlement-dialog.component.scss']
+    selector: 'app-settlement-dialog',
+    templateUrl: './settlement-dialog.component.html',
+    styleUrls: ['./settlement-dialog.component.scss'],
+    standalone: false
 })
 export class SettlementDialogComponent implements OnInit {
 

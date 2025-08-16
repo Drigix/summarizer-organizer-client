@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 
 @Component({
-  selector: 'app-profit-line-chart',
-  templateUrl: './profit-line-chart.component.html',
-  styleUrls: ['./profit-line-chart.component.scss']
+    selector: 'app-profit-line-chart',
+    templateUrl: './profit-line-chart.component.html',
+    styleUrls: ['./profit-line-chart.component.scss'],
+    standalone: false
 })
 export class ProfitLineChartComponent implements OnInit {
 

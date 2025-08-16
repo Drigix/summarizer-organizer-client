@@ -8,9 +8,10 @@ import {
 import { VerticalBarModel } from '@entities/vertical-bar.model';
 
 @Component({
-  selector: 'app-settlement-year-chart',
-  templateUrl: './settlement-year-chart.component.html',
-  styleUrls: ['./settlement-year-chart.component.scss'],
+    selector: 'app-settlement-year-chart',
+    templateUrl: './settlement-year-chart.component.html',
+    styleUrls: ['./settlement-year-chart.component.scss'],
+    standalone: false
 })
 export class SettlementYearChartComponent implements OnInit, OnChanges{
   @Input() data: VerticalBarModel = {};

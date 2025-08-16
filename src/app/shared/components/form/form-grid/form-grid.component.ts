@@ -1,8 +1,9 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-form-grid',
-  templateUrl: './form-grid.component.html'
+    selector: 'app-form-grid',
+    templateUrl: './form-grid.component.html',
+    standalone: false
 })
 
 export class FormGridComponent {

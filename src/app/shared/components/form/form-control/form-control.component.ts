@@ -13,8 +13,9 @@ import { FormControlName, Validators } from '@angular/forms';
 import { FormGridComponent } from '../form-grid/form-grid.component';
 
 @Component({
-  selector: 'app-form-control',
-  templateUrl: './form-control.component.html',
+    selector: 'app-form-control',
+    templateUrl: './form-control.component.html',
+    standalone: false
 })
 export class FormControlComponent implements OnInit, AfterContentInit {
   @Input() label?: string;

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-settlement-saving-chart',
-  templateUrl: './settlement-saving-chart.component.html',
-  styleUrls: ['./settlement-saving-chart.component.scss']
+    selector: 'app-settlement-saving-chart',
+    templateUrl: './settlement-saving-chart.component.html',
+    styleUrls: ['./settlement-saving-chart.component.scss'],
+    standalone: false
 })
 export class SettlementSavingChartComponent implements OnInit {
 

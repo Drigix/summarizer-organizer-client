@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angu
 import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+    selector: 'app-form',
+    templateUrl: './form.component.html',
+    styleUrls: ['./form.component.scss'],
+    standalone: false
 })
 
 export class FormComponent {

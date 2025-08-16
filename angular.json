@@ -15,11 +15,12 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/summarizer-organizer-client",
+            "outputPath": {
+              "base": "dist/summarizer-organizer-client"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -37,7 +38,8 @@
               "node_modules/primeng/resources/primeng.css",
               "node_modules/primeflex/primeflex.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -56,9 +58,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -70,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "summarizer-organizer-client:build:production"
+              "buildTarget": "summarizer-organizer-client:build:production"
             },
             "development": {
-              "browserTarget": "summarizer-organizer-client:build:development"
+              "buildTarget": "summarizer-organizer-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "summarizer-organizer-client:build"
+            "buildTarget": "summarizer-organizer-client:build"
           }
         },
         "test": {

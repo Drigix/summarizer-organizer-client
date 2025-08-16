@@ -6,9 +6,10 @@ type DateChangerType = 'month' | 'year';
 type DateChangeType = 'next' | 'previous';
 
 @Component({
-  selector: 'app-date-changer',
-  templateUrl: './date-changer.component.html',
-  styleUrls: ['./date-changer.component.scss']
+    selector: 'app-date-changer',
+    templateUrl: './date-changer.component.html',
+    styleUrls: ['./date-changer.component.scss'],
+    standalone: false
 })
 export class DateChangerComponent implements OnInit {
 
