@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Settlement } from '@entities/settlement.model';
 import { ButtonClickType } from '@entities/types/button-click.types';
 import { EmitSettlementPreviewType } from '@entities/types/emit-types';
@@ -9,18 +9,22 @@ import { PriceType } from '@entities/types/price.types';
   templateUrl: './settlement-preview.component.html',
   styleUrls: ['./settlement-preview.component.scss']
 })
-export class SettlementPreviewComponent implements OnInit {
+export class SettlementPreviewComponent implements OnChanges {
 
   @Input() settlements: Settlement[] = [];
   @Input() priceType?: PriceType;
 
   @Output() emitButtonClick = new EventEmitter<EmitSettlementPreviewType>();
 
+  handleSettlements: Settlement[] = [];
   selectedSettlement?: Settlement;
+  searchInput?: string;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(): void {
+    this.settlements = [...this.settlements];
+    this.handleSettlements = [...this.settlements];
   }
 
   onSettlementSelected(settlement: Settlement) {
@@ -29,6 +33,15 @@ export class SettlementPreviewComponent implements OnInit {
 
   onButtonClick(clickType: ButtonClickType): void {
     this.emitButtonClick.emit({ buttonClickType: clickType, settlement: this.selectedSettlement!, priceType: this.priceType! });
+  }
+
+  onFilterChange(event: any): void {
+    if(this.searchInput && this.searchInput.length > 0) {
+      const searchValue = this.searchInput.toLowerCase();
+      this.settlements = this.handleSettlements.filter(hs => hs.description?.includes(searchValue));
+    } else {
+      this.settlements = this.handleSettlements;
+    }
   }
 
   getTitle(): string {

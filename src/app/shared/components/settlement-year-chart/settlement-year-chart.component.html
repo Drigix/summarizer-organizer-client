@@ -1,3 +1,21 @@
 <div class="summarize-diagram">
   <p-chart type="bar" [data]="data" [options]="options" />
 </div>
+<div class="summarize-prizes flex justify-content-center text-3xl font-bold pt-4">
+  <span [ngClass]="investment ? 'summarize-prize-buy' : 'summarize-prize-in'" class="mx-2 p-3">
+    <ng-container *ngIf="investment; else normalLeftTemplate">
+      {{summarizePrizesLeft}}
+    </ng-container>
+    <ng-template #normalLeftTemplate>
+      +{{summarizePrizesLeft}}
+    </ng-template>
+  </span>
+  <span [ngClass]="investment ? 'summarize-prize-in' : 'summarize-prize-out'" class="mx-2 p-3">
+    <ng-container *ngIf="investment; else normalRightTemplate">
+      {{summarizePrizesRight}}
+    </ng-container>
+    <ng-template #normalRightTemplate>
+      -{{summarizePrizesRight}}
+    </ng-template>
+  </span>
+</div>

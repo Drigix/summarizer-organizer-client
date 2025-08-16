@@ -5,7 +5,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { SettlementPreviewComponent } from './settlement-preview/settlement-preview.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormComponent } from './form/form.component';
 import { FormGridComponent } from './form/form-grid/form-grid.component';
@@ -26,6 +26,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { SettlementSavingChartComponent } from './settlement-saving-chart/settlement-saving-chart.component';
 import { ProfitLineChartComponent } from './profit-line-chart/profit-line-chart.component';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @NgModule({
   imports: [
@@ -44,7 +46,10 @@ import { ProfitLineChartComponent } from './profit-line-chart/profit-line-chart.
     ChartModule,
     ConfirmDialogModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    IconFieldModule,
+    InputIconModule,
+    FormsModule
   ],
   exports: [
     DateChangerComponent,
@@ -69,7 +74,9 @@ import { ProfitLineChartComponent } from './profit-line-chart/profit-line-chart.
     InputNumberModule,
     DropdownModule,
     SettlementSavingChartComponent,
-    ProfitLineChartComponent
+    ProfitLineChartComponent,
+    IconFieldModule,
+    InputIconModule
   ],
   declarations: [
     DateChangerComponent,

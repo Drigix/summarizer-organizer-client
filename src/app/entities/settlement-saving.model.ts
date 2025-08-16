@@ -7,20 +7,25 @@ export class SettlementSaving {
   dateTo?: Date;
   description?: string;
   linkUrl?: string;
+  quantity?: number;
   price?: number;
+  currentPrice?: number;
   savingType?: SettlementSavingType;
   percent?: number;
   percentPeriod?: number;
   priceType?: PriceType;
 
-  constructor(_id?: string, date?: Date, dateTo?: Date, description?: string, linkUrl?:string, price?: number, savingType?: SettlementSavingType,
-    percent?: number, percentPeriod?: number, priceType?: PriceType) {
+  constructor(_id?: string, date?: Date, dateTo?: Date, description?: string, linkUrl?:string, quantity?: number,
+     price?: number, currentPrice?: number,
+     savingType?: SettlementSavingType, percent?: number, percentPeriod?: number, priceType?: PriceType) {
     this._id = _id;
     this.date = date;
     this.dateTo = dateTo;
     this.description = description;
     this.linkUrl = linkUrl;
+    this.quantity = quantity;
     this.price = price;
+    this.currentPrice = currentPrice;
     this.savingType = savingType;
     this.percent = percent;
     this.percentPeriod = percentPeriod;

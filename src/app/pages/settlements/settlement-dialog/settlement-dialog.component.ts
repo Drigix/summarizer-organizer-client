@@ -34,6 +34,7 @@ export class SettlementDialogComponent implements OnInit {
   loadPageValues(): void {
     this.dialogType = this.config.data.clickType;
     const priceType = this.config.data.priceType;
+    this.date = this.config.data.date;
     const date = DateUtil.getFirstDayOfMonth(this.config.data.date);
     const settlement: Settlement = this.config.data.selectedSettlement;
     if(this.dialogType === 'edit' && settlement) {
@@ -49,6 +50,7 @@ export class SettlementDialogComponent implements OnInit {
       this.formGroup.removeControl('id');
       this.formGroup.patchValue({
         date: this.date,
+        toDate: this.date,
         priceType,
       });
     }

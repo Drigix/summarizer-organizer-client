@@ -637,7 +637,7 @@ p-chips.p-chips-clearable .p-chips-clear-icon {
 }
 
 .p-dropdown {
-  background: #ffffff;
+  background: var(--uwb-card-background-color);
   border: 1px solid #ced4da;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   border-radius: var(--border-radius);
@@ -1004,8 +1004,8 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 .p-inputtext {
   font-family: var(--font-family);
   font-size: var(--uwb-font-size);
-  color: black;
-  background: #ffffff;
+  color: var(--uwb-button-text-color);
+  background: var(--uwb-card-background-color);
   height: 30px;
   padding: 2px 4px;
   border: 1px solid #ced4da;
@@ -4041,10 +4041,10 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 
 .p-panel .p-panel-header {
   display: flex;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--uwb-primary);
   padding: 1.25rem;
   // background: #f8f9fa;
-  color: #343a40;
+  color: #ffffff;
   border-top-right-radius: var(--border-radius);
   border-top-left-radius: var(--border-radius);
   text-align: center;
@@ -4077,7 +4077,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-panel .p-panel-content {
   padding: 1.25rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--uwb-primary);
   // background: #ffffff;
   color: #495057;
   border-bottom-right-radius: var(--border-radius);
@@ -6238,4 +6238,55 @@ p-dynamicdialog .p-dialog-mask {
 .p-toolbar {
   background-color: var(--surface-100);
   border-color: var(--uwb-primary);
+}
+
+.p-float-label > label {
+  left: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition-duration: 0.2s;
+}
+
+.p-float-label > .ng-invalid.ng-dirty + label {
+  color: #fca5a5;
+}
+
+.p-input-icon-left > .p-icon-wrapper.p-icon,
+.p-input-icon-left > i:first-of-type {
+  left: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.p-input-icon-left > .p-inputtext {
+  padding-left: 2.5rem;
+}
+
+.p-input-icon-left.p-float-label > label {
+  left: 2.5rem;
+}
+
+.p-input-icon-right > .p-icon-wrapper,
+.p-input-icon-right > i:last-of-type {
+  right: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.p-input-icon-right > .p-inputtext {
+  padding-right: 2.5rem;
+}
+
+.p-icon-field-left > .p-inputtext {
+  padding-left: 2.5rem;
+}
+
+.p-icon-field-left.p-float-label > label {
+  left: 2.5rem;
+}
+
+.p-icon-field-right > .p-inputtext {
+  padding-right: 2.5rem;
+}
+
+.p-input-icon {
+  position: relative;
+  left: 25px;
 }

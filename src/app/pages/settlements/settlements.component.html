@@ -1,5 +1,11 @@
 <div class="h-full">
   <app-date-changer (emitDateChange)="onDateChange($event)"></app-date-changer>
+  <div class="flex justify-content-center m-3">
+    <p-iconField class="w-93 pl-6" iconPosition="left">
+      <p-inputIcon styleClass="pi pi-search" />
+      <input class="w-93" type="text" pInputText placeholder="Search" />
+    </p-iconField>
+  </div>
   <div class="grid">
     <div class="col-8 grid">
       <app-settlement-preview class="col-6" [settlements]="settlementsIn" [priceType]="'in'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
@@ -15,9 +21,27 @@
     <div class="flex justify-content-center">
       <app-date-changer [dateChangerType]="'year'" (emitDateChange)="loadSummarizeYearChartDataset($event); loadProfitForBondsAndDepositsToChart($event)"></app-date-changer>
     </div>
-    <div class="grid">
-      <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
-      <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset"></app-profit-line-chart>
+    <div class="grid m-2">
+      <p-panel class="w-full m-2" header="Roczny bilans pieniędzy">
+        <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
+      </p-panel>
+      <p-panel class="w-full m-2" header="Akcje">
+        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeActionsPricesChartDataset!"></app-settlement-year-chart>
+      </p-panel>
+      <p-panel class="w-full m-2" header="Kryptowaluty">
+        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>
+      </p-panel>
+      <p-panel class="w-full m-2" header="Złoto">
+        <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie cen złota'" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
+        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeGoldPricesChartDataset!"></app-settlement-year-chart>
+      </p-panel>
+      <p-panel class="w-full m-2" header="Srebro">
+        <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie cen srebra'" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
+        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
+      </p-panel>
+      <p-panel class="w-full m-2" header="Obligacje i lokaty">
+        <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset"></app-profit-line-chart>
+      </p-panel>
     </div>
   </div>
   <!-- <div>

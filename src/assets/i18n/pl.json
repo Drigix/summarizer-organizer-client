@@ -9,9 +9,11 @@
     "description": "Opis",
     "linkUrl": "Link do elementu",
     "price": "Koszt",
+    "currentPrice": "Aktualny koszt",
     "date": "Data od",
     "toDate": "Data do",
     "percent": "Procent",
-    "percentPeriod": "Okres przeliczenia"
+    "percentPeriod": "Okres przeliczenia",
+    "savingType": "Typ inwestycji"
   }
 }

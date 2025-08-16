@@ -6,16 +6,22 @@
         <label htmlFor="description">{{ 'settlement.description' | translate }}</label>
       </span>
     </app-form-control>
-    <app-form-control [styleClass]="'col-12'">
+    <app-form-control *ngIf="!isCryptoChoose" [styleClass]="'col-12'">
       <span class="p-float-label">
         <input pInputText id="linkUrl" formControlName="linkUrl" minlength="10" maxlength="300"/>
         <label htmlFor="linkUrl">{{ 'settlement.linkUrl' | translate }}</label>
       </span>
     </app-form-control>
-    <app-form-control [styleClass]="'col-12'">
+    <app-form-control [styleClass]="isStockChoose ? 'col-6' : 'col-12'">
       <span class="p-float-label">
         <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
         <label htmlFor="price">{{ 'settlement.price' | translate }}</label>
+      </span>
+    </app-form-control>
+    <app-form-control *ngIf="isStockChoose || isCryptoChoose" [styleClass]="'col-6'">
+      <span class="p-float-label">
+        <input pInputText type="number" id="currentPrice" formControlName="currentPrice" minlength="2" maxlength="100"/>
+        <label htmlFor="price">{{ 'settlement.currentPrice' | translate }}</label>
       </span>
     </app-form-control>
     <app-form-control [styleClass]="'col-6'">
@@ -24,7 +30,7 @@
         <label htmlFor="date">{{ 'settlement.date' | translate }}</label>
       </span>
     </app-form-control>
-    <app-form-control [styleClass]="'col-6'">
+    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
       <span class="p-float-label">
         <p-calendar formControlName="dateTo" view="month" dateFormat="mm/yy" appendTo="body" />
         <label htmlFor="dateTo">{{ 'settlement.toDate' | translate }}</label>
@@ -38,17 +44,18 @@
         optionLabel="name"
         optionValue="value"
         appendTo="body"
+        (ngModelChange)="onSavingTypeChange($event)"
          />
         <label htmlFor="savingType">{{ 'settlement.savingType' | translate }}</label>
       </span>
     </app-form-control>
-    <app-form-control [styleClass]="'col-6'">
+    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
       <span class="p-float-label">
         <p-inputNumber mode="decimal" [minFractionDigits]="2" formControlName="percent" suffix="%" [min]="0"></p-inputNumber>
         <label htmlFor="percent">{{ 'settlement.percent' | translate }}</label>
       </span>
     </app-form-control>
-    <app-form-control [styleClass]="'col-6'">
+    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
       <span class="p-float-label">
         <p-inputNumber formControlName="percentPeriod" [min]="0"/>
         <label htmlFor="percentPeriod">{{ 'settlement.percentPeriod' | translate }}</label>

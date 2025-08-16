@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewSettlementSaving, SettlementSaving } from '@entities/settlement-saving.model';
 import { Settlement } from '@entities/settlement.model';
@@ -25,14 +25,19 @@ export class SettlementSavingDialogComponent implements OnInit {
     { name: 'Lokata', value: 'deposit'},
     { name: 'Akcje', value: 'stock'},
     { name: 'Złoto', value: 'gold'},
+    { name: 'Srebro', value: 'silver'},
+    { name: 'Kryptowaluty', value: 'crypto'},
     { name: 'Bez procentów', value: 'none'}
   ];
+  isStockChoose = false;
+  isCryptoChoose = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,
-    private settlementsSavingService: SettlementSavingService
+    private settlementsSavingService: SettlementSavingService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -53,11 +58,14 @@ export class SettlementSavingDialogComponent implements OnInit {
         priceType: settlement.priceType,
         description: settlement.description,
         linkUrl: settlement.linkUrl,
+        quantity: settlement.quantity,
         price: settlement.price,
+        currentPrice: settlement.currentPrice,
         savingType: settlement.savingType,
         percent: settlement.percent,
         percentPeriod: settlement.percentPeriod
       });
+      this.onSavingTypeChange(settlement.savingType!);
     } else {
       this.formGroup.removeControl('id');
       this.formGroup.patchValue({
@@ -74,7 +82,9 @@ export class SettlementSavingDialogComponent implements OnInit {
       dateTo: new FormControl(null),
       description: new FormControl('', Validators.required),
       linkUrl: new FormControl(null),
+      quantity: new FormControl(null),
       price: new FormControl(0, Validators.required),
+      currentPrice: new FormControl(0),
       savingType: new FormControl('', Validators.required),
       percent: new FormControl(0, Validators.required),
       percentPeriod: new FormControl(0, Validators.required),
@@ -82,11 +92,26 @@ export class SettlementSavingDialogComponent implements OnInit {
     });
   }
 
+  onSavingTypeChange(value: string) {
+    if(value === 'stock' || value === 'gold' || value === 'silver') {
+      this.isStockChoose = true;
+      this.cd.detectChanges();
+    } else if (value === 'crypto') {
+      this.isCryptoChoose = true;
+    } else {
+      this.isStockChoose = false;
+      this.isCryptoChoose = false;
+    }
+  }
+
   onCloseDialog(): void {
     this.ref.close();
   }
 
   onSave(): void {
+    if (this.isCryptoChoose || this.isStockChoose) {
+      this.formGroup.get('dateTo')?.setValue(null);
+    }
     if(this.dialogType === 'add') {
       const value: NewSettlementSaving = Object.assign(this.formGroup.getRawValue() as NewSettlementSaving);
       this.settlementsSavingService.createSettlementSaving(value).subscribe({

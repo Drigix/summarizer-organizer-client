@@ -13,6 +13,7 @@ import { SettlementSaving } from '@entities/settlement-saving.model';
 import { DoughnutChartModel } from '@entities/doughnut-chart.model';
 import { VerticalBarModel } from '@entities/vertical-bar.model';
 import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
+import { SettlementSavingEnum } from '@entities/enums/settlement-saving.enum';
 
 @Component({
   selector: 'app-settlements',
@@ -22,68 +23,18 @@ import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 export class SettlementsComponent implements OnInit {
 
   settlements: Settlement[] = [];
-  settlementsIn: Settlement[] = [
-    {
-      settlementId: 1,
-      description: 'wyplata',
-      price: 5800,
-      priceType: 'in'
-    },
-    {
-      settlementId: 1,
-      description: 'z drugiego konta',
-      price: 200,
-      priceType: 'in'
-    },
-    {
-      settlementId: 1,
-      description: 'odsetki',
-      price: 150,
-      priceType: 'in'
-    }
-  ];
-
-  settlementsOut: Settlement[] = [
-    {
-      settlementId: 1,
-      description: 'silownia',
-      price: 80,
-      priceType: 'out'
-    },
-    {
-      settlementId: 1,
-      description: 'jedzenie',
-      price: 200,
-      priceType: 'out'
-    },
-    {
-      settlementId: 1,
-      description: 'bilet',
-      price: 80,
-      priceType: 'out'
-    }
-  ];
-
-  settlementsSaving: SettlementSaving[] = [
-    {
-      description: 'lokata',
-      price: 17200,
-      priceType: 'save'
-    },
-    {
-      description: 'obligacje',
-      price: 60000,
-      priceType: 'save'
-    },
-    {
-      description: 'złoto',
-      price: 20000,
-      priceType: 'save'
-    }
-  ];
+  settlementsIn: Settlement[] = [];
+  settlementsOut: Settlement[] = [];
+  settlementsSaving: SettlementSaving[] = [];
   summarizeSettlements: SummarizeSettlement[] = [];
+  summarizeProfitGoldPrices: SummarizeSettlement[] = [];
+  summarizeProfitSilverPrices: SummarizeSettlement[] = [];
   summarizeSavingSettlements?: DoughnutChartModel;
   summarizeYearChartDataset?: VerticalBarModel;
+  summarizeActionsPricesChartDataset?: VerticalBarModel;
+  summarizeGoldPricesChartDataset?: VerticalBarModel;
+  summarizeSilverPricesChartDataset?: VerticalBarModel;
+  summarizeCryptoPricesChartDataset?: VerticalBarModel;
   profitBondsAndDepositsChartDataset?: ProfitLineChartModel;
   date = new Date();
 
@@ -98,8 +49,18 @@ export class SettlementsComponent implements OnInit {
     // this.loadSettlements(this.date);
     // this.loadSavingSettlements(this.date);
     this.onDateChange(this.date);
+    this.refreshData();
+  }
+
+  refreshData(): void {
     this.loadSummarizeYearChartDataset(this.date);
     this.loadProfitForBondsAndDepositsToChart(this.date);
+    this.loadSummarizeActionsPricesToChart();
+    this.loadSummarizeGoldPricesToChart();
+    this.loadSummarizeSilverPricesToChart();
+    this.loadSummarizeCryptoPricesToChart();
+    this.loadProfitGoldPrices();
+    this.loadProfitSilverPrices();
   }
 
   onDateChange(date: Date): void {
@@ -144,7 +105,7 @@ export class SettlementsComponent implements OnInit {
       error: (err) => {
         console.log(err);
       }
-    })
+    });
   }
 
   loadSummarizeSettlementsSaving(toDate: string): void {
@@ -155,7 +116,7 @@ export class SettlementsComponent implements OnInit {
       error: (err) => {
         console.error(err);
       }
-    })
+    });
   }
 
   loadSummarizeYearChartDataset(date: Date): void {
@@ -166,7 +127,73 @@ export class SettlementsComponent implements OnInit {
       error: (err) => {
         console.log(err);
       }
+    });
+  }
+
+  loadSummarizeActionsPricesToChart(): void {
+    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.STOCK).subscribe({
+      next: (res) => {
+        this.summarizeActionsPricesChartDataset = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  loadProfitGoldPrices(): void {
+    this.settlementsSavingService.getProfitSavingTypePrices(SettlementSavingEnum.GOLD).subscribe({
+      next: (res) => {
+        this.summarizeProfitGoldPrices = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
     })
+  }
+
+  loadProfitSilverPrices(): void {
+    this.settlementsSavingService.getProfitSavingTypePrices(SettlementSavingEnum.SILVER).subscribe({
+      next: (res) => {
+        this.summarizeProfitSilverPrices = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  loadSummarizeGoldPricesToChart(): void {
+    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.GOLD).subscribe({
+      next: (res) => {
+        this.summarizeGoldPricesChartDataset = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  loadSummarizeSilverPricesToChart(): void {
+    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.SILVER).subscribe({
+      next: (res) => {
+        this.summarizeSilverPricesChartDataset = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  loadSummarizeCryptoPricesToChart(): void {
+    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.CRYPTO).subscribe({
+      next: (res) => {
+        this.summarizeCryptoPricesChartDataset = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
   loadProfitForBondsAndDepositsToChart(date: Date): void {
@@ -177,7 +204,7 @@ export class SettlementsComponent implements OnInit {
       error: (err) => {
         console.error(err);
       }
-    })
+    });
   }
 
   openDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
@@ -191,7 +218,11 @@ export class SettlementsComponent implements OnInit {
         rejectIcon:"none",
         rejectButtonStyleClass:"p-button-text",
         accept: () => {
-          this.deleteSettlement(emitSettlementPreviewType.settlement._id!);
+          if(emitSettlementPreviewType.priceType === 'save') {
+            this.deleteSettlementSaving(emitSettlementPreviewType.settlement._id!);
+          } else {
+            this.deleteSettlement(emitSettlementPreviewType.settlement._id!);
+          }
         },
         key: 'mainDialog'
       });
@@ -237,11 +268,25 @@ export class SettlementsComponent implements OnInit {
     });
   }
 
+  deleteSettlementSaving(id: string): void {
+    this.settlementsSavingService.deleteSettlementSaving(id).subscribe({
+      next: (res) => {
+        const toDate = DateUtil.getLastDayOfMonth(this.date);
+        this.loadSavingSettlements(toDate);
+        this.loadSummarizeSettlementsSaving(toDate);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
   onDialogResponse(res: any): void {
     if(res.save) {
       const fromDate = DateUtil.getFirstDayOfMonth(this.date);
       const toDate = DateUtil.getLastDayOfMonth(this.date);
       this.loadSettlements(fromDate, toDate);
+      this.refreshData();
     }
   }
 
@@ -249,6 +294,7 @@ export class SettlementsComponent implements OnInit {
     if(res?.save) {
       const toDate = DateUtil.getLastDayOfMonth(this.date);
       this.loadSavingSettlements(toDate);
+      this.refreshData();
     }
   }
 
