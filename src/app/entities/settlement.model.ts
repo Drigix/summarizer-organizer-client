@@ -10,8 +10,9 @@ export class Settlement {
   linkUrl?: string;
   price?: number;
   priceType?: PriceType;
+  amount?: number;
 
-  constructor(_id?: string, settlementId?: number, userId?: number, date?: Date, toDate?: Date, description?: string, price?: number, priceType?: PriceType) {
+  constructor(_id?: string, settlementId?: number, userId?: number, date?: Date, toDate?: Date, description?: string, price?: number, priceType?: PriceType, amount?: number) {
     this._id = _id;
     this.settlementId = settlementId;
     this.userId = userId;
@@ -20,6 +21,7 @@ export class Settlement {
     this.description = description;
     this.price = price;
     this.priceType = priceType;
+    this.amount = amount;
   }
 }
 

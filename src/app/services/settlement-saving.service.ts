@@ -20,6 +20,10 @@ export class SettlementSavingService {
     return this.http.put(`${this.resourceUrl}/${id}`, settlement);
   }
 
+  sellSettlementSaving(id: string, settlement: SettlementSaving): Observable<any> {
+    return this.http.put(`${this.resourceUrl}/sell/${id}`, settlement);
+  }
+
   getSettlementsSavingToDate(toDate:string): Observable<any> {
     return this.http.get<any>(`${this.resourceUrl}/${toDate}`);
   }

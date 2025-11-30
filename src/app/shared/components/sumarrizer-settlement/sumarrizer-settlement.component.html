@@ -1,44 +1,51 @@
 <div class="summarizer-settlement-component card">
   <p-meterGroup [value]="values" labelPosition="start">
-      <ng-template pTemplate="label">
-          <div class="flex flex-wrap gap-3">
-              <ng-container *ngFor="let meterItem of values; let index = index">
-                <div [ngClass]="getComponentStyle('component-price-', meterItem.type!, meterItem.balance)">
-                  <p-card class="flex-1">
-                      <div class="flex justify-content-between gap-5">
-                          <div class="flex flex-column gap-1">
-                              <span class="text-secondary text-sm">{{ meterItem.label }}</span>
-                              <span *ngIf="meterItem.balance" class="font-bold text-lg">
-                                {{ meterItem.balance }} $
-                              </span>
-                              <span *ngIf="!meterItem.balance" class="font-bold text-lg">
-                                {{ meterItem.value }} %
-                              </span>
-                          </div>
-                          <span class="w-2rem h-2rem border-circle inline-flex justify-content-center align-items-center text-center" [style]="{ 'background-color': meterItem.color, color: '#ffffff' }">
-                              <i [class]="meterItem.icon"></i>
-                          </span>
-                      </div>
-                  </p-card>
+    <ng-template #label>
+      <div class="flex flex-wrap gap-3">
+        @for (meterItem of values; track meterItem) {
+          <div [ngClass]="getComponentStyle('component-price-', meterItem.type!, meterItem.balance)">
+            <p-card class="flex-1">
+              <div class="flex justify-content-between gap-5">
+                <div class="flex flex-column gap-1">
+                  <span class="text-secondary text-sm">{{ meterItem.label }}</span>
+                  @if (meterItem.balance) {
+                    <span class="font-bold text-lg">
+                      {{ meterItem.balance }} $
+                    </span>
+                  }
+                  @if (!meterItem.balance) {
+                    <span class="font-bold text-lg">
+                      {{ meterItem.value }} %
+                    </span>
+                  }
                 </div>
-              </ng-container>
+
+                <span
+                  class="w-2rem h-2rem border-circle inline-flex justify-content-center align-items-center text-center"
+                  [style]="{ 'background-color': meterItem.color, color: '#ffffff' }">
+          <i [class]="meterItem.icon"></i>
+        </span>
+              </div>
+            </p-card>
           </div>
-      </ng-template>
-      <!-- <ng-template pTemplate="meter" let-value let-class="class" let-width="size">
-          <span [class]="class" [style]="{ background: 'linear-gradient(to right, ' + value.color1 + ', ' + value.color2 + ')', width: width }"></span>
-      </ng-template> -->
-      <ng-template pTemplate="start" let-totalPercent="totalPercent">
-          <div class="flex justify-content-between mt-3 mb-2 relative">
-              <!-- <span>Bilans miesięczny</span> -->
-              <span [style]="{ width: totalPercent + '%' }" class="absolute text-right">{{ totalPercent }}%</span>
-              <!-- <span class="font-medium">1TB</span> -->
-          </div>
-      </ng-template>
-      <!-- <ng-template pTemplate="end">
-          <div class="flex justify-content-between mt-3">
-              <p-button label="Manage Storage" [outlined]="true" size="small" />
-              <p-button label="Update Plan" size="small" />
-          </div>
-      </ng-template> -->
+        }
+      </div>
+    </ng-template>
+    <!-- <ng-template pTemplate="meter" let-value let-class="class" let-width="size">
+        <span [class]="class" [style]="{ background: 'linear-gradient(to right, ' + value.color1 + ', ' + value.color2 + ')', width: width }"></span>
+    </ng-template> -->
+    <ng-template pTemplate="start" let-totalPercent="totalPercent">
+      <div class="flex justify-content-between mt-3 mb-2 relative">
+        <!-- <span>Bilans miesięczny</span> -->
+        <span [style]="{ width: totalPercent + '%' }" class="absolute text-right">{{ totalPercent }}%</span>
+        <!-- <span class="font-medium">1TB</span> -->
+      </div>
+    </ng-template>
+    <!-- <ng-template pTemplate="end">
+        <div class="flex justify-content-between mt-3">
+            <p-button label="Manage Storage" [outlined]="true" size="small" />
+            <p-button label="Update Plan" size="small" />
+        </div>
+    </ng-template> -->
   </p-meterGroup>
 </div>

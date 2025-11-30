@@ -11,7 +11,7 @@ import { FormComponent } from './form/form.component';
 import { FormGridComponent } from './form/form-grid/form-grid.component';
 import { FormControlComponent } from './form/form-control/form-control.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { CalendarModule } from 'primeng/calendar';
+import { DatePickerModule } from 'primeng/datepicker';
 import { PanelModule } from 'primeng/panel';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DividerModule } from 'primeng/divider';
@@ -23,11 +23,14 @@ import { SettlementYearChartComponent } from './settlement-year-chart/settlement
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { DropdownModule } from 'primeng/dropdown';
 import { SettlementSavingChartComponent } from './settlement-saving-chart/settlement-saving-chart.component';
 import { ProfitLineChartComponent } from './profit-line-chart/profit-line-chart.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import {SelectModule} from "primeng/select";
 
 @NgModule({
   imports: [
@@ -37,7 +40,7 @@ import { InputIconModule } from 'primeng/inputicon';
     ReactiveFormsModule,
     TranslateModule,
     InputTextModule,
-    CalendarModule,
+    DatePickerModule,
     PanelModule,
     FieldsetModule,
     DividerModule,
@@ -46,10 +49,13 @@ import { InputIconModule } from 'primeng/inputicon';
     ChartModule,
     ConfirmDialogModule,
     InputNumberModule,
-    DropdownModule,
+    AutoCompleteModule,
     IconFieldModule,
     InputIconModule,
-    FormsModule
+    FormsModule,
+    FloatLabelModule,
+    CascadeSelectModule,
+    SelectModule
   ],
   exports: [
     DateChangerComponent,
@@ -62,7 +68,7 @@ import { InputIconModule } from 'primeng/inputicon';
     ReactiveFormsModule,
     TranslateModule,
     InputTextModule,
-    CalendarModule,
+    DatePickerModule,
     PanelModule,
     FieldsetModule,
     DividerModule,
@@ -72,11 +78,14 @@ import { InputIconModule } from 'primeng/inputicon';
     SettlementYearChartComponent,
     ConfirmDialogModule,
     InputNumberModule,
-    DropdownModule,
+    AutoCompleteModule,
     SettlementSavingChartComponent,
     ProfitLineChartComponent,
     IconFieldModule,
-    InputIconModule
+    InputIconModule,
+    FloatLabelModule,
+    CascadeSelectModule,
+    SelectModule
   ],
   declarations: [
     DateChangerComponent,

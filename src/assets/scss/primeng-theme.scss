@@ -1012,6 +1012,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
   transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   appearance: none;
   border-radius: var(--border-radius);
+  width: 100%;
 }
 .p-inputtext:enabled:hover {
   border-color: var(--uwb-primary);
@@ -1464,6 +1465,32 @@ p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
 }
 .p-rating:not(.p-disabled):not(.p-readonly) .p-rating-icon.p-rating-cancel:hover {
   color: #e73d3e;
+}
+
+.p-inputnumber {
+  width: 100%;
+}
+
+.p-datepicker {
+  padding: 0 !important;
+  color: #495057;
+  border-radius: var(--border-radius);
+  background: var(--p-primary-color-400) !important;
+  width: 100%;
+}
+
+.p-select {
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  background: var(--p-select-background);
+  border: 1px solid var(--p-select-border-color);
+  transition: background var(--p-select-transition-duration), color var(--p-select-transition-duration), border-color var(--p-select-transition-duration), outline-color var(--p-select-transition-duration), box-shadow var(--p-select-transition-duration);
+  border-radius: var(--p-select-border-radius);
+  outline-color: transparent;
+  box-shadow: var(--p-select-shadow);
+  width: 100%;
 }
 
 .p-selectbutton .p-button {
@@ -4315,7 +4342,7 @@ p-dynamicdialog .p-dialog-mask {
   column-gap: 0.5rem;
 }
 .p-dialog .p-dialog-footer button {
-  width: 100px;
+  width: 100px !important;
   background-color: var(--uwb-button-background);
   color: var(--uwb-button-text-color);
   border: none;

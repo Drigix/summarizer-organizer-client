@@ -9,6 +9,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'
 import { ComponentsModule } from '@shared/components/components.module';
+import {providePrimeNG} from "primeng/config";
+import Aura from "@primeuix/themes/aura";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -30,7 +33,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             }
         })], providers: [
         TranslateService,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        provideAnimationsAsync(),
+        providePrimeNG({
+          theme: {
+            preset: Aura,
+          },
+        })
     ] })
 export class AppModule {
 

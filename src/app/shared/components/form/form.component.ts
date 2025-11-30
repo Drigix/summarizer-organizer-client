@@ -17,6 +17,7 @@ export class FormComponent {
   @Input() submitButtonLabel = 'global.buttons.save'
   @Input() disabledButtonOption = false;
   @Input() additionalSaveCondidtionValue = true;
+  @Input() cancelIcon = 'pi pi-times';
 
   @Output() save = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<any>();

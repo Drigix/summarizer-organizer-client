@@ -8,6 +8,8 @@ import { SettlementSavingService } from '@services/settlement-saving.service';
 import { SettlementsService } from '@services/settlement.service';
 import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {ConfirmationService} from "primeng/api";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-settlement-saving-dialog',
@@ -21,24 +23,27 @@ export class SettlementSavingDialogComponent implements OnInit {
   date = new Date();
   priceType?: PriceType;
   dialogType?: ButtonClickType;
-  savingTypes = [
-    { name: 'Obligacje', value: 'bonds'},
-    { name: 'Lokata', value: 'deposit'},
-    { name: 'Akcje', value: 'stock'},
-    { name: 'Złoto', value: 'gold'},
-    { name: 'Srebro', value: 'silver'},
-    { name: 'Kryptowaluty', value: 'crypto'},
-    { name: 'Bez procentów', value: 'none'}
+  savingTypes: any[] = [
+    { name: 'Obligacje', code: 'bonds' },
+    { name: 'Lokata', code: 'deposit' },
+    { name: 'Akcje', code: 'stock' },
+    { name: 'Złoto', code: 'gold' },
+    { name: 'Srebro', code: 'silver' },
+    { name: 'Kryptowaluty', code: 'crypto' },
+    { name: 'Bez procentów', code: 'none' }
   ];
   isStockChoose = false;
   isCryptoChoose = false;
+  isSellActionChoose = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,
     private settlementsSavingService: SettlementSavingService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private confirmationService: ConfirmationService,
+    private translationService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -64,14 +69,15 @@ export class SettlementSavingDialogComponent implements OnInit {
         currentPrice: settlement.currentPrice,
         savingType: settlement.savingType,
         percent: settlement.percent,
-        percentPeriod: settlement.percentPeriod
+        percentPeriod: settlement.percentPeriod,
+        amount: settlement?.amount ?? 1
       });
       this.onSavingTypeChange(settlement.savingType!);
     } else {
       this.formGroup.removeControl('id');
       this.formGroup.patchValue({
         date: this.date,
-        priceType,
+        priceType
       });
     }
   }
@@ -89,7 +95,9 @@ export class SettlementSavingDialogComponent implements OnInit {
       savingType: new FormControl('', Validators.required),
       percent: new FormControl(0, Validators.required),
       percentPeriod: new FormControl(0, Validators.required),
-      priceType: new FormControl('', Validators.required)
+      priceType: new FormControl('', Validators.required),
+      amount: new FormControl(1),
+      sellDate: new FormControl(new Date())
     });
   }
 
@@ -106,7 +114,11 @@ export class SettlementSavingDialogComponent implements OnInit {
   }
 
   onCloseDialog(): void {
-    this.ref.close();
+    if (this.isSellActionChoose) {
+      this.isSellActionChoose = false;
+    } else {
+      this.ref.close();
+    }
   }
 
   onSave(): void {
@@ -125,15 +137,44 @@ export class SettlementSavingDialogComponent implements OnInit {
       });
     } else if (this.dialogType === 'edit') {
       const value = Object.assign(this.formGroup.getRawValue() as SettlementSaving);
-      this.settlementsSavingService.updateSettlementSaving(value.id, value).subscribe({
-        next: () => {
-          this.ref.close({ save: true });
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
+      if (this.isSellActionChoose) {
+        this.sellAction(value);
+      } else {
+        this.settlementsSavingService.updateSettlementSaving(value.id, value).subscribe({
+          next: () => {
+            this.ref.close({ save: true });
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      }
     }
   }
 
+  onSellButtonClick(): void {
+    this.isSellActionChoose = true;
+  }
+
+  private sellAction(value: any): void {
+    this.confirmationService.confirm({
+      header: this.translationService.instant('global.header.confirm'),
+      message: this.translationService.instant('settlement.messages.sellConfirmation'),
+      icon: 'pi pi-info-circle',
+      acceptIcon:"pi pi-check",
+      rejectIcon:"pi pi-times",
+      rejectButtonStyleClass:"p-button-text",
+      accept: () => {
+        this.settlementsSavingService.sellSettlementSaving(value.id, value).subscribe({
+          next: () => {
+            this.ref.close({ save: true });
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
+      },
+      key: 'mainDialog'
+    });
+  }
 }

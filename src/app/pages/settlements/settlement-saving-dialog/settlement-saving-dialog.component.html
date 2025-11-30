@@ -1,66 +1,105 @@
-<app-form [formGroup]="formGroup!" (ngSubmit)="onSave()" (cancel)="onCloseDialog()">
-  <app-form-grid form-body>
-    <app-form-control [styleClass]="'col-12'">
-      <span class="p-float-label">
-        <input pInputText id="description" formControlName="description" minlength="2" maxlength="100"/>
-        <label htmlFor="description">{{ 'settlement.description' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control *ngIf="!isCryptoChoose" [styleClass]="'col-12'">
-      <span class="p-float-label">
-        <input pInputText id="linkUrl" formControlName="linkUrl" minlength="10" maxlength="300"/>
-        <label htmlFor="linkUrl">{{ 'settlement.linkUrl' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control [styleClass]="isStockChoose ? 'col-6' : 'col-12'">
-      <span class="p-float-label">
-        <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
-        <label htmlFor="price">{{ 'settlement.price' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control *ngIf="isStockChoose || isCryptoChoose" [styleClass]="'col-6'">
-      <span class="p-float-label">
-        <input pInputText type="number" id="currentPrice" formControlName="currentPrice" minlength="2" maxlength="100"/>
-        <label htmlFor="price">{{ 'settlement.currentPrice' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control [styleClass]="'col-6'">
-      <span class="p-float-label">
-        <p-calendar formControlName="date" view="month" dateFormat="mm/yy" appendTo="body" />
-        <label htmlFor="date">{{ 'settlement.date' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
-      <span class="p-float-label">
-        <p-calendar formControlName="dateTo" view="month" dateFormat="mm/yy" appendTo="body" />
-        <label htmlFor="dateTo">{{ 'settlement.toDate' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control [styleClass]="'col-12'">
-      <span class="p-float-label">
-        <p-dropdown
-        formControlName="savingType"
-        [options]="savingTypes"
-        optionLabel="name"
-        optionValue="value"
-        appendTo="body"
-        (ngModelChange)="onSavingTypeChange($event)"
-         />
-        <label htmlFor="savingType">{{ 'settlement.savingType' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
-      <span class="p-float-label">
-        <p-inputNumber mode="decimal" [minFractionDigits]="2" formControlName="percent" suffix="%" [min]="0"></p-inputNumber>
-        <label htmlFor="percent">{{ 'settlement.percent' | translate }}</label>
-      </span>
-    </app-form-control>
-    <app-form-control *ngIf="!isCryptoChoose && !isStockChoose" [styleClass]="'col-6'">
-      <span class="p-float-label">
-        <p-inputNumber formControlName="percentPeriod" [min]="0"/>
-        <label htmlFor="percentPeriod">{{ 'settlement.percentPeriod' | translate }}</label>
-      </span>
-    </app-form-control>
-  </app-form-grid>
+<app-form [formGroup]="formGroup!" [cancelIcon]="isSellActionChoose ? 'pi pi-arrow-left' : 'pi pi-times'" (ngSubmit)="onSave()" (cancel)="onCloseDialog()">
+  @if (!isSellActionChoose) {
+    <app-form-grid form-body>
+      <app-form-control [styleClass]="'col-12'">
+        <span class="p-float-label">
+          <p-floatlabel>
+              <input pInputText id="description" formControlName="description" minlength="2" maxlength="100"/>
+              <label htmlFor="description">{{ 'settlement.description' | translate }}</label>
+          </p-floatlabel>
+        </span>
+      </app-form-control>
+      <app-form-control [styleClass]="'col-12'">
+        <p-floatlabel>
+          <p-select
+            formControlName="savingType"
+            [options]="savingTypes"
+            optionLabel="name"
+            optionValue="code"
+            appendTo="body"
+            (ngModelChange)="onSavingTypeChange($event)"
+          >
+          </p-select>
+          <label htmlFor="savingType">{{ 'settlement.savingType' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+      @if (!isCryptoChoose) {
+        <app-form-control [styleClass]="'col-12'">
+          <p-floatlabel>
+            <input pInputText id="linkUrl" formControlName="linkUrl" minlength="10" maxlength="300"/>
+            <label htmlFor="linkUrl">{{ 'settlement.linkUrl' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+      }
+      <app-form-control [styleClass]="'col-6'">
+        <p-floatlabel>
+          <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
+          <label htmlFor="price">{{ 'settlement.price' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+      <app-form-control [styleClass]="'col-6'">
+        <p-floatlabel>
+          <input pInputText type="number" id="amount" formControlName="amount" minlength="2" maxlength="100"/>
+          <label htmlFor="amount">{{ 'settlement.amount' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+      @if (isStockChoose || isCryptoChoose) {
+        <app-form-control [styleClass]="'col-6'">
+          <p-floatlabel>
+            <input pInputText type="number" id="currentPrice" formControlName="currentPrice" minlength="2" maxlength="100"/>
+            <label htmlFor="price">{{ 'settlement.currentPrice' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+      }
+      <app-form-control [styleClass]="'col-6'">
+        <p-floatlabel>
+          <p-date-picker formControlName="date" view="month" dateFormat="mm/yy" appendTo="body" />
+          <label htmlFor="date">{{ 'settlement.date' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+      @if (!isCryptoChoose && !isStockChoose) {
+        <app-form-control [styleClass]="'col-6'">
+          <p-floatlabel>
+            <p-date-picker formControlName="dateTo" view="month" dateFormat="mm/yy" appendTo="body" />
+            <label htmlFor="dateTo">{{ 'settlement.toDate' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+      }
+      @if (!isCryptoChoose && !isStockChoose) {
+        <app-form-control [styleClass]="'col-6'">
+          <p-floatlabel>
+            <p-inputNumber mode="decimal" [minFractionDigits]="2" formControlName="percent" suffix="%" [min]="0"></p-inputNumber>
+            <label htmlFor="percent">{{ 'settlement.percent' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+        <app-form-control [styleClass]="'col-6'">
+          <p-floatlabel>
+            <p-inputNumber formControlName="percentPeriod" [min]="0"/>
+            <label htmlFor="percentPeriod">{{ 'settlement.percentPeriod' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+      }
+      @if (dialogType === 'edit') {
+        <app-form-control [styleClass]="'col-12 sell-button flex justify-content-end'">
+          <p-button
+            styleClass="ui-button_size_125"
+            [label]="'global.buttons.sell' | translate"
+            icon="pi pi-wallet"
+            (onClick)="onSellButtonClick()"
+          ></p-button>
+        </app-form-control>
+      }
+    </app-form-grid>
+  }
+  @if (isSellActionChoose) {
+    <app-form-grid form-body>
+      <app-form-control [styleClass]="'col-12'">
+        <p-floatlabel>
+          <p-date-picker formControlName="sellDate" view="month" dateFormat="mm/yy" appendTo="body" />
+          <label htmlFor="dateTo">{{ 'settlement.sellDate' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+    </app-form-grid>
+  }
 </app-form>
 

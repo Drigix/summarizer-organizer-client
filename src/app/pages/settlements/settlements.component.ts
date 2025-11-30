@@ -14,6 +14,7 @@ import { DoughnutChartModel } from '@entities/doughnut-chart.model';
 import { VerticalBarModel } from '@entities/vertical-bar.model';
 import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 import { SettlementSavingEnum } from '@entities/enums/settlement-saving.enum';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-settlements',
@@ -43,7 +44,8 @@ export class SettlementsComponent implements OnInit {
     private dialogService: DialogService,
     private settlementsService: SettlementsService,
     private settlementsSavingService: SettlementSavingService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit():void {
@@ -230,26 +232,28 @@ export class SettlementsComponent implements OnInit {
     } else {
       if(emitSettlementPreviewType.priceType === 'save') {
         const ref = this.dialogService.open(SettlementSavingDialogComponent, {
-          header: 'Test',
+          header: this.translateService.instant('global.header.addSavingDialog'),
           data: {
             clickType: emitSettlementPreviewType.buttonClickType,
             selectedSettlement: emitSettlementPreviewType.settlement,
             priceType: emitSettlementPreviewType.priceType,
-            date: this.date
+            date: this.date,
           },
-          width: '50%'
+          width: '50%',
+          focusOnShow: false
         });
         ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
       } else {
         const ref = this.dialogService.open(SettlementDialogComponent, {
-          header: 'Test',
+          header: this.translateService.instant('global.header.editSavingDialog'),
           data: {
             clickType: emitSettlementPreviewType.buttonClickType,
             selectedSettlement: emitSettlementPreviewType.settlement,
             priceType: emitSettlementPreviewType.priceType,
             date: this.date
           },
-          width: '50%'
+          width: '50%',
+          focusOnShow: false
         });
         ref.onClose.subscribe(res => this.onDialogResponse(res));
       }

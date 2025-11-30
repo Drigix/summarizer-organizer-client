@@ -41,7 +41,7 @@
           <span class="flex align-items-center text-2xl font-bold"
             [ngClass]="getComponentStyle('price-') ">
             <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>
-            {{ settlement.price }}
+            {{ settlement.price! * (settlement?.amount ?? 1)}}
             <i class="pi pi-dollar text-base font-bold"></i>
           </span>
         </div>

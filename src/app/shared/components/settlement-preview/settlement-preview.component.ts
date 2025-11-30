@@ -105,7 +105,7 @@ export class SettlementPreviewComponent implements OnChanges {
   countAllPrices(): number {
     let sum = 0;
     this.settlements.forEach((settlement) => {
-      sum += settlement.price!;
+      sum += settlement.price! * (settlement?.amount ?? 1);
     });
     return sum;
   }

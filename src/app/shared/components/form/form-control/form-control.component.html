@@ -1,6 +1,8 @@
 <div class="field">
-  <label [attr.for]="formControl?.nativeElement?.id" *ngIf="label">
-    {{label | translate: labelParams}}
-  </label>
+  @if (label) {
+    <label [attr.for]="formControl?.nativeElement?.id">
+      {{label | translate: labelParams}}
+    </label>
+  }
   <ng-content></ng-content>
 </div>

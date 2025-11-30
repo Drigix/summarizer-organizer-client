@@ -2,7 +2,13 @@
   "global": {
     "buttons": {
       "save": "Zapisz",
-      "cancel": "Anuluj"
+      "cancel": "Anuluj",
+      "sell": "Sprzedaj"
+    },
+    "header": {
+      "addSavingDialog": "Nowa inwestycja",
+      "editSavingDialog": "Edytuj inwestycje",
+      "confirm": "Potwierdzenie"
     }
   },
   "settlement": {
@@ -14,6 +20,11 @@
     "toDate": "Data do",
     "percent": "Procent",
     "percentPeriod": "Okres przeliczenia",
-    "savingType": "Typ inwestycji"
+    "savingType": "Typ inwestycji",
+    "amount": "Ilość",
+    "sellDate": "Data sprzedaży",
+    "messages": {
+      "sellConfirmation": "Wybrana inwestycja zostanie sprzedana i usunięta z diagramów. Czy chcesz kontynować?"
+    }
   }
 }
