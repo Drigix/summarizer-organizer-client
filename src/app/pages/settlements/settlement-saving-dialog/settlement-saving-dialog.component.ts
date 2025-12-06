@@ -167,7 +167,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       accept: () => {
         this.settlementsSavingService.sellSettlementSaving(value.id, value).subscribe({
           next: () => {
-            this.ref.close({ save: true });
+            this.ref.close({ save: true, sell: true });
           },
           error: (err) => {
             console.log(err);

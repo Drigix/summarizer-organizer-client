@@ -13,7 +13,7 @@
       <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie miesiąca'" [values]="summarizeSettlements"></app-sumarrizer-settlement>
     </div>
     <div class="col-4 grid ">
-      <app-settlement-preview class="col-12" [settlements]="settlementsSaving" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
+      <app-settlement-preview #settlementSavingComponent class="col-12" [settlements]="settlementsSaving" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
       <app-settlement-saving-chart class="col-12" [data]="summarizeSavingSettlements"></app-settlement-saving-chart>
     </div>
   </div>
@@ -26,7 +26,12 @@
         <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" header="Akcje">
-        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeActionsPricesChartDataset!"></app-settlement-year-chart>
+        <app-settlement-year-chart class="col-12"
+                                   [investment]="true"
+                                   [showSoldInvestmentButton]="true"
+                                   [data]="summarizeActionsPricesChartDataset!"
+        (emitSoldInvestment)="openSoldInvestmentDialog($event)">
+        </app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" header="Kryptowaluty">
         <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>

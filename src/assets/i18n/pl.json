@@ -3,12 +3,14 @@
     "buttons": {
       "save": "Zapisz",
       "cancel": "Anuluj",
-      "sell": "Sprzedaj"
+      "sell": "Sprzedaj",
+      "soldStock": "Sprzedane akcje"
     },
     "header": {
       "addSavingDialog": "Nowa inwestycja",
       "editSavingDialog": "Edytuj inwestycje",
-      "confirm": "Potwierdzenie"
+      "confirm": "Potwierdzenie",
+      "soldStock": "Sprzedane akcje"
     }
   },
   "settlement": {

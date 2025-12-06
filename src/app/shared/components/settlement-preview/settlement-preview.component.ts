@@ -13,12 +13,12 @@ import { PriceType } from '@entities/types/price.types';
 export class SettlementPreviewComponent implements OnChanges {
 
   @Input() settlements: Settlement[] = [];
+  @Input() selectedSettlement?: Settlement;
   @Input() priceType?: PriceType;
 
   @Output() emitButtonClick = new EventEmitter<EmitSettlementPreviewType>();
 
   handleSettlements: Settlement[] = [];
-  selectedSettlement?: Settlement;
   searchInput?: string;
 
   constructor() { }

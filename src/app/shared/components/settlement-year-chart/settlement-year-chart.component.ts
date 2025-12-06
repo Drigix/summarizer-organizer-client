@@ -1,11 +1,12 @@
 import {
-  Component,
+  Component, EventEmitter,
   Input,
   OnChanges,
-  OnInit,
+  OnInit, Output,
   SimpleChanges
 } from '@angular/core';
 import { VerticalBarModel } from '@entities/vertical-bar.model';
+import {SettlementSavingEnum} from "@entities/enums/settlement-saving.enum";
 
 @Component({
     selector: 'app-settlement-year-chart',
@@ -16,6 +17,9 @@ import { VerticalBarModel } from '@entities/vertical-bar.model';
 export class SettlementYearChartComponent implements OnInit, OnChanges{
   @Input() data?: VerticalBarModel = {};
   @Input() investment = false;
+  @Input() showSoldInvestmentButton = false;
+
+  @Output() emitSoldInvestment = new EventEmitter();
 
   options: any;
   documentStyle: any;
@@ -83,5 +87,9 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
         dataOut?.data?.forEach(d => this.summarizePrizesRight!+= d);
       }
     }
+  }
+
+  onSoldStockClicked(): void {
+    this.emitSoldInvestment.emit(SettlementSavingEnum.STOCK);
   }
 }

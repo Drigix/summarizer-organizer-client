@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Settlement } from '@entities/settlement.model';
 import { EmitSettlementPreviewType } from '@entities/types/emit-types';
 import { DateUtil } from '@shared/date/date.util';
@@ -15,6 +15,10 @@ import { VerticalBarModel } from '@entities/vertical-bar.model';
 import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 import { SettlementSavingEnum } from '@entities/enums/settlement-saving.enum';
 import {TranslateService} from "@ngx-translate/core";
+import {SettlementPreviewComponent} from "@shared/components/settlement-preview/settlement-preview.component";
+import {
+  SoldInvestmentDialogComponent
+} from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
 
 @Component({
     selector: 'app-settlements',
@@ -23,6 +27,9 @@ import {TranslateService} from "@ngx-translate/core";
     standalone: false
 })
 export class SettlementsComponent implements OnInit {
+
+  @ViewChild('settlementSavingComponent')
+  settlementSavingComponent!: SettlementPreviewComponent;
 
   settlements: Settlement[] = [];
   settlementsIn: Settlement[] = [];
@@ -260,6 +267,18 @@ export class SettlementsComponent implements OnInit {
     }
   }
 
+  openSoldInvestmentDialog(savingType: SettlementSavingEnum): void {
+    const ref = this.dialogService.open(SoldInvestmentDialogComponent, {
+      header: this.translateService.instant('global.header.soldStock'),
+      data: {
+        savingType: savingType,
+        year: this.date.getFullYear()
+      },
+      width: '50%',
+      focusOnShow: false
+    });
+  }
+
   deleteSettlement(id: string): void {
     this.settlementsService.deleteSettlement(id).subscribe({
       next: (res) => {
@@ -296,10 +315,16 @@ export class SettlementsComponent implements OnInit {
   }
 
   onSavingDialogResponse(res: any): void {
+    this.settlementSavingComponent.selectedSettlement = undefined;
     if(res?.save) {
       const toDate = DateUtil.getLastDayOfMonth(this.date);
       this.loadSavingSettlements(toDate);
       this.refreshData();
+    }
+    if(res?.sell) {
+      const fromDate = DateUtil.getFirstDayOfMonth(this.date);
+      const toDate = DateUtil.getLastDayOfMonth(this.date);
+      this.loadSettlements(fromDate, toDate);
     }
   }
 

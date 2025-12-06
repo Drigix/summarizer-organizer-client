@@ -6,6 +6,9 @@ import { SettlementDialogComponent } from './settlements/settlement-dialog/settl
 import {} from '@angular/common/http';
 import { SettlementsService } from '@services/settlement.service';
 import { SettlementSavingDialogComponent } from './settlements/settlement-saving-dialog/settlement-saving-dialog.component';
+import {
+  SoldInvestmentDialogComponent
+} from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
 
 
 @NgModule({
@@ -17,12 +20,14 @@ import { SettlementSavingDialogComponent } from './settlements/settlement-saving
     PagesRoutingModule,
     SettlementsComponent,
     SettlementDialogComponent,
-    SettlementSavingDialogComponent
+    SettlementSavingDialogComponent,
+    SoldInvestmentDialogComponent
   ],
   declarations: [
     SettlementsComponent,
     SettlementDialogComponent,
-    SettlementSavingDialogComponent
+    SettlementSavingDialogComponent,
+    SoldInvestmentDialogComponent
   ],
   providers: [
     SettlementsService
