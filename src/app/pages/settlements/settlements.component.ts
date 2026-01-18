@@ -246,6 +246,7 @@ export class SettlementsComponent implements OnInit {
             priceType: emitSettlementPreviewType.priceType,
             date: this.date,
           },
+          closable: true,
           width: '50%',
           focusOnShow: false
         });
@@ -259,6 +260,7 @@ export class SettlementsComponent implements OnInit {
             priceType: emitSettlementPreviewType.priceType,
             date: this.date
           },
+          closable: true,
           width: '50%',
           focusOnShow: false
         });
@@ -274,6 +276,7 @@ export class SettlementsComponent implements OnInit {
         savingType: savingType,
         year: this.date.getFullYear()
       },
+      closable: true,
       width: '50%',
       focusOnShow: false
     });

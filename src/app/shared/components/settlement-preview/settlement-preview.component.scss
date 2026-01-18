@@ -139,7 +139,7 @@
   color: var(--uwb-button-text-color);
 }
 
-::ng-deep .p-button {
+:host ::ng-deep .p-button {
   background: transparent;
   height: 30px !important;
   width: 30px !important;
@@ -152,6 +152,7 @@
 
 ::ng-deep .add-button .p-button {
   border-color: var(--uwb-price-in-color) !important;
+  background-color: var(--uwb-price-in-color) !important;
 }
 
 ::ng-deep .edit-button .p-button:hover {
@@ -161,6 +162,7 @@
 
 ::ng-deep .edit-button .p-button {
   border-color: var(--uwb-price-save-color) !important;
+  background-color: var(--uwb-price-save-color) !important;
 }
 
 ::ng-deep .delete-button .p-button:hover {
@@ -170,6 +172,7 @@
 
 ::ng-deep .delete-button .p-button {
   border-color: var(--uwb-price-out-color) !important;
+  background-color: var(--uwb-price-out-color) !important;
 }
 
 ::ng-deep .p-fieldset {
