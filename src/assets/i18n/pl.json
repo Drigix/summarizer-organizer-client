@@ -4,11 +4,16 @@
       "save": "Zapisz",
       "cancel": "Anuluj",
       "sell": "Sprzedaj",
-      "soldStock": "Sprzedane akcje"
+      "soldStock": "Sprzedane akcje",
+      "addAnother": "Dodaj następne"
     },
     "header": {
+      "addSettlementInHeader": "Nowy przychód",
+      "editSettlementInHeader": "Edycja przychodu",
+      "addSettlementOutHeader": "Nowy wydatek",
+      "editSettlementOutHeader": "Edycja wydatku",
       "addSavingDialog": "Nowa inwestycja",
-      "editSavingDialog": "Edytuj inwestycje",
+      "editSavingDialog": "Edycja inwestycji",
       "confirm": "Potwierdzenie",
       "soldStock": "Sprzedane akcje"
     }
