@@ -19,6 +19,8 @@ import {SettlementPreviewComponent} from "@shared/components/settlement-preview/
 import {
   SoldInvestmentDialogComponent
 } from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
+import {ButtonClickType} from "@entities/types/button-click.types";
+import {PriceType} from "@entities/types/price.types";
 
 @Component({
     selector: 'app-settlements',
@@ -253,7 +255,7 @@ export class SettlementsComponent implements OnInit {
         ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
       } else {
         const ref = this.dialogService.open(SettlementDialogComponent, {
-          header: this.translateService.instant('global.header.editSavingDialog'),
+          header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
           data: {
             clickType: emitSettlementPreviewType.buttonClickType,
             selectedSettlement: emitSettlementPreviewType.settlement,
@@ -331,9 +333,21 @@ export class SettlementsComponent implements OnInit {
     }
   }
 
-  // onDialogSavingResponse(res: any): void {
-  //   if(res.save) {
-  //     this.loadSettlements(this.date);
-  //   }
-  // }
+  private getSettlementDialogHeader(buttonClickType: ButtonClickType, priceType: PriceType): string {
+    let header = this.translateService.instant('global.header.addSettlementInHeader');
+    if (buttonClickType === 'add') {
+      if (priceType === 'in') {
+        header = this.translateService.instant('global.header.addSettlementInHeader');
+      } else if (priceType === 'out') {
+        header = this.translateService.instant('global.header.addSettlementOutHeader');
+      }
+    } else if (buttonClickType === 'edit') {
+      if (priceType === 'in') {
+        header = this.translateService.instant('global.header.editSettlementInHeader');
+      } else if (priceType === 'out') {
+        header = this.translateService.instant('global.header.editSettlementOutHeader');
+      }
+    }
+    return header;
+  }
 }

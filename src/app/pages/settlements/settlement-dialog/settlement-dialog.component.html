@@ -30,6 +30,19 @@
         <label htmlFor="toDate">{{ 'settlement.toDate' | translate }}</label>
       </p-floatlabel>
     </app-form-control>
+    @if (dialogType === 'add') {
+      <app-form-control [styleClass]="'col-12'">
+        <div class="button_wrapper_text">
+          <p-button
+            styleClass="ui-button_size_125"
+            icon="pi pi-plus"
+            type="button"
+            [label]="'global.buttons.addAnother' | translate"
+            (onClick)="onAddAnotherClicked()"
+          ></p-button>
+        </div>
+      </app-form-control>
+    }
   </app-form-grid>
 </app-form>
 

@@ -73,12 +73,20 @@ export class SettlementDialogComponent implements OnInit {
     this.ref.close();
   }
 
-  onSave(): void {
+  onAddAnotherClicked(): void {
+    this.onSave(true);
+  }
+
+  onSave(isAddAnother = false): void {
     if(this.dialogType === 'add') {
       const value: NewSettlement = Object.assign(this.formGroup.getRawValue() as NewSettlement);
       this.settlementsService.createSettlement(value).subscribe({
         next: () => {
-          this.ref.close({ save: true });
+          if (isAddAnother) {
+            this.createFormGroup();
+          } else {
+            this.ref.close({ save: true });
+          }
         },
         error: (err) => {
           console.log(err);
