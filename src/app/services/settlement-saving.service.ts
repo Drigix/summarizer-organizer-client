@@ -24,6 +24,10 @@ export class SettlementSavingService {
     return this.http.put(`${this.resourceUrl}/sell/${id}`, settlement);
   }
 
+  refreshPrices(ids: string[]): Observable<any> {
+    return this.http.put(`${this.resourceUrl}/refresh-prices/gold-silver`, ids);
+  }
+
   getSettlementsSavingToDate(toDate:string): Observable<any> {
     return this.http.get<any>(`${this.resourceUrl}/${toDate}`);
   }

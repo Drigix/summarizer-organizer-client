@@ -31,6 +31,14 @@
           </p-floatlabel>
         </app-form-control>
       }
+      @if (!isCryptoChoose) {
+        <app-form-control [styleClass]="'col-12'">
+          <p-floatlabel>
+            <input pInputText id="refreshPriceUrl" formControlName="refreshPriceUrl" minlength="10" maxlength="500"/>
+            <label htmlFor="refreshPriceUrl">{{ 'settlement.refreshPriceUrl' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+      }
       <app-form-control [styleClass]="'col-6'">
         <p-floatlabel>
           <input pInputText type="number" id="price" formControlName="price" minlength="2" maxlength="100"/>
@@ -86,6 +94,16 @@
             [label]="'global.buttons.sell' | translate"
             icon="pi pi-wallet"
             (onClick)="onSellButtonClick()"
+          ></p-button>
+        </app-form-control>
+      }
+      @if (!isCryptoChoose) {
+        <app-form-control [styleClass]="'col-12 sell-button flex justify-content-end'">
+          <p-button
+            styleClass="ui-button_size_150"
+            [label]="'global.buttons.refreshPrice' | translate"
+            icon="pi pi-wallet"
+            (onClick)="onRefreshPriceClick()"
           ></p-button>
         </app-form-control>
       }

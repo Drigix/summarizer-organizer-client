@@ -8,7 +8,7 @@ import { SettlementSavingService } from '@services/settlement-saving.service';
 import { SettlementsService } from '@services/settlement.service';
 import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import {ConfirmationService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -43,7 +43,8 @@ export class SettlementSavingDialogComponent implements OnInit {
     private settlementsSavingService: SettlementSavingService,
     private cd: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
-    private translationService: TranslateService
+    private translationService: TranslateService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +65,7 @@ export class SettlementSavingDialogComponent implements OnInit {
         priceType: settlement.priceType,
         description: settlement.description,
         linkUrl: settlement.linkUrl,
+        refreshPriceUrl: settlement.refreshPriceUrl,
         quantity: settlement.quantity,
         price: settlement.price,
         currentPrice: settlement.currentPrice,
@@ -89,6 +91,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       dateTo: new FormControl(null),
       description: new FormControl('', Validators.required),
       linkUrl: new FormControl(null),
+      refreshPriceUrl: new FormControl(null),
       quantity: new FormControl(null),
       price: new FormControl(0, Validators.required),
       currentPrice: new FormControl(0),
@@ -154,6 +157,23 @@ export class SettlementSavingDialogComponent implements OnInit {
 
   onSellButtonClick(): void {
     this.isSellActionChoose = true;
+  }
+
+  onRefreshPriceClick(): void {
+    const value = Object.assign(this.formGroup.getRawValue() as SettlementSaving);
+    this.settlementsSavingService.refreshPrices([value.id]).subscribe({
+      next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: this.translationService.instant('global.messages.success'),
+          detail: this.translationService.instant('settlement.messages.refreshPriceSuccess')
+        });
+        this.ref.close({ save: true });
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
   }
 
   private sellAction(value: any): void {
