@@ -65,7 +65,7 @@ export class SettlementDialogComponent implements OnInit {
       description: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
       linkUrl: new FormControl(null, [Validators.minLength(10), Validators.maxLength(300)]),
       price: new FormControl(0, Validators.required),
-      priceType: new FormControl('', Validators.required)
+      priceType: new FormControl(this.config?.data?.priceType ?? '', Validators.required)
     });
   }
 
