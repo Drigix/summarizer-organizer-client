@@ -9,6 +9,7 @@ import { SettlementSavingDialogComponent } from './settlements/settlement-saving
 import {
   SoldInvestmentDialogComponent
 } from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
+import {MessageService} from "primeng/api";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {
     SoldInvestmentDialogComponent
   ],
   providers: [
-    SettlementsService
+    SettlementsService,
+    MessageService
   ],
 })
 export class PagesModule { }
