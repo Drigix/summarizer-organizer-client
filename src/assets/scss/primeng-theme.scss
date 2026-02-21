@@ -5700,7 +5700,8 @@ p-dynamicdialog .p-dialog-mask {
   color: #696cff;
 }
 .p-toast .p-toast-message.p-toast-message-success {
-  background: var(--uwb-background);
+  //background: var(--uwb-background);
+  background: transparent !important;
   border: solid #1ea97c;
   border-width: 1px 0 1px var(--border-radius);
   color: #1ea97c;
@@ -5720,7 +5721,8 @@ p-dynamicdialog .p-dialog-mask {
   color: #cc8925;
 }
 .p-toast .p-toast-message.p-toast-message-error {
-  background: var(--uwb-background);
+  //background: var(--uwb-background);
+  background: transparent !important;
   border: solid #ff5757;
   border-width: 1px 0 1px var(--border-radius);
   color: #ff5757;

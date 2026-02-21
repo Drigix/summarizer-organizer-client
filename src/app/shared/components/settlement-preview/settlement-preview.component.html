@@ -20,6 +20,11 @@
         <div class="delete-button mx-1">
           <p-button class="delete-button" icon="pi pi-trash" [disabled]="!selectedSettlement" (onClick)="onButtonClick('delete')"></p-button>
         </div>
+        @if (priceType === 'save') {
+          <div class="refresh-button mx-1">
+            <p-button class="refresh-button" icon="pi pi-refresh" [disabled]="isRefreshDisabled()" (onClick)="onButtonClick('refresh')"></p-button>
+          </div>
+        }
       </div>
     </div>
     <p-divider type="solid" />

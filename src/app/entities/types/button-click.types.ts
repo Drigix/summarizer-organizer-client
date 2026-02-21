@@ -1,1 +1,1 @@
-export type ButtonClickType = 'add' | 'edit' | 'delete';
+export type ButtonClickType = 'add' | 'edit' | 'delete' | 'refresh';

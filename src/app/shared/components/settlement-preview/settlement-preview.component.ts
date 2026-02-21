@@ -3,6 +3,7 @@ import { Settlement } from '@entities/settlement.model';
 import { ButtonClickType } from '@entities/types/button-click.types';
 import { EmitSettlementPreviewType } from '@entities/types/emit-types';
 import { PriceType } from '@entities/types/price.types';
+import {SettlementSaving} from "@entities/settlement-saving.model";
 
 @Component({
     selector: 'app-settlement-preview',
@@ -12,13 +13,13 @@ import { PriceType } from '@entities/types/price.types';
 })
 export class SettlementPreviewComponent implements OnChanges {
 
-  @Input() settlements: Settlement[] = [];
-  @Input() selectedSettlement?: Settlement;
+  @Input() settlements: Settlement[] | SettlementSaving[] = [];
+  @Input() selectedSettlement?: Settlement | SettlementSaving;
   @Input() priceType?: PriceType;
 
   @Output() emitButtonClick = new EventEmitter<EmitSettlementPreviewType>();
 
-  handleSettlements: Settlement[] = [];
+  handleSettlements: Settlement[] | SettlementSaving[] = [];
   searchInput?: string;
 
   constructor() { }
@@ -28,7 +29,7 @@ export class SettlementPreviewComponent implements OnChanges {
     this.handleSettlements = [...this.settlements];
   }
 
-  onSettlementSelected(settlement: Settlement) {
+  onSettlementSelected(settlement: Settlement | SettlementSaving) {
     this.selectedSettlement = settlement;
   }
 
@@ -112,5 +113,9 @@ export class SettlementPreviewComponent implements OnChanges {
 
   goToLink(linkUrl: string): void {
     window.open(linkUrl, "_blank");
+  }
+
+  isRefreshDisabled(): boolean {
+    return this.priceType !== 'save' || !this.selectedSettlement || !(this.selectedSettlement as SettlementSaving).refreshPriceUrl;
   }
 }

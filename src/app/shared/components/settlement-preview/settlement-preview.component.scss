@@ -175,6 +175,16 @@
   background-color: var(--uwb-price-out-color) !important;
 }
 
+::ng-deep .refresh-button .p-button:hover {
+  background-color: var(--uwb-price-light-color) !important;
+  color: white;
+}
+
+::ng-deep .refresh-button .p-button {
+  border-color: var(--uwb-price-light-color) !important;
+  background-color: var(--uwb-price-light-color) !important;
+}
+
 ::ng-deep .p-fieldset {
   background-color: var(--uwb-card-background-color);
 }
