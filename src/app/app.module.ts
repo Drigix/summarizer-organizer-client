@@ -12,27 +12,34 @@ import { ComponentsModule } from '@shared/components/components.module';
 import {providePrimeNG} from "primeng/config";
 import Aura from "@primeuix/themes/aura";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import {Toast, ToastModule} from "primeng/toast";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        PagesModule,
-        BrowserAnimationsModule,
-        ComponentsModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })], providers: [
+    bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    PagesModule,
+    BrowserAnimationsModule,
+    ComponentsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    Toast
+  ], providers: [
         TranslateService,
+        ToastModule,
         provideHttpClient(withInterceptorsFromDi()),
         provideAnimationsAsync(),
         providePrimeNG({

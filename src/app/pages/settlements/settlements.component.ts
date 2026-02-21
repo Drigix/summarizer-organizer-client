@@ -21,6 +21,8 @@ import {
 } from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
 import {ButtonClickType} from "@entities/types/button-click.types";
 import {PriceType} from "@entities/types/price.types";
+import {SharedMessageService} from "@services/shared-message.service";
+import {SharedMessage} from "@entities/shared-message.model";
 
 @Component({
     selector: 'app-settlements',
@@ -54,7 +56,8 @@ export class SettlementsComponent implements OnInit {
     private settlementsService: SettlementsService,
     private settlementsSavingService: SettlementSavingService,
     private confirmationService: ConfirmationService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private sharedMessageService: SharedMessageService
   ) { }
 
   ngOnInit():void {
@@ -220,8 +223,9 @@ export class SettlementsComponent implements OnInit {
   }
 
   openDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
-    if(emitSettlementPreviewType.buttonClickType === 'delete') {
-
+    if (emitSettlementPreviewType.buttonClickType === 'refresh') {
+      this.onRefreshPriceClick([emitSettlementPreviewType?.settlement?._id!]);
+    } else if(emitSettlementPreviewType.buttonClickType === 'delete') {
       this.confirmationService.confirm({
         message: 'Are you sure you want to proceed?',
         header: 'Confirmation',
@@ -331,6 +335,20 @@ export class SettlementsComponent implements OnInit {
       const toDate = DateUtil.getLastDayOfMonth(this.date);
       this.loadSettlements(fromDate, toDate);
     }
+  }
+
+  private onRefreshPriceClick(ids: string[]): void {
+    this.settlementsSavingService.refreshPrices(ids).subscribe({
+      next: (res) => {
+        this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'settlement.messages.refreshPriceSuccess'));
+        const toDate = DateUtil.getLastDayOfMonth(this.date);
+        this.loadSavingSettlements(toDate);
+        this.refreshData();
+      },
+      error: (err) => {
+        this.sharedMessageService.showErrorMessage(new SharedMessage('global.messages.error', 'global.messages.errorDetails'));
+      }
+    })
   }
 
   private getSettlementDialogHeader(buttonClickType: ButtonClickType, priceType: PriceType): string {
