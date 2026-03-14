@@ -11,7 +11,7 @@ export class SoldInvestmentService {
 
   constructor(private http: HttpClient) { }
 
-  getSummarizeSoldInvestmentToChart(savingType: SettlementSavingEnum): Observable<any> {
-    return this.http.get<any>(`${this.resourceUrl}/summarize-sold-investment/chart/${savingType}`);
+  getSummarizeSoldInvestmentToChart(savingType: SettlementSavingEnum, year: number): Observable<any> {
+    return this.http.get<any>(`${this.resourceUrl}/summarize-sold-investment/chart/${savingType}/${year}`);
   }
 }

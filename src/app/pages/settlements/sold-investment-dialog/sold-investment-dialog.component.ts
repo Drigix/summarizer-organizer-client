@@ -12,6 +12,8 @@ import {SettlementSavingEnum} from "@entities/enums/settlement-saving.enum";
 export class SoldInvestmentDialogComponent implements OnInit {
 
   soldInvestmentsChartDataset?: VerticalBarModel;
+  soldInvestmentsSavingType?: SettlementSavingEnum;
+  soldInvestmentsDate?: Date;
 
   constructor(
     private soldInvestmentService: SoldInvestmentService,
@@ -21,13 +23,14 @@ export class SoldInvestmentDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const savingType = this.config.data.savingType;
+    this.soldInvestmentsSavingType = this.config.data.savingType;
     const year = this.config.data.year;
-    this.loadChartDataset(savingType, year);
+    this.soldInvestmentsDate = new Date(year,1,1)
+    this.loadChartDataset(this.soldInvestmentsSavingType!, this.soldInvestmentsDate);
   }
 
-  private loadChartDataset(savingType: SettlementSavingEnum, year: number) {
-    this.soldInvestmentService.getSummarizeSoldInvestmentToChart(savingType).subscribe({
+  loadChartDataset(savingType: SettlementSavingEnum, date: Date) {
+    this.soldInvestmentService.getSummarizeSoldInvestmentToChart(savingType, date.getFullYear()).subscribe({
       next: (res: any) => this.soldInvestmentsChartDataset = res
     });
   }
