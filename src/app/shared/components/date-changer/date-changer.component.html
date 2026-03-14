@@ -1,7 +1,7 @@
-<ng-container [ngSwitch]="dateChangerType">
-  <ng-container *ngSwitchCase="'month'">
+@switch (dateChangerType) {
+  @case('month') {
     <p-toolbar>
-      <i class="pi pi-angle-left text-4xl" (click)="onDateChange('previous')"></i>
+      <p-button icon="pi pi-angle-left" (click)="onDateChange('previous')"></p-button>
       <div class="flex flex-column align-items-center">
         <span class="text-base">
         {{ date.getFullYear() }}
@@ -10,18 +10,18 @@
         {{ getMonthName() }}
         </span>
       </div>
-      <i class="pi pi-angle-right text-4xl" (click)="onDateChange('next')"></i>
+      <p-button icon="pi pi-angle-right" (click)="onDateChange('next')"></p-button>
     </p-toolbar>
-  </ng-container>
-  <ng-container *ngSwitchCase="'year'">
+  }
+  @case('year') {
     <p-toolbar class="year-date-changer">
-      <i class="pi pi-angle-left text-4xl" (click)="onDateChange('previous')"></i>
+      <p-button icon="pi pi-angle-left" (click)="onDateChange('previous')"></p-button>
       <div class="flex flex-column align-items-center">
         <span class="text-base font-bold text-3xl">
         {{ date.getFullYear() }}
         </span>
       </div>
-      <i class="pi pi-angle-right text-4xl" (click)="onDateChange('next')"></i>
+      <p-button icon="pi pi-angle-right" [disabled]="isNextChangeDisabled" (click)="onDateChange('next')"></p-button>
     </p-toolbar>
-  </ng-container>
-</ng-container>
+  }
+}

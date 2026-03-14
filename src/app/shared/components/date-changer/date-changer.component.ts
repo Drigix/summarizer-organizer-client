@@ -17,11 +17,16 @@ export class DateChangerComponent implements OnInit {
 
   @Output() emitDateChange = new EventEmitter();
 
-  date = new Date();
+  @Input() date = new Date();
+
+  currentDate: Date = new Date();
+  isNextChangeDisabled = false;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit(): void {
+    this.changeButtonStatus();
+  }
 
   onDateChange(dateChangeType: DateChangeType): void {
     if(this.dateChangerType === 'month') {
@@ -37,7 +42,16 @@ export class DateChangerComponent implements OnInit {
         this.date.setFullYear(this.date.getFullYear() - 1);
       }
     }
+    this.changeButtonStatus();
     this.emitDateChange.emit(this.date);
+  }
+
+  changeButtonStatus(): void {
+    if(this.dateChangerType === 'month') {
+
+    } else if(this.dateChangerType === 'year') {
+      this.isNextChangeDisabled = this.date.getFullYear() + 1 > this.currentDate.getFullYear();
+    }
   }
 
   getMonthName(): string {
