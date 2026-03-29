@@ -5,7 +5,8 @@
       "cancel": "Anuluj",
       "sell": "Sprzedaj",
       "soldStock": "Sprzedane akcje",
-      "addAnother": "Dodaj następne"
+      "addAnother": "Dodaj następne",
+      "refreshPrice": "Odśwież cenę"
     },
     "header": {
       "addSettlementInHeader": "Nowy przychód",
@@ -16,11 +17,17 @@
       "editSavingDialog": "Edycja inwestycji",
       "confirm": "Potwierdzenie",
       "soldStock": "Sprzedane akcje"
+    },
+    "messages": {
+      "success": "Sukces",
+      "error": "Błąd",
+      "errorDetails": "Wystąpił błąd podczas przetwarzania zapytania."
     }
   },
   "settlement": {
     "description": "Opis",
     "linkUrl": "Link do elementu",
+    "refreshPriceUrl": "Link do odświeżania ceny",
     "price": "Koszt",
     "currentPrice": "Aktualny koszt",
     "date": "Data od",
@@ -31,7 +38,31 @@
     "amount": "Ilość",
     "sellDate": "Data sprzedaży",
     "messages": {
-      "sellConfirmation": "Wybrana inwestycja zostanie sprzedana i usunięta z diagramów. Czy chcesz kontynować?"
+      "sellConfirmation": "Wybrana inwestycja zostanie sprzedana i usunięta z diagramów. Czy chcesz kontynować?",
+      "refreshPriceSuccess": "Cena została zaaktualizowana"
+    },
+    "type": {
+      "in": "Przychodzące",
+      "out": "Wychodzące",
+      "balance": "Bilans"
+    },
+    "savingTypes": {
+      "bonds": "Obligacje",
+      "deposits": "Lokaty",
+      "stock": "Akcje giełdowe",
+      "silver": "Srebro",
+      "gold": "Złoto",
+      "crypto": "Kryptowaluty"
+    },
+    "chartHeaders": {
+      "moneyYearBalance": "Roczny bilans pieniędzy",
+      "bondsAndDeposits": "Obligacje i lokaty"
+    },
+    "chartDetails": {
+      "currentPrice": "Aktualna cena",
+      "buyPrice": "Cena kupna",
+      "sellPrice": "Cena sprzedaży",
+      "profit": "Profit"
     }
   }
 }

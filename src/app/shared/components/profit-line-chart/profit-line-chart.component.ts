@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
+import {TranslateService} from "@ngx-translate/core";
+import {VerticalBarModel} from "@entities/vertical-bar.model";
 
 @Component({
     selector: 'app-profit-line-chart',
@@ -9,35 +11,33 @@ import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
 })
 export class ProfitLineChartComponent implements OnInit {
 
-  @Input() data?: ProfitLineChartModel;
+  @Input() set data(data: VerticalBarModel) {
+    if (data?.datasets && Array.isArray(data.datasets)) {
+      data.datasets.forEach((dataset: any) => {
+        dataset.label = this.translateService.instant(dataset.label);
+      });
+    }
+    this._data = data;
+  };
+
+  get data(): any {
+    return this._data;
+  }
 
   options: any;
+
+  private _data: ProfitLineChartModel = {};
+
+  constructor(
+    private translateService: TranslateService
+  ) {
+  }
 
     ngOnInit(): void {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-        this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            datasets: [
-                {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--blue-500'),
-                    tension: 0.4
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: documentStyle.getPropertyValue('--pink-500'),
-                    tension: 0.4
-                }
-            ]
-        };
 
         this.options = {
             maintainAspectRatio: false,

@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { VerticalBarModel } from '@entities/vertical-bar.model';
 import {SettlementSavingEnum} from "@entities/enums/settlement-saving.enum";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-settlement-year-chart',
@@ -15,7 +16,20 @@ import {SettlementSavingEnum} from "@entities/enums/settlement-saving.enum";
     standalone: false
 })
 export class SettlementYearChartComponent implements OnInit, OnChanges{
-  @Input() data?: VerticalBarModel = {};
+
+  @Input() set data(data: VerticalBarModel) {
+    if (data?.datasets && Array.isArray(data.datasets)) {
+      data.datasets.forEach((dataset: any) => {
+        dataset.label = this.translateService.instant(dataset.label);
+      });
+    }
+    this._data = data;
+  };
+
+  get data() {
+    return this._data;
+  }
+
   @Input() investment = false;
   @Input() showSoldInvestmentButton = false;
 
@@ -25,6 +39,13 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
   documentStyle: any;
   summarizePrizesLeft: number = 0;
   summarizePrizesRight: number = 0;
+
+  private _data: VerticalBarModel = {}
+
+  constructor(
+    private translateService: TranslateService
+  ) {
+  }
 
   ngOnInit(): void {
     this.documentStyle = getComputedStyle(document.documentElement);

@@ -10,7 +10,7 @@
     <div class="col-8 grid">
       <app-settlement-preview class="col-6" [settlements]="settlementsIn" [priceType]="'in'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
       <app-settlement-preview class="col-6" [settlements]="settlementsOut" [priceType]="'out'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
-      <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie miesiąca'" [values]="summarizeSettlements"></app-sumarrizer-settlement>
+      <app-sumarrizer-settlement class="col-12"  [values]="summarizeSettlements"></app-sumarrizer-settlement>
     </div>
     <div class="col-4 grid ">
       <app-settlement-preview #settlementSavingComponent class="col-12" [settlements]="settlementsSaving" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
@@ -22,7 +22,7 @@
       <app-date-changer [dateChangerType]="'year'" (emitDateChange)="loadSummarizeYearChartDataset($event); loadProfitForBondsAndDepositsToChart($event)"></app-date-changer>
     </div>
     <div class="grid m-2">
-      <p-panel class="w-full m-2" header="Roczny bilans pieniędzy">
+      <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.moneyYearBalance' | translate">
         <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" header="Akcje">
@@ -44,8 +44,8 @@
         <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie cen srebra'" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
         <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" header="Obligacje i lokaty">
-        <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset"></app-profit-line-chart>
+      <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.bondsAndDeposits' | translate">
+        <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset!"></app-profit-line-chart>
       </p-panel>
     </div>
   </div>
