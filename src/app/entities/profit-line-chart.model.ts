@@ -11,11 +11,11 @@ export class ProfitLineChartModel {
 export class ProfitLineChartDataModel {
   label?: string;
   borderColor?: string;
-  data?: number[];
+  data?: number[] | string[];
   fill?: boolean;
   tension?: number;
 
-  constructor(label?: string, borderColor?: string, data?: number[], fill?: boolean, tension?: number) {
+  constructor(label?: string, borderColor?: string, data?: number[] | string[], fill?: boolean, tension?: number) {
       this.label = label;
       this.borderColor = borderColor;
       this.data = data;

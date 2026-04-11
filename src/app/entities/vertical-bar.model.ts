@@ -12,12 +12,14 @@ export class VerticalBarDataModel {
   label?: string;
   backgroundColor?: string;
   borderColor?: string;
-  data?: number[];
+  data?: number[] | string[];
+  additionalData?: string[];
 
-  constructor(label?: string, backgroundColor?: string, borderColor?: string, data?: number[]) {
+  constructor(label?: string, backgroundColor?: string, borderColor?: string, data?: number[] | string[], additionalData?: string[]) {
       this.label = label;
       this.backgroundColor = backgroundColor;
       this.borderColor = borderColor;
       this.data = data;
+      this.additionalData = additionalData;
   }
 }

@@ -40,7 +40,7 @@ export class SettlementPreviewComponent implements OnChanges {
   onFilterChange(event: any): void {
     if(this.searchInput && this.searchInput.length > 0) {
       const searchValue = this.searchInput.toLowerCase();
-      this.settlements = this.handleSettlements.filter(hs => hs.description?.includes(searchValue));
+      this.settlements = this.handleSettlements.filter(hs => hs.description?.toLowerCase()?.includes(searchValue));
     } else {
       this.settlements = this.handleSettlements;
     }

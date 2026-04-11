@@ -99,13 +99,13 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
       if(this.investment) {
         const dataBuy = this.data?.datasets![0];
         const dataCurrent = this.data?.datasets![1];
-        dataBuy?.data?.forEach(d => this.summarizePrizesLeft!+= d);
-        dataCurrent?.data?.forEach(d => this.summarizePrizesRight!+= d);
+        dataBuy?.data?.forEach(d => this.summarizePrizesLeft!+= Number(d));
+        dataCurrent?.data?.forEach(d => this.summarizePrizesRight!+= Number(d));
       } else {
         const dataIn = this.data?.datasets![0];
         const dataOut = this.data?.datasets![1];
-        dataIn?.data?.forEach(d => this.summarizePrizesLeft!+= d);
-        dataOut?.data?.forEach(d => this.summarizePrizesRight!+= d);
+        dataIn?.data?.forEach(d => this.summarizePrizesLeft!+= Number(d));
+        dataOut?.data?.forEach(d => this.summarizePrizesRight!+= Number(d));
       }
     }
   }
