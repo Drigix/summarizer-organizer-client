@@ -10,7 +10,7 @@
                   <span class="text-secondary text-sm">{{ meterItem.label! | translate }}</span>
                   @if (meterItem.balance) {
                     <span class="font-bold text-lg">
-                      {{ meterItem.balance }} $
+                      {{ meterItem.balance | currency:'PLN':'symbol-narrow': '2.0'}}
                     </span>
                   }
                   @if (!meterItem.balance) {

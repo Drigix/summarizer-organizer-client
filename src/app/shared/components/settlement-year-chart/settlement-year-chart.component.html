@@ -3,20 +3,18 @@
 </div>
 <div class="summarize-prizes flex justify-content-center align-items-center text-3xl font-bold pt-4">
   <span [ngClass]="investment ? 'summarize-prize-buy' : 'summarize-prize-in'" class="mx-2 p-3">
-    <ng-container *ngIf="investment; else normalLeftTemplate">
-      {{summarizePrizesLeft}}
-    </ng-container>
-    <ng-template #normalLeftTemplate>
-      +{{summarizePrizesLeft}}
-    </ng-template>
+     @if (investment) {
+       {{summarizePrizesLeft | currency:'PLN':'symbol-narrow': '2.0'}}
+     } @else {
+       +{{summarizePrizesLeft | currency:'PLN':'symbol-narrow': '2.0'}}
+     }
   </span>
   <span [ngClass]="investment ? 'summarize-prize-in' : 'summarize-prize-out'" class="mx-2 p-3">
-    <ng-container *ngIf="investment; else normalRightTemplate">
-      {{summarizePrizesRight}}
-    </ng-container>
-    <ng-template #normalRightTemplate>
-      -{{summarizePrizesRight}}
-    </ng-template>
+    @if (investment) {
+      {{summarizePrizesRight | currency:'PLN':'symbol-narrow': '2.0'}}
+    } @else {
+        -{{summarizePrizesRight | currency:'PLN':'symbol-narrow': '2.0'}}
+    }
   </span>
   @if (showSoldInvestmentButton) {
     <p-button [ngClass]="'ui-button_size_150'" [label]="'global.buttons.soldStock' | translate" (onClick)="onSoldStockClicked()"></p-button>
