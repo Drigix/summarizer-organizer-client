@@ -26,8 +26,8 @@
     </app-form-control>
     <app-form-control [styleClass]="'col-6'">
       <p-floatlabel>
-        <p-date-picker formControlName="toDate" view="month" dateFormat="mm/yy" appendTo="body" />
-        <label htmlFor="toDate">{{ 'settlement.toDate' | translate }}</label>
+        <p-date-picker formControlName="dateTo" view="month" dateFormat="mm/yy" appendTo="body" />
+        <label htmlFor="dateTo">{{ 'settlement.toDate' | translate }}</label>
       </p-floatlabel>
     </app-form-control>
     @if (dialogType === 'add') {
