@@ -25,7 +25,7 @@
       <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.moneyYearBalance' | translate">
         <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" header="Akcje">
+      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.stock' | translate">
         <app-settlement-year-chart class="col-12"
                                    [investment]="true"
                                    [showSoldInvestmentButton]="true"
@@ -33,15 +33,15 @@
         (emitSoldInvestment)="openSoldInvestmentDialog($event)">
         </app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" header="Kryptowaluty">
+      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.crypto' | translate">
         <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" header="Złoto">
-        <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie cen złota'" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
+      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.gold' | translate">
+        <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
         <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeGoldPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" header="Srebro">
-        <app-sumarrizer-settlement class="col-12" [header]="'Podsumowanie cen srebra'" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
+      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.silver' | translate">
+        <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
         <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.bondsAndDeposits' | translate">

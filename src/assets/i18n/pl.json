@@ -22,6 +22,9 @@
       "success": "Sukces",
       "error": "Błąd",
       "errorDetails": "Wystąpił błąd podczas przetwarzania zapytania."
+    },
+    "questions": {
+      "deleteConfirmation": "Czy na pewno chcesz usunąć dany element?"
     }
   },
   "settlement": {
@@ -39,7 +42,8 @@
     "sellDate": "Data sprzedaży",
     "messages": {
       "sellConfirmation": "Wybrana inwestycja zostanie sprzedana i usunięta z diagramów. Czy chcesz kontynować?",
-      "refreshPriceSuccess": "Cena została zaaktualizowana"
+      "refreshPriceSuccess": "Cena została zaaktualizowana",
+      "editAllSettlementConfirmation": "Czy chcesz edytować wszystkie rekordy od {{date}} do {{dateTo}} o podanej nazwie?"
     },
     "type": {
       "in": "Przychodzące",

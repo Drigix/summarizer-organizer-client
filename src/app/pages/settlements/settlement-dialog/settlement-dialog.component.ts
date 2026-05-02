@@ -6,6 +6,8 @@ import { PriceType } from '@entities/types/price.types';
 import { SettlementsService } from '@services/settlement.service';
 import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {ConfirmationService} from "primeng/api";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-settlement-dialog',
@@ -24,7 +26,9 @@ export class SettlementDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,
-    private settlementsService: SettlementsService
+    private settlementsService: SettlementsService,
+    private confirmationService: ConfirmationService,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -42,6 +46,7 @@ export class SettlementDialogComponent implements OnInit {
       this.formGroup.patchValue({
         id : settlement._id,
         date: new Date(settlement.date!),
+        dateTo: settlement.dateTo ? new Date(settlement.dateTo!) : new Date(settlement.date!),
         priceType: settlement.priceType,
         description: settlement.description,
         linkUrl: settlement.linkUrl,
@@ -51,7 +56,7 @@ export class SettlementDialogComponent implements OnInit {
       this.formGroup.removeControl('id');
       this.formGroup.patchValue({
         date: this.date,
-        toDate: this.date,
+        dateTo: this.date,
         priceType,
       });
     }
@@ -61,7 +66,7 @@ export class SettlementDialogComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       id: new FormControl(null),
       date: new FormControl(this.date, Validators.required),
-      toDate: new FormControl(this.date, Validators.required),
+      dateTo: new FormControl(this.date, Validators.required),
       description: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
       linkUrl: new FormControl(null, [Validators.minLength(10), Validators.maxLength(300)]),
       price: new FormControl(0, Validators.required),
@@ -94,14 +99,37 @@ export class SettlementDialogComponent implements OnInit {
       });
     } else if (this.dialogType === 'edit') {
       const value = Object.assign(this.formGroup.getRawValue() as Settlement);
-      this.settlementsService.updateSettlement(value.id, value).subscribe({
-        next: () => {
-          this.ref.close({ save: true });
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
+      if (value.date.getTime() !== value.dateTo.getTime()) {
+        this.confirmationService.confirm({
+          message: this.translateService.instant('settlement.messages.editAllSettlementConfirmation', {date: value.date.toString(), dateTo: value.dateTo.toString()}),
+          header: this.translateService.instant('global.header.confirm'),
+          icon: 'pi pi-info-circle',
+          acceptIcon:"pi pi-check",
+          rejectIcon:"none",
+          rejectButtonStyleClass:"p-button-text",
+          accept: () => {
+            value.updateAllRecords = true;
+            this.updateSettlement(value.id, value);
+          },
+          reject: () => {
+            this.updateSettlement(value.id, value);
+          },
+          key: 'mainDialog'
+        });
+      } else {
+        this.updateSettlement(value.id, value);
+      }
     }
+  }
+
+  private updateSettlement(settlementId: string, settlement: Settlement): void {
+    this.settlementsService.updateSettlement(settlementId, settlement).subscribe({
+      next: () => {
+        this.ref.close({ save: true });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }

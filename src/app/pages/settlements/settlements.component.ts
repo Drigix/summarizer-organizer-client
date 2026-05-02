@@ -227,8 +227,8 @@ export class SettlementsComponent implements OnInit {
       this.onRefreshPriceClick([emitSettlementPreviewType?.settlement?._id!]);
     } else if(emitSettlementPreviewType.buttonClickType === 'delete') {
       this.confirmationService.confirm({
-        message: 'Are you sure you want to proceed?',
-        header: 'Confirmation',
+        message: this.translateService.instant('global.questions.deleteConfirmation'),
+        header: this.translateService.instant('global.header.confirm'),
         icon: 'pi pi-info-circle',
         acceptIcon:"pi pi-check",
         rejectIcon:"none",
