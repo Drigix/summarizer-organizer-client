@@ -47,7 +47,7 @@ $shady-lady: #9f9b9d;
   height: 30px !important;
 }
 .ui-button_size_150 {
-  width: 150px;
+  width: 150px !important;
 }
 .ui-button_size_175 {
   width: 175px;
@@ -74,4 +74,22 @@ $shady-lady: #9f9b9d;
 
 .field {
   margin-bottom: 1.8rem !important;
+}
+
+.summarize-prize-in {
+  color: var(--uwb-price-in-light-color);
+  border: 1px solid var(--uwb-price-in-light-color);
+  border-radius: 14px;
+}
+
+.summarize-prize-out {
+  color: var(--uwb-price-out-light-color);
+  border: 1px solid var(--uwb-price-out-light-color);
+  border-radius: 14px;
+}
+
+.summarize-prize-buy {
+  color: var(--uwb-price-light-color);
+  border: 1px solid var(--uwb-price-light-color);
+  border-radius: 14px;
 }
