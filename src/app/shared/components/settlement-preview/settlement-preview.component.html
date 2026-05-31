@@ -1,16 +1,16 @@
 <div class="mt-2" [ngClass]="getComponentStyle('component-price-')">
-  <p-fieldset [legend]="getTitle()" [toggleable]="true">
+  <p-fieldset [legend]="(getTitle() | currency:'PLN':'symbol-narrow': '2.0')!" [toggleable]="true">
     <div class="component-settlement-preview"
     [ngClass]="getComponentStyle('component-price-')">
 
     <div class="grid p-0">
-      <div class="col-8">
+      <div [ngClass]="{'col-8': priceType !== 'save', 'col-7': priceType === 'save'}">
         <p-iconField iconPosition="left">
           <p-inputIcon styleClass="pi pi-search" />
           <input class="w-93" type="text" pInputText placeholder="Search" [(ngModel)]="searchInput" (input)="onFilterChange($event)" />
         </p-iconField>
       </div>
-      <div class="col-4 navbar flex justify-content-end">
+      <div [ngClass]="{'col-4': priceType !== 'save', 'col-5': priceType === 'save'}" class="navbar flex justify-content-end">
         <div class="add-button mx-1">
           <p-button icon="pi pi-plus" (onClick)="onButtonClick('add')"></p-button>
         </div>
@@ -23,6 +23,11 @@
         @if (priceType === 'save') {
           <div class="refresh-button mx-1">
             <p-button class="refresh-button" icon="pi pi-refresh" [disabled]="isRefreshDisabled()" (onClick)="onButtonClick('refresh')"></p-button>
+          </div>
+        }
+        @if (priceType === 'save') {
+          <div class="unrealized-profit-button mx-1">
+            <p-button class="unrealized-profit-button" icon="pi pi-chart-line" (onClick)="onButtonClick('unrealized-profit')"></p-button>
           </div>
         }
       </div>
@@ -53,16 +58,6 @@
     </div>
 
   </div>
-  <!-- <div class="footer"
-    [ngStyle]="{'background-color': getPriceColor('var(--uwb-price-?-color)')}">
-    <span class="text-4xl">
-      <span class="flex justify-content-center align-items-center text-2xl font-bold">
-        <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>
-        {{ countAllPrices() }}
-        <i class="pi pi-dollar text-base font-bold"></i>
-      </span>
-    </span>
-  </div> -->
 
   </p-fieldset>
 </div>

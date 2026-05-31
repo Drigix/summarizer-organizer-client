@@ -46,18 +46,8 @@ export class SettlementPreviewComponent implements OnChanges {
     }
   }
 
-  getTitle(): string {
-    let string = '';
-    switch (this.priceType) {
-      case 'in': string += '+ ';
-      break;
-      case 'out': string += '- ';
-      break;
-      case 'save': string += '% ';
-      break;
-    }
-    string += Math.round(this.countAllPrices()) + '$'
-    return string;
+  getTitle(): number {
+    return Math.round(this.countAllPrices());
   }
 
   getComponentStyle(style: string): string {

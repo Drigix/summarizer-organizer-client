@@ -185,6 +185,11 @@
   background-color: var(--uwb-price-light-color) !important;
 }
 
+::ng-deep .unrealized-profit-button .p-button {
+  border-color: var(--uwb-profit-color) !important;
+  background-color: var(--uwb-profit-color) !important;
+}
+
 ::ng-deep .p-fieldset {
   background-color: var(--uwb-card-background-color);
 }
