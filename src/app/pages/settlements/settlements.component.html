@@ -26,7 +26,7 @@
         <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.savingTypes.stock' | translate">
-        <app-settlement-year-chart class="col-12"
+        <app-settlement-year-chart #stockComponent class="col-12"
                                    [investment]="true"
                                    [showSoldInvestmentButton]="true"
                                    [data]="summarizeActionsPricesChartDataset!"
@@ -34,18 +34,18 @@
         </app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.savingTypes.crypto' | translate">
-        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>
+        <app-settlement-year-chart #cryptoComponent class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.savingTypes.gold' | translate">
         <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
-        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeGoldPricesChartDataset!"></app-settlement-year-chart>
+        <app-settlement-year-chart #goldComponent class="col-12" [investment]="true" [data]="summarizeGoldPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.savingTypes.silver' | translate">
         <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
-        <app-settlement-year-chart class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
+        <app-settlement-year-chart #silverComponent class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
       </p-panel>
       <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.bondsAndDeposits' | translate">
-        <app-profit-line-chart class="col-12" [data]="profitBondsAndDepositsChartDataset!"></app-profit-line-chart>
+        <app-profit-line-chart #bondsAndDepositComponent class="col-12" [data]="profitBondsAndDepositsChartDataset!"></app-profit-line-chart>
       </p-panel>
     </div>
   </div>

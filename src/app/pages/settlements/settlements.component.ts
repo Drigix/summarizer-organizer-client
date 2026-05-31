@@ -267,54 +267,13 @@ export class SettlementsComponent implements OnInit {
         });
         break;
       }
-      case 'add': {
-        console.log(typeof emitSettlementPreviewType.settlement);
-        console.log(emitSettlementPreviewType.settlement instanceof Settlement);
-        if (emitSettlementPreviewType.settlement instanceof SettlementSaving) {
-          const ref = this.dialogService.open(SettlementSavingDialogComponent, {
-            header: this.translateService.instant('global.header.addSavingDialog'),
-            data: {
-              clickType: emitSettlementPreviewType.buttonClickType,
-              selectedSettlement: emitSettlementPreviewType.settlement,
-              priceType: emitSettlementPreviewType.priceType,
-              date: this.date,
-            },
-            closable: true,
-            width: '50%',
-            focusOnShow: false
-          });
-          ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
-        } else {
-          const ref = this.dialogService.open(SettlementDialogComponent, {
-            header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
-            data: {
-              clickType: emitSettlementPreviewType.buttonClickType,
-              selectedSettlement: emitSettlementPreviewType.settlement,
-              priceType: emitSettlementPreviewType.priceType,
-              date: this.date
-            },
-            closable: true,
-            width: '50%',
-            focusOnShow: false
-          });
-          ref.onClose.subscribe(res => this.onDialogResponse(res));
-        }
-        break;
-      }
+      case 'add':
       case 'edit': {
-        const ref = this.dialogService.open(SettlementDialogComponent, {
-          header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
-          data: {
-            clickType: emitSettlementPreviewType.buttonClickType,
-            selectedSettlement: emitSettlementPreviewType.settlement,
-            priceType: emitSettlementPreviewType.priceType,
-            date: this.date
-          },
-          closable: true,
-          width: '50%',
-          focusOnShow: false
-        });
-        ref.onClose.subscribe(res => this.onDialogResponse(res));
+        if (emitSettlementPreviewType.priceType === 'save') {
+          this.openSettlementSaveDialog(emitSettlementPreviewType);
+        } else {
+          this.openSettlementDialog(emitSettlementPreviewType);
+        }
         break;
       }
     }
@@ -382,6 +341,38 @@ export class SettlementsComponent implements OnInit {
     }
   }
 
+  private openSettlementDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
+    const ref = this.dialogService.open(SettlementDialogComponent, {
+      header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
+      data: {
+        clickType: emitSettlementPreviewType.buttonClickType,
+        selectedSettlement: emitSettlementPreviewType.settlement,
+        priceType: emitSettlementPreviewType.priceType,
+        date: this.date
+      },
+      closable: true,
+      width: '50%',
+      focusOnShow: false
+    });
+    ref.onClose.subscribe(res => this.onDialogResponse(res));
+  }
+
+  private openSettlementSaveDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
+    const ref = this.dialogService.open(SettlementSavingDialogComponent, {
+      header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
+      data: {
+        clickType: emitSettlementPreviewType.buttonClickType,
+        selectedSettlement: emitSettlementPreviewType.settlement,
+        priceType: emitSettlementPreviewType.priceType,
+        date: this.date,
+      },
+      closable: true,
+      width: '50%',
+      focusOnShow: false
+    });
+    ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
+  }
+
   private onRefreshPriceClick(ids: string[]): void {
     this.settlementsSavingService.refreshPrices(ids).subscribe({
       next: (res) => {
@@ -423,12 +414,16 @@ export class SettlementsComponent implements OnInit {
         header = this.translateService.instant('global.header.addSettlementInHeader');
       } else if (priceType === 'out') {
         header = this.translateService.instant('global.header.addSettlementOutHeader');
+      } else if (priceType === 'save') {
+        header = this.translateService.instant('global.header.addSettlementSaveHeader');
       }
     } else if (buttonClickType === 'edit') {
       if (priceType === 'in') {
         header = this.translateService.instant('global.header.editSettlementInHeader');
       } else if (priceType === 'out') {
         header = this.translateService.instant('global.header.editSettlementOutHeader');
+      } else if (priceType === 'save') {
+        header = this.translateService.instant('global.header.editSettlementSaveHeader');
       }
     }
     return header;
