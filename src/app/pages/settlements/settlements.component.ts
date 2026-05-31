@@ -23,6 +23,12 @@ import {ButtonClickType} from "@entities/types/button-click.types";
 import {PriceType} from "@entities/types/price.types";
 import {SharedMessageService} from "@services/shared-message.service";
 import {SharedMessage} from "@entities/shared-message.model";
+import {SettlementYearChartComponent} from "@shared/components/settlement-year-chart/settlement-year-chart.component";
+import {ProfitLineChartComponent} from "@shared/components/profit-line-chart/profit-line-chart.component";
+import {
+  UnrealizedProfitDialogComponent
+} from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
+import {UnrealizedProfitDialogModel} from "@entities/unrealized-profit-dialog.model";
 
 @Component({
     selector: 'app-settlements',
@@ -34,6 +40,18 @@ export class SettlementsComponent implements OnInit {
 
   @ViewChild('settlementSavingComponent')
   settlementSavingComponent!: SettlementPreviewComponent;
+
+  @ViewChild('stockComponent')
+  stockComponent!: SettlementYearChartComponent;
+
+  @ViewChild('goldComponent')
+  goldComponent!: SettlementYearChartComponent;
+
+  @ViewChild('silverComponent')
+  silverComponent!: SettlementYearChartComponent;
+
+  @ViewChild('bondsAndDepositComponent')
+  bondsAndDepositComponent!: ProfitLineChartComponent;
 
   settlements: Settlement[] = [];
   settlementsIn: Settlement[] = [];
@@ -61,8 +79,6 @@ export class SettlementsComponent implements OnInit {
   ) { }
 
   ngOnInit():void {
-    // this.loadSettlements(this.date);
-    // this.loadSavingSettlements(this.date);
     this.onDateChange(this.date);
     this.refreshData();
   }
@@ -223,41 +239,69 @@ export class SettlementsComponent implements OnInit {
   }
 
   openDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
-    if (emitSettlementPreviewType.buttonClickType === 'refresh') {
-      this.onRefreshPriceClick([emitSettlementPreviewType?.settlement?._id!]);
-    } else if(emitSettlementPreviewType.buttonClickType === 'delete') {
-      this.confirmationService.confirm({
-        message: this.translateService.instant('global.questions.deleteConfirmation'),
-        header: this.translateService.instant('global.header.confirm'),
-        icon: 'pi pi-info-circle',
-        acceptIcon:"pi pi-check",
-        rejectIcon:"none",
-        rejectButtonStyleClass:"p-button-text",
-        accept: () => {
-          if(emitSettlementPreviewType.priceType === 'save') {
-            this.deleteSettlementSaving(emitSettlementPreviewType.settlement._id!);
-          } else {
-            this.deleteSettlement(emitSettlementPreviewType.settlement._id!);
-          }
-        },
-        key: 'mainDialog'
-      });
-    } else {
-      if(emitSettlementPreviewType.priceType === 'save') {
-        const ref = this.dialogService.open(SettlementSavingDialogComponent, {
-          header: this.translateService.instant('global.header.addSavingDialog'),
-          data: {
-            clickType: emitSettlementPreviewType.buttonClickType,
-            selectedSettlement: emitSettlementPreviewType.settlement,
-            priceType: emitSettlementPreviewType.priceType,
-            date: this.date,
+    switch (emitSettlementPreviewType.buttonClickType) {
+      case 'refresh': {
+        this.onRefreshPriceClick([emitSettlementPreviewType?.settlement?._id!]);
+        break;
+      }
+      case 'unrealized-profit': {
+        this.onUnrealizedProfitClick();
+        break;
+      }
+      case 'delete': {
+        this.confirmationService.confirm({
+          message: this.translateService.instant('global.questions.deleteConfirmation'),
+          header: this.translateService.instant('global.header.confirm'),
+          icon: 'pi pi-info-circle',
+          acceptIcon:"pi pi-check",
+          rejectIcon:"none",
+          rejectButtonStyleClass:"p-button-text",
+          accept: () => {
+            if(emitSettlementPreviewType.priceType === 'save') {
+              this.deleteSettlementSaving(emitSettlementPreviewType.settlement._id!);
+            } else {
+              this.deleteSettlement(emitSettlementPreviewType.settlement._id!);
+            }
           },
-          closable: true,
-          width: '50%',
-          focusOnShow: false
+          key: 'mainDialog'
         });
-        ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
-      } else {
+        break;
+      }
+      case 'add': {
+        console.log(typeof emitSettlementPreviewType.settlement);
+        console.log(emitSettlementPreviewType.settlement instanceof Settlement);
+        if (emitSettlementPreviewType.settlement instanceof SettlementSaving) {
+          const ref = this.dialogService.open(SettlementSavingDialogComponent, {
+            header: this.translateService.instant('global.header.addSavingDialog'),
+            data: {
+              clickType: emitSettlementPreviewType.buttonClickType,
+              selectedSettlement: emitSettlementPreviewType.settlement,
+              priceType: emitSettlementPreviewType.priceType,
+              date: this.date,
+            },
+            closable: true,
+            width: '50%',
+            focusOnShow: false
+          });
+          ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
+        } else {
+          const ref = this.dialogService.open(SettlementDialogComponent, {
+            header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
+            data: {
+              clickType: emitSettlementPreviewType.buttonClickType,
+              selectedSettlement: emitSettlementPreviewType.settlement,
+              priceType: emitSettlementPreviewType.priceType,
+              date: this.date
+            },
+            closable: true,
+            width: '50%',
+            focusOnShow: false
+          });
+          ref.onClose.subscribe(res => this.onDialogResponse(res));
+        }
+        break;
+      }
+      case 'edit': {
         const ref = this.dialogService.open(SettlementDialogComponent, {
           header: this.getSettlementDialogHeader(emitSettlementPreviewType.buttonClickType, emitSettlementPreviewType.priceType),
           data: {
@@ -271,6 +315,7 @@ export class SettlementsComponent implements OnInit {
           focusOnShow: false
         });
         ref.onClose.subscribe(res => this.onDialogResponse(res));
+        break;
       }
     }
   }
@@ -349,6 +394,26 @@ export class SettlementsComponent implements OnInit {
         this.sharedMessageService.showErrorMessage(new SharedMessage('global.messages.error', 'global.messages.errorDetails'));
       }
     })
+  }
+
+  private onUnrealizedProfitClick(): void {
+    const noneSavingTypePrize = this.settlementsSaving.filter(s => s.savingType! === 'none').reduce((sum, s) => sum + s.price!, 0);
+    const unrealizedProfitData = [
+      new UnrealizedProfitDialogModel('stock', this.stockComponent.summarizePrizesLeft, this.stockComponent.summarizePrizesRight),
+      new UnrealizedProfitDialogModel('gold', this.goldComponent.summarizePrizesLeft, this.goldComponent.summarizePrizesRight),
+      new UnrealizedProfitDialogModel('silver', this.silverComponent.summarizePrizesLeft, this.silverComponent.summarizePrizesRight),
+      new UnrealizedProfitDialogModel('bonds', this.bondsAndDepositComponent.summarizePrizesLeft, this.bondsAndDepositComponent.summarizePrizesRight),
+      new UnrealizedProfitDialogModel('none', noneSavingTypePrize, noneSavingTypePrize),
+    ]
+    const ref = this.dialogService.open(UnrealizedProfitDialogComponent, {
+      header: this.translateService.instant('global.header.unrealizedProfit'),
+      data: {
+        unrealizedProfitData: unrealizedProfitData
+      },
+      closable: true,
+      width: '50%',
+      focusOnShow: false
+    });
   }
 
   private getSettlementDialogHeader(buttonClickType: ButtonClickType, priceType: PriceType): string {

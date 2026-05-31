@@ -10,6 +10,9 @@ import {
   SoldInvestmentDialogComponent
 } from "@pages/settlements/sold-investment-dialog/sold-investment-dialog.component";
 import {MessageService} from "primeng/api";
+import {
+  UnrealizedProfitDialogComponent
+} from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
 
 
 @NgModule({
@@ -22,13 +25,15 @@ import {MessageService} from "primeng/api";
     SettlementsComponent,
     SettlementDialogComponent,
     SettlementSavingDialogComponent,
-    SoldInvestmentDialogComponent
+    SoldInvestmentDialogComponent,
+    UnrealizedProfitDialogComponent
   ],
   declarations: [
     SettlementsComponent,
     SettlementDialogComponent,
     SettlementSavingDialogComponent,
-    SoldInvestmentDialogComponent
+    SoldInvestmentDialogComponent,
+    UnrealizedProfitDialogComponent
   ],
   providers: [
     SettlementsService,
