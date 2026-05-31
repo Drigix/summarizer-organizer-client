@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ProfitLineChartModel } from '@entities/profit-line-chart.model';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ProfitLineChartDataModel, ProfitLineChartModel} from '@entities/profit-line-chart.model';
 import {TranslateService} from "@ngx-translate/core";
-import {VerticalBarModel} from "@entities/vertical-bar.model";
+import {VerticalBarDataModel, VerticalBarModel} from "@entities/vertical-bar.model";
 
 @Component({
     selector: 'app-profit-line-chart',
@@ -9,12 +9,12 @@ import {VerticalBarModel} from "@entities/vertical-bar.model";
     styleUrls: ['./profit-line-chart.component.scss'],
     standalone: false
 })
-export class ProfitLineChartComponent implements OnInit {
+export class ProfitLineChartComponent implements OnInit, OnChanges {
 
-  @Input() set data(data: VerticalBarModel) {
+  @Input() set data(data: ProfitLineChartModel) {
     if (data?.datasets && Array.isArray(data.datasets)) {
-      data.datasets.forEach((dataset: any) => {
-        dataset.label = this.translateService.instant(dataset.label);
+      data.datasets.forEach((dataset: ProfitLineChartDataModel) => {
+        dataset.label = this.translateService.instant(dataset?.label!);
       });
     }
     this._data = data;
@@ -25,6 +25,8 @@ export class ProfitLineChartComponent implements OnInit {
   }
 
   options: any;
+  summarizePrizesLeft: number = 0;
+  summarizePrizesRight: number = 0;
 
   private _data: ProfitLineChartModel = {};
 
@@ -33,7 +35,7 @@ export class ProfitLineChartComponent implements OnInit {
   ) {
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -70,6 +72,18 @@ export class ProfitLineChartComponent implements OnInit {
                 }
             }
         };
-    }
+  }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['data']) {
+      this.summarizePrizesLeft = 0;
+      this.summarizePrizesRight = 0;
+      if (this.data?.datasets && Array.isArray(this.data.datasets)) {
+        this.data.datasets.forEach((dataset: ProfitLineChartDataModel) => {
+          this.summarizePrizesLeft += dataset?.buyPrice!;
+          this.summarizePrizesRight += Number(dataset?.data![dataset?.data?.length! - 1]);
+        });
+      }
+    }
+  }
 }

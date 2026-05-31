@@ -1,3 +1,11 @@
 <div class="card">
   <p-chart type="line" [data]="data" [options]="options" />
 </div>
+<div class="summarize-prizes flex justify-content-center align-items-center text-3xl font-bold pt-4">
+  <span [ngClass]="'summarize-prize-buy'" class="mx-2 p-3">
+       {{summarizePrizesLeft | currency:'PLN':'symbol-narrow': '2.0'}}
+  </span>
+  <span [ngClass]="'summarize-prize-in'" class="mx-2 p-3">
+      {{summarizePrizesRight | currency:'PLN':'symbol-narrow': '2.0'}}
+  </span>
+</div>
