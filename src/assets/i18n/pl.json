@@ -13,10 +13,11 @@
       "editSettlementInHeader": "Edycja przychodu",
       "addSettlementOutHeader": "Nowy wydatek",
       "editSettlementOutHeader": "Edycja wydatku",
-      "addSavingDialog": "Nowa inwestycja",
-      "editSavingDialog": "Edycja inwestycji",
+      "addSettlementSaveHeader": "Nowa inwestycja",
+      "editSettlementSaveHeader": "Edycja inwestycji",
       "confirm": "Potwierdzenie",
-      "soldStock": "Sprzedane akcje"
+      "soldStock": "Sprzedane akcje",
+      "unrealizedProfit": "Aktualny niezrealizowany profit"
     },
     "messages": {
       "success": "Sukces",
