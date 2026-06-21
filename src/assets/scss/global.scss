@@ -76,6 +76,17 @@ $shady-lady: #9f9b9d;
   margin-bottom: 1.8rem !important;
 }
 
+.label-field {
+  color: var(--uwb-label-color);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.span-field {
+  font-weight: 300;
+  font-size: 14px;
+}
+
 .summarize-prize-in {
   color: var(--uwb-price-in-light-color);
   border: 1px solid var(--uwb-price-in-light-color);

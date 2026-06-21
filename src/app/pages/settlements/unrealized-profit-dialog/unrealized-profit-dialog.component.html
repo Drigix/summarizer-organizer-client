@@ -1,8 +1,14 @@
-<div class="flex justify-content-center align-content-center">
-  <span>
-    {{collectedBuyPrizes | currency:'PLN':'symbol-narrow': '2.0'}}
-  </span>
-  <span>
-    {{collectedCurrentPrizes | currency:'PLN':'symbol-narrow': '2.0'}}
-  </span>
+<div class="flex justify-content-center align-content-center gap-3">
+  <div class="summarize-prize-buy flex flex-column p-3">
+    <label class="label-field">{{'settlement.unrealizedProfit.investmentPrice' | translate}}</label>
+    <span class="span-field">
+      {{collectedBuyPrizes | currency:'PLN':'symbol-narrow': '2.0'}}
+    </span>
+  </div>
+  <div class="summarize-prize-in flex flex-column p-3">
+    <label class="label-field">{{'settlement.unrealizedProfit.currentInvestmentPrice' | translate}}</label>
+    <span class="span-field">
+      {{collectedCurrentPrizes | currency:'PLN':'symbol-narrow': '2.0'}}
+    </span>
+  </div>
 </div>
