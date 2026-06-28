@@ -31,6 +31,10 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import {SelectModule} from "primeng/select";
+import { DataExtractorSelectComponent } from './data-extractor-select/data-extractor-select.component';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { DataExtractorService } from '@services/data-extractor.service';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
@@ -55,9 +59,13 @@ import {SelectModule} from "primeng/select";
     FormsModule,
     FloatLabelModule,
     CascadeSelectModule,
-    SelectModule
+    SelectModule,
+    SplitButtonModule,
+    RadioButtonModule
   ],
   exports: [
+    CommonModule,
+    FormsModule,
     DateChangerComponent,
     ToolbarModule,
     ButtonModule,
@@ -85,7 +93,9 @@ import {SelectModule} from "primeng/select";
     InputIconModule,
     FloatLabelModule,
     CascadeSelectModule,
-    SelectModule
+    SelectModule,
+    DataExtractorSelectComponent,
+    RadioButtonModule
   ],
   declarations: [
     DateChangerComponent,
@@ -96,12 +106,14 @@ import {SelectModule} from "primeng/select";
     SumarrizerSettlementComponent,
     SettlementYearChartComponent,
     SettlementSavingChartComponent,
-    ProfitLineChartComponent
+    ProfitLineChartComponent,
+    DataExtractorSelectComponent
   ],
   providers: [
     DialogService,
     TranslateService,
-    ConfirmationService
+    ConfirmationService,
+    DataExtractorService
   ],
 })
 export class ComponentsModule { }
