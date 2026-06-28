@@ -1,0 +1,13 @@
+<app-form [formGroup]="formGroup!" (ngSubmit)="onSave()" (cancel)="onCloseDialog()">
+  <app-form-grid form-body>
+    <app-form-control [styleClass]="'col-12'">
+      @for(settlementTypeData of settlementDataTypeToExtract; track settlementTypeData.key) {
+        <p-radiobutton [inputId]="settlementTypeData.key" name="settlementTypeData" [value]="settlementTypeData" formControlName="dataType"/>
+        <label [for]="settlementTypeData.key" class="ml-2">{{ settlementTypeData.name | translate }}</label>
+      }
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+            <p-datepicker appendTo="body" formControlName="dateRange" selectionMode="range" [readonlyInput]="true" />
+    </app-form-control>
+  </app-form-grid>
+</app-form>

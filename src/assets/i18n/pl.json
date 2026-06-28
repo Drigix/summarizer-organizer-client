@@ -6,7 +6,8 @@
       "sell": "Sprzedaj",
       "soldStock": "Sprzedane akcje",
       "addAnother": "Dodaj następne",
-      "refreshPrice": "Odśwież cenę"
+      "refreshPrice": "Odśwież cenę",
+      "extractData": "Pobierz dane do pliku"
     },
     "header": {
       "addSettlementInHeader": "Nowy przychód",
@@ -68,6 +69,17 @@
       "buyPrice": "Cena kupna",
       "sellPrice": "Cena sprzedaży",
       "profit": "Profit"
+    },
+    "unrealizedProfit": {
+      "investmentPrice": "Zainwestowana kwota",
+      "currentInvestmentPrice": "Aktualna kwota inwestycji"
+    },
+    "extractData": {
+      "dialogHeader": "Wybierz typ danych oraz okres do pobrania"
+    },
+    "extractOptions": {
+      "inAndOut": "Przychody i wydatki",
+      "savings": "Inwestycje"
     }
   }
 }

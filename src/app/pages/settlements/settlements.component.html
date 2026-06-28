@@ -1,10 +1,13 @@
 <div class="h-full">
   <app-date-changer (emitDateChange)="onDateChange($event)"></app-date-changer>
-  <div class="flex justify-content-center m-3">
+  <!-- <div class="flex justify-content-center m-3">
     <p-iconField class="w-93 pl-6" iconPosition="left">
       <p-inputIcon styleClass="pi pi-search" />
       <input class="w-93" type="text" pInputText placeholder="Search" />
     </p-iconField>
+  </div> -->
+  <div class="flex justify-content-end mt-4">
+    <app-data-extractor-select></app-data-extractor-select>
   </div>
   <div class="grid">
     <div class="col-8 grid">
