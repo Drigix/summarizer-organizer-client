@@ -6,11 +6,9 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
     ComponentsModule,
-    CommonModule
   ],
   exports: [
     ComponentsModule,
-    CommonModule
   ],
   providers: [],
 })

@@ -15,8 +15,6 @@ export class UnrealizedProfitDialogComponent implements OnInit {
   collectedCurrentPrizes = 0;
 
   constructor(
-    private soldInvestmentService: SoldInvestmentService,
-    private ref: DynamicDialogRef,
     private config: DynamicDialogConfig
   ) {
   }
