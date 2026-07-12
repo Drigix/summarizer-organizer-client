@@ -5460,7 +5460,7 @@ p-dynamicdialog .p-dialog-mask {
   box-shadow: inset 0 0 0 0.15rem var(--uwb-selected-row-light-bg);
 }
 .p-tieredmenu.p-tieredmenu-overlay {
-  background: #ffffff;
+  background: var(--p-fieldset-background);
   border: 0 none;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }

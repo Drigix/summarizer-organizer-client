@@ -58,7 +58,8 @@
       "stock": "Akcje giełdowe",
       "silver": "Srebro",
       "gold": "Złoto",
-      "crypto": "Kryptowaluty"
+      "crypto": "Kryptowaluty",
+      "none": "Nie zainwestowane"
     },
     "chartHeaders": {
       "moneyYearBalance": "Roczny bilans pieniędzy",
@@ -72,7 +73,8 @@
     },
     "unrealizedProfit": {
       "investmentPrice": "Zainwestowana kwota",
-      "currentInvestmentPrice": "Aktualna kwota inwestycji"
+      "currentInvestmentPrice": "Aktualna kwota inwestycji",
+      "showDetails": "Pokaż szczegóły"
     },
     "extractData": {
       "dialogHeader": "Wybierz typ danych oraz okres do pobrania"

@@ -35,6 +35,7 @@ import { DataExtractorSelectComponent } from './data-extractor-select/data-extra
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DataExtractorService } from '@services/data-extractor.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     CascadeSelectModule,
     SelectModule,
     SplitButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    AccordionModule
   ],
   exports: [
     CommonModule,
@@ -95,7 +97,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     CascadeSelectModule,
     SelectModule,
     DataExtractorSelectComponent,
-    RadioButtonModule
+    RadioButtonModule,
+    AccordionModule
   ],
   declarations: [
     DateChangerComponent,
