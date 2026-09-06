@@ -10,6 +10,8 @@ import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
+import { StockCompany } from '@entities/stock-company.model';
+import { MarketDataService } from '@services/market-data.service';
 
 @Component({
     selector: 'app-settlement-saving-dialog',
@@ -32,6 +34,7 @@ export class SettlementSavingDialogComponent implements OnInit {
     { name: 'Kryptowaluty', code: 'crypto' },
     { name: 'Bez procentów', code: 'none' }
   ];
+  stockCompanies: StockCompany[] = [];
   isStockChoose = false;
   isCryptoChoose = false;
   isSellActionChoose = false;
@@ -44,7 +47,8 @@ export class SettlementSavingDialogComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private confirmationService: ConfirmationService,
     private translationService: TranslateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private marketDataService: MarketDataService
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +64,7 @@ export class SettlementSavingDialogComponent implements OnInit {
     if(this.dialogType === 'edit' && settlement) {
       this.formGroup.patchValue({
         id : settlement._id,
+        stockSymbol: settlement.stockSymbol,
         date: new Date(settlement.date!),
         dateTo: settlement.dateTo ? new Date(settlement.dateTo) : null,
         priceType: settlement.priceType,
@@ -89,6 +94,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       id: new FormControl(null),
       date: new FormControl(this.date, Validators.required),
       dateTo: new FormControl(null),
+      stockSymbol: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       linkUrl: new FormControl(null),
       refreshPriceUrl: new FormControl(null),
@@ -107,6 +113,9 @@ export class SettlementSavingDialogComponent implements OnInit {
   onSavingTypeChange(value: string) {
     if(value === 'stock' || value === 'gold' || value === 'silver') {
       this.isStockChoose = true;
+      if (this.stockCompanies.length === 0) {
+        this.loadStockCompanies();
+      }
       this.cd.detectChanges();
     } else if (value === 'crypto') {
       this.isCryptoChoose = true;
@@ -195,6 +204,17 @@ export class SettlementSavingDialogComponent implements OnInit {
         });
       },
       key: 'mainDialog'
+    });
+  }
+
+  private loadStockCompanies(): void {
+    this.marketDataService.getStockCompanies().subscribe({
+      next: (res) => {
+        this.stockCompanies = res;
+      },
+      error: (err) => {
+        console.error(err);
+      }
     });
   }
 }

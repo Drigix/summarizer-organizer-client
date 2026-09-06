@@ -3,6 +3,7 @@ import { SettlementSavingType } from "./types/settlement-saving.type";
 
 export class SettlementSaving {
   _id?: string;
+  stockSymbol?: string;
   date?: Date;
   dateTo?: Date;
   description?: string;
@@ -18,10 +19,11 @@ export class SettlementSaving {
   amount?: number;
   sellDate?: Date;
 
-  constructor(_id?: string, date?: Date, dateTo?: Date, description?: string, linkUrl?:string, refreshPriceUrl?: string, quantity?: number,
+  constructor(_id?: string, stockSymbol?: string, date?: Date, dateTo?: Date, description?: string, linkUrl?:string, refreshPriceUrl?: string, quantity?: number,
      price?: number, currentPrice?: number,
      savingType?: SettlementSavingType, percent?: number, percentPeriod?: number, priceType?: PriceType, amount?: number, sellDate?: Date) {
     this._id = _id;
+    this.stockSymbol = stockSymbol;
     this.date = date;
     this.dateTo = dateTo;
     this.description = description;

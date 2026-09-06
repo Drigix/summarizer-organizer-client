@@ -23,6 +23,21 @@
           <label htmlFor="savingType">{{ 'settlement.savingType' | translate }}</label>
         </p-floatlabel>
       </app-form-control>
+      @if (isStockChoose) {
+      <app-form-control [styleClass]="'col-12'">
+       <p-floatlabel>
+          <p-select
+            formControlName="stockSymbol"
+            [options]="stockCompanies"
+            optionLabel="companyName"
+            optionValue="stockSymbol"
+            appendTo="body"
+          >
+          </p-select>
+          <label htmlFor="stockSymbol">{{ 'settlement.stockSymbol' | translate }}</label>
+        </p-floatlabel>
+      </app-form-control>
+      }
       @if (!isCryptoChoose) {
         <app-form-control [styleClass]="'col-12'">
           <p-floatlabel>
