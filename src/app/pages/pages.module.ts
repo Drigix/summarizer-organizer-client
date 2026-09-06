@@ -14,6 +14,7 @@ import {
   UnrealizedProfitDialogComponent
 } from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
 import { DataExtractorDialogComponent } from './settlements/data-extractor-dialog/data-extractor-dialog.component';
+import { MarketDataService } from '@services/market-data.service';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { DataExtractorDialogComponent } from './settlements/data-extractor-dialo
   ],
   providers: [
     SettlementsService,
-    MessageService
+    MessageService,
+    MarketDataService
   ],
 })
 export class PagesModule { }
