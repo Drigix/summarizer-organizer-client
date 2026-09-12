@@ -7,7 +7,8 @@
       "soldStock": "Sprzedane akcje",
       "addAnother": "Dodaj następne",
       "refreshPrice": "Odśwież cenę",
-      "extractData": "Pobierz dane do pliku"
+      "extractData": "Pobierz dane do pliku",
+      "chooseDateRange": "Wybierz zakres dat"
     },
     "header": {
       "addSettlementInHeader": "Nowy przychód",
