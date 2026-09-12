@@ -3,5 +3,11 @@
     key="mainDialog"
     rejectButtonStyleClass="p-button-outlined" />
   <p-toast />
+  <div class="flex justify-center menu-container">
+    <p-menu #menu [model]="menuItems" [popup]="true" styleClass="w-40" appendTo="body" />
+    <button type="button" pButton severity="secondary" variant="outlined" (click)="menu.toggle($event)">
+      <i class="pi pi-ellipsis-v"></i>
+    </button>
+  </div>
   <router-outlet></router-outlet>
 </div>

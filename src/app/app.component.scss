@@ -1,3 +1,10 @@
 .main {
   height: 97vh;
 }
+
+.menu-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+}

@@ -36,6 +36,9 @@ import { SplitButtonModule } from 'primeng/splitbutton';
 import { DataExtractorService } from '@services/data-extractor.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { AccordionModule } from 'primeng/accordion';
+import { MenuModule } from 'primeng/menu';
+import { DataViewModule } from 'primeng/dataview';
+import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data-view/custom-stock-company-data-view.component';
 
 @NgModule({
   imports: [
@@ -63,7 +66,9 @@ import { AccordionModule } from 'primeng/accordion';
     SelectModule,
     SplitButtonModule,
     RadioButtonModule,
-    AccordionModule
+    AccordionModule,
+    MenuModule,
+    DataViewModule
   ],
   exports: [
     CommonModule,
@@ -98,7 +103,10 @@ import { AccordionModule } from 'primeng/accordion';
     SelectModule,
     DataExtractorSelectComponent,
     RadioButtonModule,
-    AccordionModule
+    AccordionModule,
+    MenuModule,
+    DataViewModule,
+    CustomStockCompanyDataViewComponent
   ],
   declarations: [
     DateChangerComponent,
@@ -110,7 +118,8 @@ import { AccordionModule } from 'primeng/accordion';
     SettlementYearChartComponent,
     SettlementSavingChartComponent,
     ProfitLineChartComponent,
-    DataExtractorSelectComponent
+    DataExtractorSelectComponent,
+    CustomStockCompanyDataViewComponent
   ],
   providers: [
     DialogService,
