@@ -15,6 +15,8 @@ import {
 } from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
 import { DataExtractorDialogComponent } from './settlements/data-extractor-dialog/data-extractor-dialog.component';
 import { MarketDataService } from '@services/market-data.service';
+import { StockCompaniesComponent } from './stock-comapnies/stock-companies.component';
+import { StockCompaniesActionDialogComponent } from './stock-comapnies/stock-companies-action-dialog/stock-companies-action-dialog.component';
 
 @NgModule({
   imports: [
@@ -28,7 +30,9 @@ import { MarketDataService } from '@services/market-data.service';
     SettlementSavingDialogComponent,
     SoldInvestmentDialogComponent,
     UnrealizedProfitDialogComponent,
-    DataExtractorDialogComponent
+    DataExtractorDialogComponent,
+    StockCompaniesComponent,
+    StockCompaniesActionDialogComponent
   ],
   declarations: [
     SettlementsComponent,
@@ -36,7 +40,9 @@ import { MarketDataService } from '@services/market-data.service';
     SettlementSavingDialogComponent,
     SoldInvestmentDialogComponent,
     UnrealizedProfitDialogComponent,
-    DataExtractorDialogComponent
+    DataExtractorDialogComponent,
+    StockCompaniesComponent,
+    StockCompaniesActionDialogComponent
   ],
   providers: [
     SettlementsService,
