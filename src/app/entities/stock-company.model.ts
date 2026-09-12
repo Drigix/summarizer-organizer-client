@@ -4,5 +4,6 @@ export class StockCompany {
     companyName?: string;
     icon?: string;
     currentPrice?: number;
+    currency?: string;
     updatedAt?: Date;
 }
