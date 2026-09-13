@@ -6,6 +6,8 @@ import { StockCompaniesActionDialogComponent } from './stock-companies-action-di
 import { DialogService } from 'primeng/dynamicdialog';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
+import { SharedMessage } from '@entities/shared-message.model';
+import { SharedMessageService } from '@services/shared-message.service';
 
 @Component({
     selector: 'app-stock-companies',
@@ -22,7 +24,8 @@ export class StockCompaniesComponent implements OnInit {
         private marketDataService: MarketDataService,
         private dialogService: DialogService,
         private translationService: TranslateService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private sharedMessageService: SharedMessageService
     ) { }
 
     ngOnInit(): void { 
@@ -47,6 +50,13 @@ export class StockCompaniesComponent implements OnInit {
                 },
                 key: 'mainDialog'
             });
+        } else if(action.clickType === 'refresh') {
+            this.marketDataService.updateStockCompanyPrice(action.stockCompany?.stockSymbol!).subscribe({
+                next: (res) => {
+                    this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'settlement.stockCompanies.refreshPriceSuccess'));
+                    this.loadStockCompanies();
+                }
+            });
         }
     }
 
@@ -60,7 +70,7 @@ export class StockCompaniesComponent implements OnInit {
           width: '50%',
           focusOnShow: false
         });
-        ref.onClose.subscribe(res => this.onStockCompanyActionDialogResponse(res));
+        ref?.onClose.subscribe(res => this.onStockCompanyActionDialogResponse(res));
     }
 
     private openStockCompanyActionEditDialog(clickType: ButtonClickType, stockCompany: StockCompany): void {
@@ -74,15 +84,24 @@ export class StockCompaniesComponent implements OnInit {
           width: '50%',
           focusOnShow: false
         });
-        ref.onClose.subscribe(res => this.onStockCompanyActionDialogResponse(res));
+        ref?.onClose.subscribe(res => this.onStockCompanyActionDialogResponse(res));
     }
 
     private deleteStockCompany(stockCompany: StockCompany): void {
-        
+        this.marketDataService.deleteStockCompany(stockCompany.stockSymbol!).subscribe({
+            next: () => {
+                this.loadStockCompanies();
+            },
+            error: (err) => {
+                console.error(err);
+            }
+        });
     }
 
     private onStockCompanyActionDialogResponse(response: any): void {
-        
+        if(response && response.save) {
+            this.loadStockCompanies();
+        }
     }
 
     private loadStockCompanies(): void {

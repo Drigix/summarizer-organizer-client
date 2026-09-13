@@ -7,3 +7,5 @@ export class StockCompany {
     currency?: string;
     updatedAt?: Date;
 }
+
+export type NewStockCompany = Omit<StockCompany, 'id'>;

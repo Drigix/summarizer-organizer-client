@@ -29,7 +29,6 @@ import {
   UnrealizedProfitDialogComponent
 } from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
 import {UnrealizedProfitDialogModel} from "@entities/unrealized-profit-dialog.model";
-import { MarketDataService } from '@services/market-data.service';
 
 @Component({
     selector: 'app-settlements',
@@ -76,8 +75,7 @@ export class SettlementsComponent implements OnInit {
     private settlementsSavingService: SettlementSavingService,
     private confirmationService: ConfirmationService,
     private translateService: TranslateService,
-    private sharedMessageService: SharedMessageService,
-    private marketDataService: MarketDataService
+    private sharedMessageService: SharedMessageService
   ) { }
 
   ngOnInit():void {
@@ -94,11 +92,6 @@ export class SettlementsComponent implements OnInit {
     this.loadSummarizeCryptoPricesToChart();
     this.loadProfitGoldPrices();
     this.loadProfitSilverPrices();
-    this.marketDataService.getStockPrices('ORCL').subscribe({
-      next: (res) => {
-        console.log('Stock prices for ORCL:', res);
-      }
-    });
   }
 
   onDateChange(date: Date): void {
@@ -361,7 +354,7 @@ export class SettlementsComponent implements OnInit {
       width: '50%',
       focusOnShow: false
     });
-    ref.onClose.subscribe(res => this.onDialogResponse(res));
+    ref?.onClose.subscribe(res => this.onDialogResponse(res));
   }
 
   private openSettlementSaveDialog(emitSettlementPreviewType: EmitSettlementPreviewType): void {
@@ -377,7 +370,7 @@ export class SettlementsComponent implements OnInit {
       width: '50%',
       focusOnShow: false
     });
-    ref.onClose.subscribe(res => this.onSavingDialogResponse(res));
+    ref?.onClose.subscribe(res => this.onSavingDialogResponse(res));
   }
 
   private onRefreshPriceClick(ids: string[]): void {

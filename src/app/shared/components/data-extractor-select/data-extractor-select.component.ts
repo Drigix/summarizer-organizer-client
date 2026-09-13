@@ -52,7 +52,7 @@ export class DataExtractorSelectComponent implements OnInit {
         width: '50%',
         focusOnShow: false
         });
-        ref.onClose.subscribe(res => {
+        ref?.onClose.subscribe(res => {
             console.log('res', res);
             this.extractData(fileType, res.dataType, res.dateFrom, res.dateTo)   
         });
