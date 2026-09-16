@@ -39,6 +39,8 @@ import { AccordionModule } from 'primeng/accordion';
 import { MenuModule } from 'primeng/menu';
 import { DataViewModule } from 'primeng/dataview';
 import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data-view/custom-stock-company-data-view.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -68,7 +70,8 @@ import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data
     RadioButtonModule,
     AccordionModule,
     MenuModule,
-    DataViewModule
+    DataViewModule,
+    FileUploadModule
   ],
   exports: [
     CommonModule,
@@ -106,7 +109,8 @@ import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data
     AccordionModule,
     MenuModule,
     DataViewModule,
-    CustomStockCompanyDataViewComponent
+    CustomStockCompanyDataViewComponent,
+    FileUploadComponent
   ],
   declarations: [
     DateChangerComponent,
@@ -119,7 +123,8 @@ import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data
     SettlementSavingChartComponent,
     ProfitLineChartComponent,
     DataExtractorSelectComponent,
-    CustomStockCompanyDataViewComponent
+    CustomStockCompanyDataViewComponent,
+    FileUploadComponent
   ],
   providers: [
     DialogService,
