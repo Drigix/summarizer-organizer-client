@@ -1,0 +1,47 @@
+:host ::ng-deep .p-button {
+  background: transparent;
+  height: 30px !important;
+  width: 30px !important;
+}
+
+::ng-deep .add-button .p-button:hover {
+  background-color: var(--uwb-price-in-color) !important;
+  color: white;
+}
+
+::ng-deep .add-button .p-button {
+  border-color: var(--uwb-price-in-color) !important;
+  background-color: var(--uwb-price-in-color) !important;
+    height: 30px !important;
+  width: 250px !important;
+}
+
+::ng-deep .edit-button .p-button:hover {
+  background-color: var(--uwb-price-save-color) !important;
+  color: white;
+}
+
+::ng-deep .edit-button .p-button {
+  border-color: var(--uwb-price-save-color) !important;
+  background-color: var(--uwb-price-save-color) !important;
+}
+
+::ng-deep .delete-button .p-button:hover {
+  background-color: var(--uwb-price-out-color) !important;
+  color: white;
+}
+
+::ng-deep .delete-button .p-button {
+  border-color: var(--uwb-price-out-color) !important;
+  background-color: var(--uwb-price-out-color) !important;
+}
+
+::ng-deep .refresh-button .p-button:hover {
+  background-color: var(--uwb-price-light-color) !important;
+  color: white;
+}
+
+::ng-deep .refresh-button .p-button {
+  border-color: var(--uwb-price-light-color) !important;
+  background-color: var(--uwb-price-light-color) !important;
+}
