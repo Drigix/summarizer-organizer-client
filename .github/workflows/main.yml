@@ -2,7 +2,7 @@ name: Build Angular
  
 on:
   push:
-    branches: [main]   # uruchamia się przy każdym mergu (pushu) do main
+    branches: [master]
  
 concurrency:
   group: build-${{ github.ref }}
