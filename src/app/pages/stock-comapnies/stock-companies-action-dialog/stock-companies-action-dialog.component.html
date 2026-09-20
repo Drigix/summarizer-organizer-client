@@ -1,0 +1,38 @@
+<app-form [formGroup]="formGroup!" (ngSubmit)="onSave()" (cancel)="onCloseDialog()">
+  <app-form-grid form-body>
+    <app-form-control [styleClass]="'col-12'">
+      <p-floatlabel>
+        <input pInputText id="stockSymbol" formControlName="stockSymbol" minlength="2" maxlength="100"/>
+        <label htmlFor="stockSymbol">{{ 'stockCompanies.stockSymbol' | translate }}</label>
+      </p-floatlabel>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <p-floatlabel>
+        <input pInputText id="companyName" formControlName="companyName" minlength="2" maxlength="100"/>
+        <label htmlFor="companyName">{{ 'stockCompanies.companyName' | translate }}</label>
+      </p-floatlabel>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <p-floatlabel>
+        <input pInputText type="number" id="currentPrice" formControlName="currentPrice" minlength="2" maxlength="100"/>
+        <label htmlFor="currentPrice">{{ 'stockCompanies.currentPrice' | translate }}</label>
+      </p-floatlabel>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <p-floatlabel>
+        <input pInputText id="currency" formControlName="currency" minlength="2" maxlength="100"/>
+        <label htmlFor="currency">{{ 'stockCompanies.currency' | translate }}</label>
+      </p-floatlabel>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
+      <p-floatlabel>
+        <app-file-upload 
+        [imageSrc]="formGroup.get('icon')?.value" 
+        [chooseLabel]="'stockCompanies.icon'"
+        (imageSrcChange)="formGroup.get('icon')?.setValue($event)">
+        </app-file-upload>
+      </p-floatlabel>
+    </app-form-control>
+  </app-form-grid>
+</app-form>
+

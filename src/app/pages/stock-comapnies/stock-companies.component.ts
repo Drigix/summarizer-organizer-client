@@ -53,7 +53,7 @@ export class StockCompaniesComponent implements OnInit {
         } else if(action.clickType === 'refresh') {
             this.marketDataService.updateStockCompanyPrice(action.stockCompany?.stockSymbol!).subscribe({
                 next: (res) => {
-                    this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'settlement.stockCompanies.refreshPriceSuccess'));
+                    this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'stockCompanies.messages.refreshPriceSuccess'));
                     this.loadStockCompanies();
                 }
             });

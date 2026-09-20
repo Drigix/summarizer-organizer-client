@@ -1,0 +1,41 @@
+<div class="flex justify-content-end my-3">
+        <div class="add-button mx-1">
+          <p-button icon="pi pi-plus" [label]="'global.buttons.addNewStockCompany' | translate" (onClick)="onButtonClick('add')"></p-button>
+        </div>
+</div>
+<p-dataview #dv [value]="stockCompanies">
+            <ng-template #list let-items>
+                <div class="grid grid-cols-12 gap-4 grid-nogutter">
+                    @for (item of items; track item.id; let first = $first) {
+                        <div class="col-span-12">
+                            <div class="flex flex-col sm:flex-row sm:items-center p-5 gap-4" [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }">
+                                <div class="md:w-40 relative">
+                                    <img class="block xl:block mx-auto rounded-border w-full" width="80" height="60 " [src]="item.icon" alt="logo"/>
+                                </div>
+                                <div class="flex flex-col md:flex-row justify-between md:items-center flex-1 gap-5">
+                                    <div class="flex flex-row md:flex-col justify-between items-start gap-2">
+                                        <div>
+                                            <div class="font-medium text-surface-900 dark:text-surface-0 mt-1">{{ item.companyName }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col md:items-end gap-7">
+                                        <span class="text-lg font-semibold text-surface-900 dark:text-surface-0">{{ '$' + item.currentPrice }}</span>
+                                        <div class="flex flex-row-reverse md:flex-row gap-2">
+                                            <div class="edit-button mx-1">
+                                                <p-button class="edit-button" icon="pi pi-pencil" (onClick)="onButtonClick('edit', item)"></p-button>
+                                            </div>
+                                            <div class="delete-button mx-1">
+                                                <p-button class="delete-button" icon="pi pi-trash" (onClick)="onButtonClick('delete', item)"></p-button>
+                                            </div>
+                                            <div class="refresh-button mx-1">
+                                                <p-button class="refresh-button" icon="pi pi-refresh" (onClick)="onButtonClick('refresh', item)"></p-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ng-template>
+        </p-dataview>
