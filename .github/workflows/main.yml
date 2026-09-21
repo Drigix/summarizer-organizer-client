@@ -45,12 +45,12 @@ jobs:
           retention-days: 7
 
   publish:
-    needs: build                              # startuje tylko po udanym buildzie
-    if: github.event_name != 'pull_request'   # PR-y nie publikują obrazów
+    needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write                         # wymagane do push na ghcr.io
+      packages: write
 
     steps:
       - name: Checkout
