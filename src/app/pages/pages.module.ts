@@ -17,6 +17,7 @@ import { DataExtractorDialogComponent } from './settlements/data-extractor-dialo
 import { MarketDataService } from '@services/market-data.service';
 import { StockCompaniesComponent } from './stock-comapnies/stock-companies.component';
 import { StockCompaniesActionDialogComponent } from './stock-comapnies/stock-companies-action-dialog/stock-companies-action-dialog.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { StockCompaniesActionDialogComponent } from './stock-comapnies/stock-com
     UnrealizedProfitDialogComponent,
     DataExtractorDialogComponent,
     StockCompaniesComponent,
-    StockCompaniesActionDialogComponent
+    StockCompaniesActionDialogComponent,
+    LoginPageComponent
   ],
   declarations: [
     SettlementsComponent,
@@ -42,7 +44,8 @@ import { StockCompaniesActionDialogComponent } from './stock-comapnies/stock-com
     UnrealizedProfitDialogComponent,
     DataExtractorDialogComponent,
     StockCompaniesComponent,
-    StockCompaniesActionDialogComponent
+    StockCompaniesActionDialogComponent,
+    LoginPageComponent
   ],
   providers: [
     SettlementsService,
