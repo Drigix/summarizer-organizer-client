@@ -8,7 +8,8 @@
       "addAnother": "Dodaj następne",
       "refreshPrice": "Odśwież cenę",
       "extractData": "Pobierz dane do pliku",
-      "chooseDateRange": "Wybierz zakres dat"
+      "chooseDateRange": "Wybierz zakres dat",
+      "login": "Zaloguj się"
     },
     "header": {
       "addSettlementInHeader": "Nowy przychód",
@@ -29,6 +30,14 @@
     "questions": {
       "deleteConfirmation": "Czy na pewno chcesz usunąć dany element?"
     }
+  },
+  "login": {
+    "email": "Email",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło",
+    "registerQuestion": "Nie masz konta? Zarejestruj się",
+    "registerSuccess": "Rejestracja powiodła się"
   },
   "settlement": {
     "description": "Opis",
