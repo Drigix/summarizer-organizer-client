@@ -33,7 +33,22 @@
             optionValue="stockSymbol"
             appendTo="body"
           >
+           <ng-template #selectedItem let-selectedOption>
+                    <div class="flex justify-content-start align-items-center gap-2">
+                        <img [src]="selectedOption.icon" width]="15" [height]="15" [alt]="selectedOption.companyName" class="w-6 h-6"/>
+                        <span>{{ selectedOption.companyName }}</span>
+                    </div>
+                </ng-template>
+                <ng-template let-stockCompany #item>
+                    <div class="flex items-center gap-3 py-1">
+                        <img [src]="stockCompany.icon" [width]="15" [height]="15" [alt]="stockCompany.companyName" class="w-6 h-6"/>
+                        <div class="flex flex-col">
+                            <span class="font-medium">{{ stockCompany.companyName }}</span>
+                        </div>
+                    </div>
+                </ng-template>
           </p-select>
+          
           <label htmlFor="stockSymbol">{{ 'settlement.stockSymbol' | translate }}</label>
         </p-floatlabel>
       </app-form-control>

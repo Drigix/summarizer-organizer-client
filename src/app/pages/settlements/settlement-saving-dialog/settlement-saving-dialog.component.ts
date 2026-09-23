@@ -94,7 +94,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       id: new FormControl(null),
       date: new FormControl(this.date, Validators.required),
       dateTo: new FormControl(null),
-      stockSymbol: new FormControl('', Validators.required),
+      stockSymbol: new FormControl(null),
       description: new FormControl('', Validators.required),
       linkUrl: new FormControl(null),
       refreshPriceUrl: new FormControl(null),

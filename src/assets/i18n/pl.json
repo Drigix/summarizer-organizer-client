@@ -9,6 +9,7 @@
       "refreshPrice": "Odśwież cenę",
       "extractData": "Pobierz dane do pliku",
       "chooseDateRange": "Wybierz zakres dat",
+      "addNewStockCompany": "Dodaj nową spółkę giełdową",
       "login": "Zaloguj się"
     },
     "header": {
@@ -31,6 +32,10 @@
       "deleteConfirmation": "Czy na pewno chcesz usunąć dany element?"
     }
   },
+  "menu": {
+    "dashboard": "Panel główny",
+    "stockCompanies": "Spółki giełdowe"
+  },
   "login": {
     "email": "Email",
     "username": "Nazwa użytkownika",
@@ -44,6 +49,7 @@
     "linkUrl": "Link do elementu",
     "refreshPriceUrl": "Link do odświeżania ceny",
     "price": "Koszt",
+    "stockSymbol": "Symbol giełdowy",
     "currentPrice": "Aktualny koszt",
     "date": "Data od",
     "toDate": "Data do",
@@ -92,6 +98,19 @@
     "extractOptions": {
       "inAndOut": "Przychody i wydatki",
       "savings": "Inwestycje"
+    }
+  },
+  "stockCompanies": {
+    "stockSymbol": "Symbol giełdowy",
+    "companyName": "Nazwa spółki",
+    "currentPrice": "Aktualna cena",
+    "currency": "Waluta",
+    "icon": "Ikona",
+    "addStockCompany": "Utwórz nową spółkę giełdową",
+    "editStockCompany": "Edytuj spółkę giełdową",
+    "messages": {
+      "updatePriceSuccess": "Cena spółki została zaktualizowana",
+      "refreshPriceSuccess": "Cena spółki została zaaktualizowana"
     }
   }
 }
