@@ -6,13 +6,14 @@ import { PagesModule } from '@pages/pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http'
 import { ComponentsModule } from '@shared/components/components.module';
 import {providePrimeNG} from "primeng/config";
 import Aura from "@primeuix/themes/aura";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {Toast, ToastModule} from "primeng/toast";
+import { AuthInterceptor } from '@config/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ], providers: [
         TranslateService,
         ToastModule,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi()),
         provideAnimationsAsync(),
         providePrimeNG({
