@@ -12,6 +12,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateService} from "@ngx-translate/core";
 import { StockCompany } from '@entities/stock-company.model';
 import { MarketDataService } from '@services/market-data.service';
+import { StringUtils } from '@shared/utils/string.utils';
 
 @Component({
     selector: 'app-settlement-saving-dialog',
@@ -74,6 +75,7 @@ export class SettlementSavingDialogComponent implements OnInit {
         quantity: settlement.quantity,
         price: settlement.price,
         currentPrice: settlement.currentPrice,
+        stockBuyPriceAverage: settlement.stockBuyPriceAverage,
         savingType: settlement.savingType,
         percent: settlement.percent,
         percentPeriod: settlement.percentPeriod,
@@ -101,6 +103,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       quantity: new FormControl(null),
       price: new FormControl(0, Validators.required),
       currentPrice: new FormControl(0),
+      stockBuyPriceAverage: new FormControl(null),
       savingType: new FormControl('', Validators.required),
       percent: new FormControl(0, Validators.required),
       percentPeriod: new FormControl(0, Validators.required),
@@ -183,6 +186,16 @@ export class SettlementSavingDialogComponent implements OnInit {
         console.error(err);
       }
     })
+  }
+
+  onStockSymbolChange(): void {
+    if (StringUtils.isEmpty(this.formGroup.get('description')?.getRawValue())) {
+      const stockSymbol = this.formGroup.get('stockSymbol')?.getRawValue();
+      const stockComapny = stockSymbol !== null ? this.stockCompanies.find(s => stockSymbol === s.companyName) : null;
+      if (stockComapny) {
+        this.formGroup.get('description')?.setValue(stockComapny);
+      }
+    }
   }
 
   private sellAction(value: any): void {

@@ -51,6 +51,7 @@
     "price": "Koszt",
     "stockSymbol": "Symbol giełdowy",
     "currentPrice": "Aktualny koszt",
+    "stockBuyPriceAverage": "Średnia cena zakupu akcji",
     "date": "Data od",
     "toDate": "Data do",
     "percent": "Procent",

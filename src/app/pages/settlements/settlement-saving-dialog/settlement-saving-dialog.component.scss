@@ -1,4 +1,4 @@
-::ng-deep .sell-button .p-button  {
-  width: 125px !important;
+:host() ::ng-deep .sell-button .p-button  {
+  width: 150px !important;
   height: 30px !important;
 }

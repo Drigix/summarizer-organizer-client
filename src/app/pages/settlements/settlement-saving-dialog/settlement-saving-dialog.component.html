@@ -32,6 +32,7 @@
             optionLabel="companyName"
             optionValue="stockSymbol"
             appendTo="body"
+            (onChange)="onStockSymbolChange()"
           >
            <ng-template #selectedItem let-selectedOption>
                     <div class="flex justify-content-start align-items-center gap-2">
@@ -84,6 +85,12 @@
       @if (isStockChoose || isCryptoChoose) {
         <app-form-control [styleClass]="'col-6'">
           <p-floatlabel>
+            <input pInputText type="number" id="stockBuyPriceAverage" formControlName="stockBuyPriceAverage" minlength="2" maxlength="100"/>
+            <label htmlFor="stockBuyPriceAverage">{{ 'settlement.stockBuyPriceAverage' | translate }}</label>
+          </p-floatlabel>
+        </app-form-control>
+        <app-form-control [styleClass]="'col-6'">
+          <p-floatlabel>
             <input pInputText type="number" id="currentPrice" formControlName="currentPrice" minlength="2" maxlength="100"/>
             <label htmlFor="price">{{ 'settlement.currentPrice' | translate }}</label>
           </p-floatlabel>
@@ -132,7 +139,7 @@
           <p-button
             styleClass="ui-button_size_150"
             [label]="'global.buttons.refreshPrice' | translate"
-            icon="pi pi-wallet"
+            icon="pi pi-refresh"
             (onClick)="onRefreshPriceClick()"
           ></p-button>
         </app-form-control>
