@@ -40,7 +40,14 @@ export class AppComponent implements OnInit {
         command: () => {
           this.router.navigate(['/stock-companies']);
         }
-      }
+      },
+      {
+        label: this.translateService.instant('menu.logout'),
+        icon: 'pi pi-power-off',
+        command: () => {
+          this.logout()
+        }
+      },
     ];
     this.refreshTokenAndUserData(true);
   }
@@ -48,13 +55,18 @@ export class AppComponent implements OnInit {
    private refreshTokenAndUserData(isFirstLoad: boolean): void {
     const token = this.sessionStorageService.load(SessionStorageKeys.AUTH_TOKEN)?.value;
     if (!token || JwtUtils.isTokenExpired(token)) {
-      this.sessionStorageService.remove(SessionStorageKeys.AUTH_TOKEN);
-      this.userData.set(null);
-      this.router.navigate(['/login']);
+      this.logout();
       return;
     }
     const decodedToken = JwtUtils.decodeToken(token);
     this.userAuthService.userData = new UserDataModel(decodedToken.sub, decodedToken.username);
     this.userData.set(this.userAuthService!.userData!);
+  }
+
+  private logout(): void {
+    this.sessionStorageService.remove(SessionStorageKeys.AUTH_TOKEN);
+    this.userAuthService.userData = null;
+    this.userData.set(null); 
+    this.router.navigate(['/login']);
   }
 }
