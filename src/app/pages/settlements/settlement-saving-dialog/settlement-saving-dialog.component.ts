@@ -191,9 +191,9 @@ export class SettlementSavingDialogComponent implements OnInit {
   onStockSymbolChange(): void {
     if (StringUtils.isEmpty(this.formGroup.get('description')?.getRawValue())) {
       const stockSymbol = this.formGroup.get('stockSymbol')?.getRawValue();
-      const stockComapny = stockSymbol !== null ? this.stockCompanies.find(s => stockSymbol === s.companyName) : null;
+      const stockComapny = stockSymbol !== null ? this.stockCompanies.find(s => stockSymbol === s.stockSymbol) : null;
       if (stockComapny) {
-        this.formGroup.get('description')?.setValue(stockComapny);
+        this.formGroup.get('description')?.setValue(stockComapny.companyName);
       }
     }
   }
