@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from '@services/session-storage.service';
@@ -15,7 +15,7 @@ import { AuthService } from '@services/auth.service';
     styleUrls: ['./app.component.scss'],
     standalone: false
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
   title = 'summarizer-organizer-client';
   menuItems: MenuItem[] | undefined;
   userData = signal<UserDataModel | null>(null);
@@ -26,6 +26,11 @@ export class AppComponent implements OnInit {
   private userAuthService = inject(AuthService);
 
   ngOnInit(): void {
+    this.refreshTokenAndUserData(true);
+    this.toggleDarkMode();
+  }
+
+  ngAfterViewChecked(): void {
     this.menuItems = [
       {
         label: this.translateService.instant('menu.dashboard'),
@@ -49,7 +54,10 @@ export class AppComponent implements OnInit {
         }
       },
     ];
-    this.refreshTokenAndUserData(true);
+  }
+
+  toggleDarkMode() {
+    document.querySelector('html')?.classList.toggle('my-app-dark');
   }
 
    private refreshTokenAndUserData(isFirstLoad: boolean): void {

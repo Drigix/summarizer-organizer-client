@@ -47,6 +47,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         providePrimeNG({
           theme: {
             preset: Aura,
+            options: {
+              darkModeSelector: '.my-app-dark'
+            }
           },
         })
     ] })
