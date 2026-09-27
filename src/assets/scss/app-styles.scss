@@ -9,6 +9,8 @@ $uwb-menu-scrollbar-track: #80cbc4;
 $uwb-menu-scrollbar-thumb: #4db6ac;
 $uwb-menu-scrollbar-thumb-hover: #00796b;
 $uwb-checkbox-marked: #004d40;
+$uwb-text-color: #ffffff;
+$uwb-text-color-secondary: #949494;
 
 /*TABLE COLORS*/
 $uwb-label-color: #ffffff;
@@ -96,4 +98,6 @@ $card-background-color: #1c1c1d;
     --uwb-price-out-light-color: #{$price-out-light-color};
     --uwb-price-save-light-color: #{$price-save-light-color};
     --uwb-card-background-color: #{$card-background-color};
+    --text-color: #{$uwb-text-color};
+    --text-color-secondary: #{$uwb-text-color-secondary};
 }

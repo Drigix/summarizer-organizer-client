@@ -34,7 +34,8 @@
   },
   "menu": {
     "dashboard": "Panel główny",
-    "stockCompanies": "Spółki giełdowe"
+    "stockCompanies": "Spółki giełdowe",
+    "logout": "Wyloguj"
   },
   "login": {
     "email": "Email",
