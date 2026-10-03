@@ -35,7 +35,7 @@ export class SettlementSavingChartComponent implements OnInit {
 
   ngOnInit(): void {
       const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
+      const textColor = documentStyle.getPropertyValue('--uwb-text-subtle');
 
 
       this.options = {

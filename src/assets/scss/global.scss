@@ -1,61 +1,194 @@
-$shady-lady: #9f9b9d;
+@import 'app-styles';
+
+
+// ============================================================
+// GLOBAL
+// ============================================================
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+
+  font-family: var(--uwb-font-family);
+  font-size: var(--uwb-font-size);
+  line-height: var(--uwb-line-height);
+  color: var(--uwb-text);
+
+  background-color: var(--uwb-background);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+
+// ============================================================
+// ACCESSIBILITY
+// ============================================================
+
+:focus-visible {
+  outline: none;
+
+  box-shadow: var(--uwb-focus-ring);
+}
+
+::selection {
+  color: #ffffff;
+  background-color: var(--uwb-primary);
+}
+
+
+// ============================================================
+// REDUCED MOTION
+// ============================================================
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+
+// ============================================================
+// BORDERS
+// ============================================================
 
 .element_bordered {
-  border: 1px solid $shady-lady;
+  border: 1px solid var(--uwb-border);
+  border-radius: var(--uwb-radius-md);
 }
+
+
+// ============================================================
+// BUTTON WRAPPERS
+// ============================================================
+
 .button_wrapper_text {
-  margin: 2px;
+  margin: $space-1;
   white-space: nowrap;
 }
+
 .button_wrapper_icon {
-  margin: 2px;
+  margin: $space-1;
+
   overflow: hidden;
   white-space: nowrap;
 }
+
 .button_wrapper_dialog {
-  width: 100px;
-  height: 30px;
-  margin: 5px;
+  width: 110px;
+  height: var(--uwb-control-height);
+
+  margin: $space-2;
+
   overflow: hidden;
   white-space: nowrap;
 }
+
 .buttons-container_dialog {
   display: inline-flex;
-}
-.buttons-container_center {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  gap: $space-2;
 }
+
+.buttons-container_center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: $space-2;
+
+  overflow: hidden;
+}
+
+
+// ============================================================
+// BUTTONS
+// ============================================================
+
+// Wspólny wygląd dla legacy buttonów.
+//
+// 40px jest teraz domyślną wysokością kontrolek.
+// Pozwala zachować kompaktowy UI, ale daje znacznie lepszy
+// komfort użytkowania niż wcześniejsze 30px.
+
+.ui-button_size_75,
+.ui-button_size_100,
+.ui-button_size_125,
+.ui-button_size_150,
+.ui-button_size_175,
+.ui-button_size_200,
+.ui-button_size_250,
+.ui-button_size_300.ui-button,
+.ui-button_height_30 {
+  height: var(--uwb-control-height) !important;
+
+  border-radius: var(--uwb-radius-md);
+
+  transition:
+    background-color $transition,
+    border-color $transition,
+    box-shadow $transition,
+    transform $transition;
+}
+
+
+// Icon button
+
 .ui-button_special_icon {
-  height: 31px !important;
-  width: 31px !important;
+  width: var(--uwb-control-height) !important;
+  height: var(--uwb-control-height) !important;
+
+  border-radius: var(--uwb-radius-md);
 }
+
+
+// ------------------------------------------------------------
+// Button widths
+// ------------------------------------------------------------
+
+.ui-button_size_75 {
+  width: 80px;
+}
+
 .ui-button_size_100 {
   width: 100px;
 }
+
 .ui-button_size_125 {
-  width: 125px;
-  height: 30px !important;
+  width: 128px;
 }
-.ui-button_size_75 {
-  width: 75px;
-  height: 30px !important;
-}
-.ui-button_height_30 {
-  height: 30px !important;
-}
+
 .ui-button_size_150 {
   width: 150px !important;
 }
+
 .ui-button_size_175 {
-  width: 175px;
-  font-size: 17px !important;
+  width: 180px;
+
+  font-size: $font-size-lg !important;
 }
+
 .ui-button_size_200 {
   width: 200px;
 }
+
 .ui-button_size_250 {
   width: 250px;
 }
@@ -63,6 +196,40 @@ $shady-lady: #9f9b9d;
 .ui-button_size_300.ui-button {
   width: 300px;
 }
+
+
+// ============================================================
+// BUTTON INTERACTION
+// ============================================================
+
+.ui-button_size_75:hover,
+.ui-button_size_100:hover,
+.ui-button_size_125:hover,
+.ui-button_size_150:hover,
+.ui-button_size_175:hover,
+.ui-button_size_200:hover,
+.ui-button_size_250:hover,
+.ui-button_size_300.ui-button:hover,
+.ui-button_special_icon:hover {
+  transform: translateY(-1px);
+}
+
+.ui-button_size_75:active,
+.ui-button_size_100:active,
+.ui-button_size_125:active,
+.ui-button_size_150:active,
+.ui-button_size_175:active,
+.ui-button_size_200:active,
+.ui-button_size_250:active,
+.ui-button_size_300.ui-button:active,
+.ui-button_special_icon:active {
+  transform: translateY(0);
+}
+
+
+// ============================================================
+// WIDTH UTILITIES
+// ============================================================
 
 .w-90 {
   width: 90%;
@@ -72,35 +239,166 @@ $shady-lady: #9f9b9d;
   width: 93%;
 }
 
+
+// ============================================================
+// FORMS
+// ============================================================
+
 .field {
-  margin-bottom: 1.8rem !important;
+  margin-bottom: $space-6 !important;
 }
 
 .label-field {
-  color: var(--uwb-label-color);
-  font-weight: 500;
-  font-size: 18px;
+  display: block;
+
+  margin-bottom: $space-2;
+
+  color: var(--uwb-text-strong);
+
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
 }
 
 .span-field {
-  font-weight: 300;
-  font-size: 14px;
+  display: inline-block;
+
+  margin-top: $space-1;
+
+  color: var(--uwb-text-muted);
+
+  font-size: $font-size-sm;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
 }
+
+
+// ============================================================
+// GENERIC FORM ELEMENTS
+// ============================================================
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--uwb-text-subtle);
+  opacity: 1;
+}
+
+
+// ============================================================
+// PRICE SUMMARY
+// ============================================================
+
+%summarize-prize {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 28px;
+
+  padding:
+    $space-1
+    $space-3;
+
+  border-radius: var(--uwb-radius-pill);
+
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  font-variant-numeric: tabular-nums;
+
+  background-color: rgba(255, 255, 255, 0.04);
+
+  transition:
+    background-color $transition,
+    border-color $transition;
+}
+
+
+// ---------- Income ----------
 
 .summarize-prize-in {
+  @extend %summarize-prize;
+
   color: var(--uwb-price-in-light-color);
+
   border: 1px solid var(--uwb-price-in-light-color);
-  border-radius: 14px;
 }
+
+
+// ---------- Expense ----------
 
 .summarize-prize-out {
+  @extend %summarize-prize;
+
   color: var(--uwb-price-out-light-color);
+
   border: 1px solid var(--uwb-price-out-light-color);
-  border-radius: 14px;
 }
 
+
+// ---------- Buy ----------
+
 .summarize-prize-buy {
+  @extend %summarize-prize;
+
   color: var(--uwb-price-light-color);
+
   border: 1px solid var(--uwb-price-light-color);
-  border-radius: 14px;
+}
+
+
+// ============================================================
+// RESPONSIVE BUTTONS
+// ============================================================
+
+@media (max-width: 768px) {
+
+  .ui-button_size_200,
+  .ui-button_size_250,
+  .ui-button_size_300.ui-button {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .buttons-container_dialog {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .button_wrapper_dialog {
+    width: auto;
+    flex: 1 1 120px;
+  }
+}
+
+
+// ============================================================
+// SMALL MOBILE
+// ============================================================
+
+@media (max-width: 480px) {
+
+  .field {
+    margin-bottom: $space-5 !important;
+  }
+
+  .label-field {
+    font-size: $font-size-sm;
+  }
+
+  .ui-button_size_75,
+  .ui-button_size_100,
+  .ui-button_size_125,
+  .ui-button_size_150,
+  .ui-button_size_175,
+  .ui-button_size_200,
+  .ui-button_size_250,
+  .ui-button_size_300.ui-button {
+    max-width: 100%;
+  }
 }

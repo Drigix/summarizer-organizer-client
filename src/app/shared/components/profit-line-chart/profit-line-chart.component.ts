@@ -37,7 +37,7 @@ export class ProfitLineChartComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
         const documentStyle = getComputedStyle(document.documentElement);
-        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColor = documentStyle.getPropertyValue('--uwb-text-subtle');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 

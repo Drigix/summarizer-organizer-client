@@ -1,103 +1,568 @@
-/*GLOBAL COLORS*/
-$uwb-primary: #009688; // turkusowy
-$uwb-primary-light: #4db6ac; // jaśniejszy turkusowy
-$uwb-secondary: #00796b; // ciemniejszy turkusowy
-$uwb-primary-second-lighter: #80cbc4; // bardzo jasny turkusowy
-$uwb-background: #e0f7fa; // bardzo jasny błękitny
+// ============================================================
+// UWB DESIGN SYSTEM
+// Modern Blue / Cyan / Navy
+// ============================================================
 
-$uwb-menu-scrollbar-track: #80cbc4;
-$uwb-menu-scrollbar-thumb: #4db6ac;
-$uwb-menu-scrollbar-thumb-hover: #00796b;
-$uwb-checkbox-marked: #004d40;
-$uwb-text-color: #ffffff;
-$uwb-text-color-secondary: #949494;
+// ------------------------------------------------------------
+// 1. COLORS
+// ------------------------------------------------------------
 
-/*TABLE COLORS*/
-$uwb-label-color: #ffffff;
-$uwb-table-header-background-color: #b2dfdb; // bardzo jasny turkusowy
-$uwb-table-header-color: #006064; // ciemny turkusowy
-$uwb-selected-row-light-text: #ffffff;
-$uwb-selected-row-light-bg: #00838f; // turkusowy
-$uwb-table-row-even-highlight-background: #00838f; // turkusowy
-$uwb-table-row-even-highlight-text: #004d40; // ciemny turkusowy
-$uwb-table-row-even-selected-background: #00838f; // turkusowy
-$uwb-tab-background: #e0f2f1; // bardzo jasny turkusowy
+// ---------- Primary: Blue ----------
+// Główny kolor interakcji aplikacji.
+// Chłodniejszy i bardziej "enterprise" niż dotychczasowy teal.
+
+$blue-50:  #eff6ff;
+$blue-100: #dbeafe;
+$blue-200: #bfdbfe;
+$blue-300: #93c5fd;
+$blue-400: #60a5fa;
+$blue-500: #3b82f6;
+$blue-600: #2563eb;
+$blue-700: #1d4ed8;
+$blue-800: #1e40af;
+$blue-900: #1e3a8a;
+
+// ---------- Cyan / Teal ----------
+// Kolor akcentowy – używany oszczędniej niż primary.
+
+$cyan-50:  #ecfeff;
+$cyan-100: #cffafe;
+$cyan-200: #a5f3fc;
+$cyan-300: #67e8f9;
+$cyan-400: #22d3ee;
+$cyan-500: #06b6d4;
+$cyan-600: #0891b2;
+$cyan-700: #0e7490;
+$cyan-800: #155e75;
+$cyan-900: #164e63;
+
+// ---------- Navy ----------
+// Fundament systemu tekstów i ciemnych powierzchni.
+
+$navy-50:  #f8fafc;
+$navy-100: #f1f5f9;
+$navy-200: #e2e8f0;
+$navy-300: #cbd5e1;
+$navy-400: #94a3b8;
+$navy-500: #64748b;
+$navy-600: #475569;
+$navy-700: #334155;
+$navy-800: #1e293b;
+$navy-900: #0f172a;
+$navy-950: #020617;
+
+// ---------- Semantic ----------
+
+$success-50:  #f0fdf4;
+$success-100: #dcfce7;
+$success-500: #22c55e;
+$success-600: #16a34a;
+$success-700: #15803d;
+$success-800: #166534;
+
+$danger-50:  #fef2f2;
+$danger-100: #fee2e2;
+$danger-500: #ef4444;
+$danger-600: #dc2626;
+$danger-700: #b91c1c;
+
+$warning-50:  #fffbeb;
+$warning-100: #fef3c7;
+$warning-500: #f59e0b;
+$warning-600: #d97706;
+$warning-700: #b45309;
+
+$info-50:  #f0f9ff;
+$info-100: #e0f2fe;
+$info-500: #0ea5e9;
+$info-600: #0284c7;
+$info-700: #0369a1;
+
+
+// ------------------------------------------------------------
+// 2. SEMANTIC COLOR TOKENS
+// ------------------------------------------------------------
+
+$color-primary: $blue-700;
+$color-primary-hover: $blue-800;
+$color-primary-active: $blue-900;
+$color-primary-light: $blue-50;
+$color-primary-muted: $blue-100;
+
+$color-accent: $cyan-600;
+$color-accent-light: $cyan-50;
+
+$color-background: var(--p-surface-900);
+$color-surface: var(--p-surface-900);
+$color-surface-subtle: #f1f5f9;
+$color-surface-muted: #e2e8f0;
+
+$color-text: $navy-800;
+$color-text-strong: $navy-200;
+$color-text-muted: $navy-500;
+$color-text-subtle: $navy-400;
+$color-text-inverse: #ffffff;
+
+$color-border: $navy-200;
+$color-border-strong: $navy-300;
+
+$color-focus: $blue-600;
+
+
+// ------------------------------------------------------------
+// 3. LEGACY COLOR COMPATIBILITY
+// ------------------------------------------------------------
+// Zachowane, żeby istniejący kod SCSS nadal działał.
+//
+// Nowy kod powinien korzystać przede wszystkim z:
+// $color-primary
+// $color-background
+// $color-surface
+// $color-text
+// $color-border
+// itd.
+
+// ---------- Legacy teal ----------
+
+$teal-50:  $cyan-50;
+$teal-100: $cyan-100;
+$teal-200: $cyan-200;
+$teal-300: $cyan-300;
+$teal-400: $cyan-400;
+$teal-500: $cyan-500;
+$teal-600: $cyan-600;
+$teal-700: $cyan-700;
+$teal-800: $cyan-800;
+$teal-900: $cyan-900;
+
+
+// ---------- UWB legacy ----------
+
+$uwb-primary: $color-primary;
+$uwb-primary-light: $blue-500;
+$uwb-secondary: $blue-800;
+$uwb-primary-second-lighter: $blue-200;
+
+$uwb-background: $color-background;
+
+$uwb-menu-scrollbar-track: $navy-100;
+$uwb-menu-scrollbar-thumb: $navy-300;
+$uwb-menu-scrollbar-thumb-hover: $navy-400;
+
+$uwb-checkbox-marked: $color-primary;
+
+
+// ------------------------------------------------------------
+// 4. TABLE COLORS
+// ------------------------------------------------------------
+
+$uwb-label-color: $navy-700;
+
+$uwb-table-header-background-color: $navy-100;
+$uwb-table-header-color: $navy-700;
+
+$uwb-selected-row-light-text: $blue-800;
+$uwb-selected-row-light-bg: $blue-50;
+
+$uwb-table-row-even-highlight-background: #ffffff;
+$uwb-table-row-even-highlight-text: $navy-800;
+
+$uwb-table-row-even-selected-background: $cyan-50;
+
+$uwb-tab-background: $navy-100;
 $uwb-tab-content-background: #ffffff;
-$uwb-tab-frame: #e0f7fa; // bardzo jasny błękitny
-$uwb-internal-tab-font-color: #004d40; // ciemny turkusowy
-$uwb-internal-tab-header-background: #b2dfdb; // bardzo jasny turkusowy
-$uwb-front-tab-background: #e0f7fa; // bardzo jasny błękitny
-$uwb-front-tab-text-color: #004d40; // ciemny turkusowy
+$uwb-tab-frame: $navy-200;
 
-/*BUTTONS COLORS*/
-$uwb-button-background: #009688; // turkusowy
-$uwb-button-border: #009688; // turkusowy
-$uwb-button-hover-background-color: #ffffff;
-$uwb-button-hover-text-color: #009688; // turkusowy
+$uwb-internal-tab-font-color: $navy-700;
+$uwb-internal-tab-header-background: $navy-100;
+
+$uwb-front-tab-background: #ffffff;
+$uwb-front-tab-text-color: $blue-800;
+
+
+// ------------------------------------------------------------
+// 5. BUTTON COLORS
+// ------------------------------------------------------------
+
+$uwb-button-background: $color-primary;
+$uwb-button-border: $color-primary;
+
+$uwb-button-hover-background-color: $color-primary-hover;
+$uwb-button-hover-text-color: #ffffff;
+
 $uwb-button-text-color: #ffffff;
 
-$wild-sand: #f4f4f4;
-$shady-lady: #9f9b9d;
-$mercury: #e7e7e7;
-$malibu: #67b0d1;
-$lochmara: #00a3a9;
-$congress-blue: #058b90;
-$cardinal: #c41e3a;
-$gray: #808080;
-$tundora: #3c3a3b;
 
-$price-in-color: #059058;
-$price-out-color: #901f05;
-$price-save-color: #9a7a06;
-$price-in-light-color: #67ab90;
-$price-light-color: #577bb1;
-$price-out-light-color: #fd876d;
-$price-save-light-color: #af9f64;
-$profit-color: #f3d769;
-$card-background-color: #1c1c1d;
+// ------------------------------------------------------------
+// 6. OLD COLOR ALIASES
+// ------------------------------------------------------------
+
+$wild-sand: $navy-100;
+$shady-lady: $navy-300;
+$mercury: $navy-200;
+
+$malibu: $blue-400;
+$lochmara: $blue-600;
+$congress-blue: $blue-800;
+
+$cardinal: $danger-600;
+
+$gray: $navy-500;
+$tundora: $navy-700;
+
+
+// ------------------------------------------------------------
+// 7. PRICE / FINANCIAL COLORS
+// ------------------------------------------------------------
+
+$price-in-color: $success-700;
+$price-out-color: $danger-700;
+$price-save-color: $warning-700;
+
+// Jasne warianty do ciemnych powierzchni.
+
+$price-in-light-color: #0891b2;
+$price-light-color: #2563eb;
+$price-out-light-color: #e11d48;
+$price-save-light-color: #facc15;
+
+$profit-color: #fbbf24;
+
+$card-background-color: $navy-900;
+
+
+// ------------------------------------------------------------
+// 8. SPACING
+// ------------------------------------------------------------
+// System oparty na 4 px.
+// Większa skala pozwala ograniczyć przypadkowe wartości.
+
+$space-0: 0;
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 20px;
+$space-6: 24px;
+$space-7: 32px;
+$space-8: 40px;
+$space-9: 48px;
+$space-10: 64px;
+$space-11: 80px;
+$space-12: 96px;
+
+
+// ------------------------------------------------------------
+// 9. TYPOGRAPHY
+// ------------------------------------------------------------
+
+$font-family:
+  'Inter',
+  ui-sans-serif,
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  sans-serif;
+
+$font-size-xs: 11px;
+$font-size-sm: 13px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 20px;
+$font-size-2xl: 24px;
+$font-size-3xl: 30px;
+$font-size-4xl: 36px;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+
+// Legacy
+$line-height: $line-height-normal;
+
+
+// ------------------------------------------------------------
+// 10. CONTROL SIZES
+// ------------------------------------------------------------
+
+$control-height-xs: 28px;
+$control-height-sm: 32px;
+$control-height-md: 40px;
+$control-height-lg: 44px;
+$control-height-xl: 48px;
+
+// Legacy default
+$control-height: $control-height-md;
+
+
+// ------------------------------------------------------------
+// 11. RADIUS
+// ------------------------------------------------------------
+
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-2xl: 20px;
+$radius-pill: 999px;
+
+
+// ------------------------------------------------------------
+// 12. SHADOWS
+// ------------------------------------------------------------
+
+$shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+$shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+
+$shadow-md:
+  0 4px 6px -1px rgba(15, 23, 42, 0.06),
+  0 2px 4px -2px rgba(15, 23, 42, 0.06);
+
+$shadow-lg:
+  0 10px 15px -3px rgba(15, 23, 42, 0.08),
+  0 4px 6px -4px rgba(15, 23, 42, 0.06);
+
+$shadow-xl:
+  0 20px 25px -5px rgba(15, 23, 42, 0.08),
+  0 8px 10px -6px rgba(15, 23, 42, 0.05);
+
+
+// ------------------------------------------------------------
+// 13. MOTION
+// ------------------------------------------------------------
+
+$transition-fast: 120ms ease;
+$transition: 160ms ease;
+$transition-slow: 220ms ease;
+
+$transition-colors:
+  color $transition,
+  background-color $transition,
+  border-color $transition;
+
+$transition-interactive:
+  color $transition,
+  background-color $transition,
+  border-color $transition,
+  box-shadow $transition,
+  transform $transition;
+
+
+// ------------------------------------------------------------
+// 14. FOCUS
+// ------------------------------------------------------------
+
+$focus-ring:
+  0 0 0 3px rgba(37, 99, 235, 0.22),
+  0 0 0 1px $blue-600;
+
+
+// ------------------------------------------------------------
+// 15. CSS CUSTOM PROPERTIES
+// ------------------------------------------------------------
 
 :root {
-    --uwb-primary: #{$uwb-primary};
-    --uwb-secondary: #{$uwb-secondary};
-    --uwb-background: #{$uwb-background};
-    --uwb-tab-background: #{$uwb-tab-background};
-    --uwb-primary-second-lighter: #{$uwb-primary-second-lighter};
-    --uwb-tab-content-background: #{$uwb-tab-content-background};
-    --uwb-tab-frame: #{$uwb-tab-frame};
-    --uwb-internal-tab-font-color: #{$uwb-internal-tab-font-color};
-    --uwb-internal-tab-header-background: #{$uwb-internal-tab-header-background};
-    --uwb-front-tab-background: #{$uwb-front-tab-background};
-    --uwb-front-tab-text-color: #{$uwb-front-tab-text-color};
-    --uwb-button-text-color: #{$uwb-button-text-color};
-    --uwb-label-color: #{$uwb-label-color};
-    --uwb-font-size: 14px;
-    --uwb-font-size-larger: 16px;
-    --uwb-font-size-table: 12px;
-    --uwb-table-header-background-color: #{$uwb-table-header-background-color};
-    --uwb-table-header-color: #{$uwb-table-header-color};
-    --uwb-button-hover-background-color: #{$uwb-button-hover-background-color};
-    --uwb-selected-row-light-text: #{$uwb-selected-row-light-text};
-    --uwb-selected-row-light-bg: #{$uwb-selected-row-light-bg};
-    --uwb-button-hover-text-color: #{$uwb-button-hover-text-color};
-    --uwb-table-row-even-highlight-background: #{$uwb-table-row-even-highlight-background};
-    --uwb-table-row-even-highlight-text: #{$uwb-table-row-even-highlight-text};
-    --uwb-table-row-even-selected-background: #{$uwb-table-row-even-selected-background};
-    --uwb-button-background: #{$uwb-button-background};
-    --uwb-button-border: #{$uwb-button-border};
-    --uwb-primary-light: #{$uwb-primary-light};
-    --uwb-checkbox-marked: #{$uwb-checkbox-marked};
-    --uwb-menu-scrollbar-track: #{$uwb-menu-scrollbar-track};
-    --uwb-menu-scrollbar-thumb: #{$uwb-menu-scrollbar-thumb};
-    --uwb-menu-scrollbar-thumb-hover: #{$uwb-menu-scrollbar-thumb-hover};
-    --uwb-price-in-color: #{$price-in-color};
-    --uwb-price-out-color: #{$price-out-color};
-    --uwb-price-save-color: #{$price-save-color};
-    --uwb-price-in-light-color: #{$price-in-light-color};
-    --uwb-price-light-color: #{$price-light-color};
-    --uwb-profit-color: #{$profit-color};
-    --uwb-price-out-light-color: #{$price-out-light-color};
-    --uwb-price-save-light-color: #{$price-save-light-color};
-    --uwb-card-background-color: #{$card-background-color};
-    --text-color: #{$uwb-text-color};
-    --text-color-secondary: #{$uwb-text-color-secondary};
+
+  --p-primary-100: #{$blue-100};
+  --p-primary-200: #{$blue-200};
+  --p-primary-300: #{$blue-300};
+  --p-primary-400: #{$blue-400};
+  --p-primary-500: #{$blue-500};
+  --p-primary-600: #{$blue-600};
+  --p-primary-700: #{$blue-700};
+  --p-primary-800: #{$blue-800};
+  --p-primary-900: #{$blue-900};
+  // ---------- Brand ----------
+
+  --uwb-primary: #{$color-primary};
+  --uwb-primary-hover: #{$color-primary-hover};
+  --uwb-primary-active: #{$color-primary-active};
+  --uwb-primary-light: #{$color-primary-light};
+  --uwb-primary-muted: #{$color-primary-muted};
+
+  --uwb-accent: #{$color-accent};
+  --uwb-accent-light: #{$color-accent-light};
+
+  // ---------- Surfaces ----------
+
+  --uwb-background: #{$color-background};
+  --uwb-surface: #{$color-surface};
+  --uwb-surface-subtle: #{$color-surface-subtle};
+  --uwb-surface-muted: #{$color-surface-muted};
+
+  // ---------- Text ----------
+  --text-color: #{$color-text};
+  --uwb-text: #{$color-text};
+  --uwb-text-strong: #{$color-text-strong};
+  --uwb-text-muted: #{$color-text-muted};
+  --uwb-text-subtle: #{$color-text-subtle};
+  --uwb-text-inverse: #{$color-text-inverse};
+
+  // ---------- Borders ----------
+
+  --uwb-border: #{$color-border};
+  --uwb-border-strong: #{$color-border-strong};
+
+  // ---------- Typography ----------
+
+  --uwb-font-family: #{$font-family};
+
+  --uwb-font-size-xs: #{$font-size-xs};
+  --uwb-font-size-sm: #{$font-size-sm};
+  --uwb-font-size: #{$font-size-md};
+  --uwb-font-size-lg: #{$font-size-lg};
+  --uwb-font-size-xl: #{$font-size-xl};
+
+  --uwb-line-height: #{$line-height-normal};
+
+  // ---------- Controls ----------
+
+  --uwb-control-height: #{$control-height-md};
+
+  // ---------- Radius ----------
+
+  --uwb-radius-sm: #{$radius-sm};
+  --uwb-radius-md: #{$radius-md};
+  --uwb-radius-lg: #{$radius-lg};
+  --uwb-radius-xl: #{$radius-xl};
+
+  // ---------- Shadows ----------
+
+  --uwb-shadow-sm: #{$shadow-sm};
+  --uwb-shadow-md: #{$shadow-md};
+  --uwb-shadow-lg: #{$shadow-lg};
+
+  // ---------- Focus ----------
+
+  --uwb-focus-ring: #{$focus-ring};
+
+
+  // ==========================================================
+  // LEGACY VARIABLES
+  // ==========================================================
+
+  --uwb-secondary: #{$uwb-secondary};
+
+  --uwb-tab-background: #{$uwb-tab-background};
+  --uwb-primary-second-lighter: #{$uwb-primary-second-lighter};
+
+  --uwb-tab-content-background: #{$uwb-tab-content-background};
+  --uwb-tab-frame: #{$uwb-tab-frame};
+
+  --uwb-internal-tab-font-color: #{$uwb-internal-tab-font-color};
+  --uwb-internal-tab-header-background: #{$uwb-internal-tab-header-background};
+
+  --uwb-front-tab-background: #{$uwb-front-tab-background};
+  --uwb-front-tab-text-color: #{$uwb-front-tab-text-color};
+
+  --uwb-button-text-color: #{$uwb-button-text-color};
+  --uwb-button-background: #{$uwb-button-background};
+  --uwb-button-border: #{$uwb-button-border};
+
+  --uwb-label-color: #{$uwb-label-color};
+
+  --uwb-font-size-larger: #{$font-size-lg};
+  --uwb-font-size-table: #{$font-size-xs};
+
+  --uwb-table-header-background-color:
+    #{$uwb-table-header-background-color};
+
+  --uwb-table-header-color:
+    #{$uwb-table-header-color};
+
+  --uwb-button-hover-background-color:
+    #{$uwb-button-hover-background-color};
+
+  --uwb-button-hover-text-color:
+    #{$uwb-button-hover-text-color};
+
+  --uwb-selected-row-light-text:
+    #{$uwb-selected-row-light-text};
+
+  --uwb-selected-row-light-bg:
+    #{$uwb-selected-row-light-bg};
+
+  --uwb-table-row-even-highlight-background:
+    #{$uwb-table-row-even-highlight-background};
+
+  --uwb-table-row-even-highlight-text:
+    #{$uwb-table-row-even-highlight-text};
+
+  --uwb-table-row-even-selected-background:
+    #{$uwb-table-row-even-selected-background};
+
+  --uwb-checkbox-marked:
+    #{$uwb-checkbox-marked};
+
+  --uwb-menu-scrollbar-track:
+    #{$uwb-menu-scrollbar-track};
+
+  --uwb-menu-scrollbar-thumb:
+    #{$uwb-menu-scrollbar-thumb};
+
+  --uwb-menu-scrollbar-thumb-hover:
+    #{$uwb-menu-scrollbar-thumb-hover};
+
+  // ---------- Prices ----------
+
+  --uwb-price-in-color: #{$price-in-color};
+  --uwb-price-out-color: #{$price-out-color};
+  --uwb-price-save-color: #{$price-save-color};
+
+  --uwb-price-in-light-color:
+    #{$price-in-light-color};
+
+  --uwb-price-light-color:
+    #{$price-light-color};
+
+  --uwb-price-out-light-color:
+    #{$price-out-light-color};
+
+  --uwb-price-save-light-color:
+    #{$price-save-light-color};
+
+  --uwb-profit-color:
+    #{$profit-color};
+
+  --uwb-card-background-color:
+    #{$card-background-color};
+
+  --uwb-price-in-color: #0f766e;
+  --uwb-price-in-soft: #ccfbf1;
+
+  --uwb-price-out-color: #be123c;
+  --uwb-price-out-soft: #ffe4e6;
+
+  --uwb-price-save-color: #0369a1;
+  --uwb-price-save-soft: #e0f2fe;
+
+  --uwb-profit-color: #7c3aed;
+  --uwb-profit-soft: #ede9fe;
+
+  --uwb-primary-light-soft: #ecfeff;
+
+  // ---------- Spaces ----------
+    --uwb-space-1: #{$space-1};
+    --uwb-space-2: #{$space-2};
+    --uwb-space-3: #{$space-3};
+
+  // ---------- Fonts ----------
+    --uwb-font-size-sm: #{$font-size-sm};
+    --uwb-font-size-lg: #{$font-size-lg};
+    --uwb-font-weight-medium: #{$font-weight-medium};
+    --uwb-font-weight-semibold: #{$font-weight-semibold};
+
+  // ---------- Transitions ----------
+    --uwb-transition-fast: #{$transition-fast};
+
+    --uwb-control-height-md: #{$control-height-md};
+
 }

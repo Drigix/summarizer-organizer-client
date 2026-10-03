@@ -49,7 +49,7 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {
     this.documentStyle = getComputedStyle(document.documentElement);
-    const textColor = this.documentStyle.getPropertyValue('--text-color');
+    const textColor = this.documentStyle.getPropertyValue('--uwb-text-subtle');
     const textColorSecondary = this.documentStyle.getPropertyValue(
       '--text-color-secondary'
     );

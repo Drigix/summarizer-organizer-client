@@ -1,203 +1,464 @@
-.component-settlement-preview {
-  margin: 10px;
-  margin-bottom: 0px;
-  // border: 2px solid;
-  // border-radius: 7px;
-  // height: 300px;
+// ============================================================
+// Settlement component
+// ============================================================
+
+.settlement-component {
+  margin-top: var(--uwb-space-2);
+  color: var(--uwb-text);
+}
+
+.settlement-preview {
+  margin: var(--uwb-space-2) var(--uwb-space-2) 0;
+  overflow: hidden;
+}
+
+// ============================================================
+// Fieldset
+// ============================================================
+
+:host ::ng-deep .settlement-component .p-fieldset {
+  background: var(--uwb-surface);
+  border: 1px solid var(--uwb-border);
+  border-radius: var(--uwb-radius-lg);
+  box-shadow: var(--uwb-shadow-sm);
+}
+
+:host ::ng-deep .settlement-component .p-fieldset-legend {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+:host ::ng-deep .settlement-component .p-fieldset-legend > a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--uwb-space-2);
+
+  min-height: 36px;
+  padding: 0 var(--uwb-space-3);
+
+  border: 1px solid var(--settlement-accent);
+  border-radius: var(--uwb-radius-md);
+
+  background: var(--settlement-accent-soft);
+  color: var(--settlement-accent);
+
+  font-size: var(--uwb-font-size-sm);
+  font-weight: var(--uwb-font-weight-semibold);
+
+  transition:
+    background-color var(--uwb-transition-fast),
+    border-color var(--uwb-transition-fast),
+    color var(--uwb-transition-fast);
+}
+
+:host ::ng-deep
+  .settlement-component
+  .p-fieldset.p-fieldset-toggleable
+  .p-fieldset-legend
+  > a:hover {
+  background: var(--settlement-accent);
+  color: var(--uwb-text-inverse);
+}
+
+:host ::ng-deep
+  .settlement-component
+  .p-fieldset.p-fieldset-toggleable
+  .p-fieldset-toggler {
+  display: none;
+}
+
+:host ::ng-deep .settlement-component .p-fieldset-content {
+  padding: var(--uwb-space-3);
+}
+
+// ============================================================
+// Toolbar
+// ============================================================
+
+.settlement-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--uwb-space-3);
+
+  min-height: 40px;
+}
+
+.settlement-search {
+  flex: 1;
+  min-width: 0;
+}
+
+:host ::ng-deep .settlement-search .p-icon-field {
+  width: 100%;
+}
+
+.settlement-search-input {
+  width: 100%;
+  height: var(--uwb-control-height-md);
+
+  border-radius: var(--uwb-radius-md);
+  background: var(--uwb-surface-subtle);
+  border-color: var(--uwb-border);
+
+  color: var(--uwb-text);
+
+  transition:
+    border-color var(--uwb-transition-fast),
+    box-shadow var(--uwb-transition-fast),
+    background-color var(--uwb-transition-fast);
+
+  &:hover {
+    border-color: var(--uwb-border-strong);
+  }
+
+  &:focus {
+    background: var(--uwb-surface);
+    border-color: var(--uwb-primary);
+    box-shadow: var(--uwb-focus-ring);
+  }
+
+  &::placeholder {
+    color: var(--uwb-text-muted);
+  }
+}
+
+// ============================================================
+// Actions
+// ============================================================
+
+.settlement-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--uwb-space-1);
+  flex-shrink: 0;
+}
+
+:host ::ng-deep .settlement-action .p-button {
+  width: 34px !important;
+  height: 30px !important;
+
+  border: 1px solid transparent !important;
+  border-radius: var(--uwb-radius-md) !important;
+
+  transition:
+    background-color var(--uwb-transition-fast),
+    border-color var(--uwb-transition-fast),
+    color var(--uwb-transition-fast),
+    transform var(--uwb-transition-fast);
+
+  &:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+// Add
+
+:host ::ng-deep .settlement-action-add .p-button {
+  color: var(--uwb-price-in-color) !important;
+}
+
+:host ::ng-deep .settlement-action-add .p-button:hover {
+  background: var(--uwb-price-in-soft) !important;
+  border-color: var(--uwb-price-in-color) !important;
+}
+
+// Edit
+
+:host ::ng-deep .settlement-action-edit .p-button {
+  color: var(--uwb-price-save-color) !important;
+}
+
+:host ::ng-deep .settlement-action-edit .p-button:hover {
+  background: var(--uwb-price-save-soft) !important;
+  border-color: var(--uwb-price-save-color) !important;
+}
+
+// Delete
+
+:host ::ng-deep .settlement-action-delete .p-button {
+  color: var(--uwb-price-out-color) !important;
+}
+
+:host ::ng-deep .settlement-action-delete .p-button:hover {
+  background: var(--uwb-price-out-soft) !important;
+  border-color: var(--uwb-price-out-color) !important;
+}
+
+// Refresh
+
+:host ::ng-deep .settlement-action-refresh .p-button {
+  color: var(--uwb-price-light-color) !important;
+}
+
+:host ::ng-deep .settlement-action-refresh .p-button:hover {
+  background: var(--uwb-price-light-soft) !important;
+  border-color: var(--uwb-price-light-color) !important;
+}
+
+// Profit
+
+:host ::ng-deep .settlement-action-profit .p-button {
+  color: var(--uwb-profit-color) !important;
+}
+
+:host ::ng-deep .settlement-action-profit .p-button:hover {
+  background: var(--uwb-profit-soft) !important;
+  border-color: var(--uwb-profit-color) !important;
+}
+
+// ============================================================
+// Divider
+// ============================================================
+
+:host ::ng-deep .settlement-component .p-divider {
+  margin: var(--uwb-space-3) 0;
+}
+
+:host ::ng-deep .settlement-component .p-divider.p-divider-horizontal::before {
+  border-top-color: var(--uwb-border);
+}
+
+// ============================================================
+// List
+// ============================================================
+
+.settlement-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--uwb-space-1);
+
+  height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+
+  padding-right: var(--uwb-space-1);
+
+  scrollbar-width: thin;
 }
 
-.middle {
-  height: 200px;
-  overflow: auto;
-}
+.settlement-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--uwb-space-3);
 
-.list-item {
-  color: darkgray;
-  font-size:14px;
-}
+  min-height: 44px;
+  padding: var(--uwb-space-2) var(--uwb-space-3);
 
+  border: 1px solid transparent;
+  border-radius: var(--uwb-radius-md);
 
-::ng-deep .component-price-in {
-  border-color: var(--uwb-price-in-color);
-  .p-fieldset {
-    border-color: var(--uwb-price-in-color);
-  }
-  .p-fieldset .p-fieldset-legend {
-    border-color: var(--uwb-price-in-color);
-  }
-  .p-fieldset .p-fieldset-legend{
-    background-color: var(--uwb-price-in-color);
-    color: darkgray;
-    font-size: 20px;
-  }
-  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
-    color: darkgray;
-  }
-}
+  background: transparent;
+  color: var(--uwb-text-muted);
 
+  cursor: pointer;
 
-::ng-deep .component-price-out {
-  border-color: var(--uwb-price-out-color);
-  .p-fieldset {
-    border-color: var(--uwb-price-out-color);
-  }
-  .p-fieldset .p-fieldset-legend {
-    border-color: var(--uwb-price-out-color);
-  }
-  .p-fieldset .p-fieldset-legend {
-    background-color: var(--uwb-price-out-color);
-    color: darkgray;
-    font-size: 20px;
-  }
-  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
-    color: darkgray;
+  transition:
+    background-color var(--uwb-transition-fast),
+    border-color var(--uwb-transition-fast),
+    box-shadow var(--uwb-transition-fast),
+    transform var(--uwb-transition-fast);
+
+  &:hover {
+    background: var(--uwb-surface-subtle);
+    border-color: var(--uwb-border);
+
+    .settlement-price {
+      transform: translateX(-2px);
+    }
   }
 }
 
-::ng-deep .component-price-save {
-  border-color: var(--uwb-price-save-color);
-  .p-fieldset {
-    border-color: var(--uwb-price-save-color);
+.settlement-description {
+  display: flex;
+  align-items: center;
+  gap: var(--uwb-space-2);
+
+  min-width: 0;
+  flex: 1;
+}
+
+.settlement-description-text {
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-size: var(--uwb-font-size-sm);
+  font-weight: var(--uwb-font-weight-medium);
+}
+
+.settlement-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 28px;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: var(--uwb-radius-md);
+
+  color: var(--uwb-primary);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--uwb-transition-fast),
+    color var(--uwb-transition-fast);
+
+  &:hover {
+    background: var(--uwb-primary-light-soft);
+    color: var(--uwb-primary-active);
   }
-  .p-fieldset .p-fieldset-legend {
-    border-color: var(--uwb-price-save-color);
-  }
-  .p-fieldset .p-fieldset-legend {
-    background-color: var(--uwb-price-save-color);
-    color: darkgray;
-    font-size: 20px;
-  }
-  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
-    color: darkgray;
+
+  i {
+    font-size: 0.8rem;
   }
 }
 
+// ============================================================
+// Price
+// ============================================================
+
+.settlement-price {
+  display: flex;
+  align-items: center;
+  gap: var(--uwb-space-1);
+
+  flex-shrink: 0;
+
+  font-size: var(--uwb-font-size-lg);
+  font-weight: var(--uwb-font-weight-semibold);
+  white-space: nowrap;
+
+  transition: transform var(--uwb-transition-fast);
+}
+
+.settlement-price-icon {
+  font-size: 0.85rem;
+}
+
+// ============================================================
+// Selected settlement
+// ============================================================
+
+.selected-settlement {
+  position: relative;
+
+  border-color: var(--settlement-accent) !important;
+  background: var(--settlement-accent-soft);
+
+  box-shadow: var(--uwb-shadow-sm);
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+
+    width: 3px;
+
+    border-radius: var(--uwb-radius-pill);
+
+    background: var(--settlement-accent);
+  }
+
+  .settlement-description-text {
+    font-weight: var(--uwb-font-weight-semibold);
+  }
+
+  .settlement-price {
+    font-weight: var(--uwb-font-weight-semibold);
+  }
+}
+
+// ============================================================
+// Price variants
+// ============================================================
+
+.component-price-in {
+  --settlement-accent: var(--uwb-price-in-color);
+  --settlement-accent-soft: var(--uwb-price-in-soft);
+}
+
+.component-price-out {
+  --settlement-accent: var(--uwb-price-out-color);
+  --settlement-accent-soft: var(--uwb-price-out-soft);
+}
+
+.component-price-save {
+  --settlement-accent: var(--uwb-price-save-color);
+  --settlement-accent-soft: var(--uwb-price-save-soft);
+}
+
+// ============================================================
+// Price text
+// ============================================================
 
 .price-in {
   color: var(--uwb-price-in-color);
-}
 
-.price-in .pi {
-  color: var(--uwb-price-in-color);
+  .pi {
+    color: var(--uwb-price-in-color);
+  }
 }
 
 .price-out {
   color: var(--uwb-price-out-color);
-}
 
-.price-out .pi {
-  color: var(--uwb-price-out-color);
-}
-
-.price-save .pi {
-  color: var(--uwb-price-save-color);
+  .pi {
+    color: var(--uwb-price-out-color);
+  }
 }
 
 .price-save {
   color: var(--uwb-price-save-color);
+
+  .pi {
+    color: var(--uwb-price-save-color);
+  }
 }
 
-.selected-settlement {
-  border-radius: 5px;
-  transition: background-color 0.5s ease-in-out, background-image 0.5s ease-in-out;
-}
+// ============================================================
+// Responsive
+// ============================================================
 
-.selected-price-in {
-  border: 3px solid rgb(114,149,135);
-  // background: rgb(114,149,135);
-  // background: linear-gradient(95deg, rgba(114,149,135,1) 64%, rgba(199,104,255,0) 85%);
-  color: #ffffff;
-}
+@media (max-width: 768px) {
+  .settlement-preview {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-.selected-price-out {
-  border: 3px solid rgb(253,135,109);
-  // background: rgb(253,135,109);
-  // background: linear-gradient(95deg, rgba(253,135,109,1) 64%, rgba(199,104,255,0) 85%);
-  color: #ffffff;
-}
+  .settlement-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
 
-.selected-price-save {
-  border: 3px solid rgb(175,159,100);
-  // background: rgb(175,159,100);
-  // background: linear-gradient(95deg, rgba(175,159,100,1) 64%, rgba(199,104,255,0) 85%);
-  color: #ffffff;
-}
+  .settlement-actions {
+    justify-content: flex-end;
+  }
 
-.settlement-link {
-  cursor: pointer;
-}
+  .settlement-list {
+    height: 220px;
+  }
 
-.footer {
-  margin: 0 10px;
-  border-radius: 7px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-  color: var(--uwb-button-text-color);
-}
+  .settlement-item {
+    min-height: 48px;
+    padding: var(--uwb-space-2);
+  }
 
-:host ::ng-deep .p-button {
-  background: transparent;
-  height: 30px !important;
-  width: 30px !important;
-}
-
-::ng-deep .add-button .p-button:hover {
-  background-color: var(--uwb-price-in-color) !important;
-  color: white;
-}
-
-::ng-deep .add-button .p-button {
-  border-color: var(--uwb-price-in-color) !important;
-  background-color: var(--uwb-price-in-color) !important;
-}
-
-::ng-deep .edit-button .p-button:hover {
-  background-color: var(--uwb-price-save-color) !important;
-  color: white;
-}
-
-::ng-deep .edit-button .p-button {
-  border-color: var(--uwb-price-save-color) !important;
-  background-color: var(--uwb-price-save-color) !important;
-}
-
-::ng-deep .delete-button .p-button:hover {
-  background-color: var(--uwb-price-out-color) !important;
-  color: white;
-}
-
-::ng-deep .delete-button .p-button {
-  border-color: var(--uwb-price-out-color) !important;
-  background-color: var(--uwb-price-out-color) !important;
-}
-
-::ng-deep .refresh-button .p-button:hover {
-  background-color: var(--uwb-price-light-color) !important;
-  color: white;
-}
-
-::ng-deep .refresh-button .p-button {
-  border-color: var(--uwb-price-light-color) !important;
-  background-color: var(--uwb-price-light-color) !important;
-}
-
-::ng-deep .unrealized-profit-button .p-button {
-  border-color: var(--uwb-profit-color) !important;
-  background-color: var(--uwb-profit-color) !important;
-}
-
-::ng-deep .p-fieldset {
-  background-color: var(--uwb-card-background-color);
-}
-
-::ng-deep .p-fieldset .p-fieldset-content {
-  padding: 5px;
-}
-
-::ng-deep .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a .p-fieldset-toggler {
-  display: none;
+  .settlement-price {
+    font-size: var(--uwb-font-size-sm);
+  }
 }

@@ -1,63 +1,147 @@
-<div class="mt-2" [ngClass]="getComponentStyle('component-price-')">
-  <p-fieldset [legend]="(getTitle() | currency:'PLN':'symbol-narrow': '2.0')!" [toggleable]="true">
-    <div class="component-settlement-preview"
-    [ngClass]="getComponentStyle('component-price-')">
+<div
+  class="settlement-component"
+  [ngClass]="getComponentStyle('component-price-')"
+>
+  <p-fieldset
+    [legend]="(getTitle() | currency:'PLN':'symbol-narrow':'2.0')!"
+    [toggleable]="true"
+  >
+    <div class="settlement-preview">
 
-    <div class="grid p-0">
-      <div [ngClass]="{'col-8': priceType !== 'save', 'col-7': priceType === 'save'}">
-        <p-iconField iconPosition="left">
-          <p-inputIcon styleClass="pi pi-search" />
-          <input class="w-93" type="text" pInputText placeholder="Search" [(ngModel)]="searchInput" (input)="onFilterChange($event)" />
-        </p-iconField>
-      </div>
-      <div [ngClass]="{'col-4': priceType !== 'save', 'col-5': priceType === 'save'}" class="navbar flex justify-content-end">
-        <div class="add-button mx-1">
-          <p-button icon="pi pi-plus" (onClick)="onButtonClick('add')"></p-button>
-        </div>
-        <div class="edit-button mx-1">
-          <p-button class="edit-button" icon="pi pi-pencil" [disabled]="!selectedSettlement" (onClick)="onButtonClick('edit')"></p-button>
-        </div>
-        <div class="delete-button mx-1">
-          <p-button class="delete-button" icon="pi pi-trash" [disabled]="!selectedSettlement" (onClick)="onButtonClick('delete')"></p-button>
-        </div>
-        @if (priceType === 'save') {
-          <div class="refresh-button mx-1">
-            <p-button class="refresh-button" icon="pi pi-refresh" [disabled]="isRefreshDisabled()" (onClick)="onButtonClick('refresh')"></p-button>
-          </div>
-        }
-        @if (priceType === 'save') {
-          <div class="unrealized-profit-button mx-1">
-            <p-button class="unrealized-profit-button" icon="pi pi-chart-line" (onClick)="onButtonClick('unrealized-profit')"></p-button>
-          </div>
-        }
-      </div>
-    </div>
-    <p-divider type="solid" />
+      <!-- Toolbar -->
+      <div class="settlement-toolbar">
+        <div class="settlement-search">
+          <p-iconField iconPosition="left">
+            <p-inputIcon styleClass="pi pi-search"></p-inputIcon>
 
-    <div class="middle">
-      <div *ngFor="let settlement of settlements">
-        <div class="list-item w-full flex align-items-center justify-content-between p-2"
-          [ngClass]="settlement === selectedSettlement ? getComponentStyle('selected-settlement selected-price-') : ''"
+            <input
+              class="settlement-search-input"
+              type="text"
+              pInputText
+              placeholder="Szukaj settlementu..."
+              [(ngModel)]="searchInput"
+              (input)="onFilterChange($event)"
+            />
+          </p-iconField>
+        </div>
+
+        <div class="settlement-actions">
+
+          <p-button
+            class="settlement-action settlement-action-add"
+            icon="pi pi-plus"
+            [rounded]="true"
+            [text]="true"
+            pTooltip="Dodaj"
+            tooltipPosition="top"
+            (onClick)="onButtonClick('add')"
+          ></p-button>
+
+          <p-button
+            class="settlement-action settlement-action-edit"
+            icon="pi pi-pencil"
+            [rounded]="true"
+            [text]="true"
+            [disabled]="!selectedSettlement"
+            pTooltip="Edytuj"
+            tooltipPosition="top"
+            (onClick)="onButtonClick('edit')"
+          ></p-button>
+
+          <p-button
+            class="settlement-action settlement-action-delete"
+            icon="pi pi-trash"
+            [rounded]="true"
+            [text]="true"
+            [disabled]="!selectedSettlement"
+            pTooltip="Usuń"
+            tooltipPosition="top"
+            (onClick)="onButtonClick('delete')"
+          ></p-button>
+
+          @if (priceType === 'save') {
+            <p-button
+              class="settlement-action settlement-action-refresh"
+              icon="pi pi-refresh"
+              [rounded]="true"
+              [text]="true"
+              [disabled]="isRefreshDisabled()"
+              pTooltip="Odśwież"
+              tooltipPosition="top"
+              (onClick)="onButtonClick('refresh')"
+            ></p-button>
+
+            <p-button
+              class="settlement-action settlement-action-profit"
+              icon="pi pi-chart-line"
+              [rounded]="true"
+              [text]="true"
+              pTooltip="Niezrealizowany zysk"
+              tooltipPosition="top"
+              (onClick)="onButtonClick('unrealized-profit')"
+            ></p-button>
+          }
+        </div>
+      </div>
+
+      <p-divider></p-divider>
+
+      <!-- Settlement list -->
+      <div class="settlement-list">
+
+        <div
+          *ngFor="let settlement of settlements"
+          class="settlement-item"
+          [ngClass]="
+            settlement === selectedSettlement
+              ? getComponentStyle('selected-settlement selected-price-')
+              : ''
+          "
           (click)="onSettlementSelected(settlement)"
-          >
-          <span class="grid align-items-center">
-            <a *ngIf="settlement.linkUrl" class="col-2 settlement-link" (click)="goToLink(settlement.linkUrl)">
-              <i class="pi pi-external-link text-base font-bold mr-2"></i>
+        >
+
+          <div class="settlement-description">
+
+            <a
+              *ngIf="settlement.linkUrl"
+              class="settlement-link"
+              (click)="goToLink(settlement.linkUrl); $event.stopPropagation()"
+              pTooltip="Otwórz powiązany element"
+              tooltipPosition="top"
+            >
+              <i class="pi pi-external-link"></i>
             </a>
-            <p class="flex justify-content-end white-space-nowrap overflow-hidden text-overflow-ellipsis" [ngClass]="settlement.linkUrl ? 'col-10' : 'col-12'">
+
+            <span
+              class="settlement-description-text"
+              [class.settlement-description-with-link]="settlement.linkUrl"
+            >
               {{ settlement.description }}
-            </p>
-          </span>
-          <span class="flex align-items-center text-2xl font-bold"
-            [ngClass]="getComponentStyle('price-') ">
-            <i class="mx-1 font-bold" [ngClass]="getPriceIcon()"></i>
-            {{ settlement.price! * (settlement?.amount ?? 1) | currency:'PLN':'symbol-narrow': '2.0'}}
-          </span>
+            </span>
+
+          </div>
+
+          <div
+            class="settlement-price"
+            [ngClass]="getComponentStyle('price-')"
+          >
+            <i
+              class="settlement-price-icon"
+              [ngClass]="getPriceIcon()"
+            ></i>
+
+            <span>
+              {{
+                settlement.price! * (settlement?.amount ?? 1)
+                  | currency:'PLN':'symbol-narrow':'2.0'
+              }}
+            </span>
+          </div>
+
         </div>
+
       </div>
+
     </div>
-
-  </div>
-
   </p-fieldset>
 </div>
