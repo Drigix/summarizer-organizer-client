@@ -6,6 +6,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { MarketDataService } from "@services/market-data.service";
 import { ConfirmationService, MessageService } from "primeng/api";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
+import { CURRENCIES_LIST } from "src/app/models/constans/currencies-list.const";
 
 @Component({
     selector: 'app-stock-companies-action-dialog',
@@ -17,6 +18,7 @@ export class StockCompaniesActionDialogComponent implements OnInit {
     
   formGroup!: FormGroup;
   dialogType?: ButtonClickType;
+  currencies = CURRENCIES_LIST;
 
   constructor(
     private formBuilder: FormBuilder,

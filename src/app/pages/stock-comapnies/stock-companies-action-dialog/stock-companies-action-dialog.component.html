@@ -20,7 +20,28 @@
     </app-form-control>
     <app-form-control [styleClass]="'col-12'">
       <p-floatlabel>
-        <input pInputText id="currency" formControlName="currency" minlength="2" maxlength="100"/>
+        <p-select
+            formControlName="currency"
+            [options]="currencies"
+            optionLabel="value"
+            optionValue="value"
+            appendTo="body"
+          >
+           <ng-template #selectedItem let-selectedOption>
+                    <div class="flex justify-content-start align-items-center gap-2">
+                        <!-- <img [src]="selectedOption.icon" width]="15" [height]="15" [alt]="selectedOption.companyName" class="w-6 h-6"/> -->
+                        <span>{{ selectedOption.value }}</span>
+                    </div>
+                </ng-template>
+                <ng-template let-currency #item>
+                    <div class="flex items-center gap-3 py-1">
+                        <!-- <img [src]="stockCompany.icon" [width]="15" [height]="15" [alt]="stockCompany.companyName" class="w-6 h-6"/> -->
+                        <div class="flex flex-col">
+                            <span class="font-medium">{{ currency.value }}</span>
+                        </div>
+                    </div>
+                </ng-template>
+        </p-select>
         <label htmlFor="currency">{{ 'stockCompanies.currency' | translate }}</label>
       </p-floatlabel>
     </app-form-control>
