@@ -28,6 +28,11 @@ export class AppComponent implements OnInit, AfterViewChecked {
   ngOnInit(): void {
     this.refreshTokenAndUserData(true);
     this.toggleDarkMode();
+    this.userAuthService.userDataChanges.subscribe((change) => {
+      if (change) {
+        this.userData.set(this.userAuthService!.userData!);
+      }
+    });
   }
 
   ngAfterViewChecked(): void {
