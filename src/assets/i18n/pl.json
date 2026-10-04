@@ -108,6 +108,7 @@
     "currentPrice": "Aktualna cena",
     "currency": "Waluta",
     "icon": "Ikona",
+    "updateSettlementSaving": "Aktualizuj inwestycje powiązane z tą spółką podczas edycji ręcznej",
     "addStockCompany": "Utwórz nową spółkę giełdową",
     "editStockCompany": "Edytuj spółkę giełdową",
     "messages": {

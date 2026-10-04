@@ -42,6 +42,7 @@ import { CustomStockCompanyDataViewComponent } from './custom-stock-company-data
 import { FileUploadModule } from 'primeng/fileupload';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { PasswordModule } from 'primeng/password';
     MenuModule,
     DataViewModule,
     FileUploadModule,
-    PasswordModule
+    PasswordModule,
+    CheckboxModule
   ],
   exports: [
     CommonModule,
@@ -113,7 +115,8 @@ import { PasswordModule } from 'primeng/password';
     DataViewModule,
     CustomStockCompanyDataViewComponent,
     FileUploadComponent,
-    PasswordModule
+    PasswordModule,
+    CheckboxModule
   ],
   declarations: [
     DateChangerComponent,

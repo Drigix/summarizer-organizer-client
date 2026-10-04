@@ -44,7 +44,8 @@ export class StockCompaniesActionDialogComponent implements OnInit {
             icon: new FormControl(null),
             currentPrice: new FormControl(null, [Validators.required]),
             currency: new FormControl(null, [Validators.required]),
-            updatedAt: new FormControl(new Date())
+            updatedAt: new FormControl(new Date()),
+            updateSettlementSaving: new FormControl(false)
         });
     }
 
@@ -59,7 +60,8 @@ export class StockCompaniesActionDialogComponent implements OnInit {
                 icon: stockCompany.icon,
                 currentPrice: stockCompany.currentPrice,
                 currency: stockCompany.currency,
-                updatedAt: new Date(stockCompany.updatedAt!)
+                updatedAt: new Date(stockCompany.updatedAt!),
+                updateSettlementSaving: stockCompany.updateSettlementSaving || false
               });
             } else {
               this.formGroup.removeControl('id');

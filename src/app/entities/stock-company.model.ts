@@ -6,6 +6,7 @@ export class StockCompany {
     currentPrice?: number;
     currency?: string;
     updatedAt?: Date;
+    updateSettlementSaving?: boolean;
 }
 
 export type NewStockCompany = Omit<StockCompany, 'id'>;
