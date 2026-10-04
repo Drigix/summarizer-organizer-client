@@ -46,6 +46,10 @@
       </p-floatlabel>
     </app-form-control>
     <app-form-control [styleClass]="'col-12'">
+      <p-checkbox formControlName="updateSettlementSaving" [binary]="true"></p-checkbox>
+      <label pLabel for="preview-checkbox">{{ 'stockCompanies.updateSettlementSaving' | translate }}</label>
+    </app-form-control>
+    <app-form-control [styleClass]="'col-12'">
       <p-floatlabel>
         <app-file-upload 
         [imageSrc]="formGroup.get('icon')?.value" 
