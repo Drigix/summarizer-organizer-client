@@ -549,6 +549,9 @@ $focus-ring:
 
   --uwb-primary-light-soft: #ecfeff;
 
+  // ---------- Forms -----------
+  --p-form-field-float-label-focus-color: #{$color-primary};
+  --p-floatlabel-focus-color: #{$color-primary};
   // ---------- Spaces ----------
     --uwb-space-1: #{$space-1};
     --uwb-space-2: #{$space-2};

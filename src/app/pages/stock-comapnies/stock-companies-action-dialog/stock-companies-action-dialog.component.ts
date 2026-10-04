@@ -45,7 +45,8 @@ export class StockCompaniesActionDialogComponent implements OnInit {
             currentPrice: new FormControl(null, [Validators.required]),
             currency: new FormControl(null, [Validators.required]),
             updatedAt: new FormControl(new Date()),
-            updateSettlementSaving: new FormControl(false)
+            updateSettlementSaving: new FormControl(false),
+            oldStockSymbol: new FormControl(null)
         });
     }
 
@@ -61,12 +62,12 @@ export class StockCompaniesActionDialogComponent implements OnInit {
                 currentPrice: stockCompany.currentPrice,
                 currency: stockCompany.currency,
                 updatedAt: new Date(stockCompany.updatedAt!),
-                updateSettlementSaving: stockCompany.updateSettlementSaving || false
+                updateSettlementSaving: stockCompany.updateSettlementSaving || false,
+                oldStockSymbol: stockCompany?.oldStockSymbol ?? stockCompany.stockSymbol
               });
             } else {
               this.formGroup.removeControl('id');
             }
-            console.log('FormGroup values:', this.formGroup.getRawValue());
     }
 
     onCloseDialog(): void {
@@ -74,19 +75,10 @@ export class StockCompaniesActionDialogComponent implements OnInit {
     }
 
     onSave(): void {
- if(this.dialogType === 'add') {
-      const value: NewStockCompany = Object.assign(this.formGroup.getRawValue() as NewStockCompany);
-      this.marketDataService.createStockCompany(value).subscribe({
-        next: () => {
-          this.ref.close({ save: true });
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    } else if (this.dialogType === 'edit') {
-      const value = Object.assign(this.formGroup.getRawValue() as StockCompany);
-      this.marketDataService.updateStockCompany(value).subscribe({
+      if(this.dialogType === 'add') {
+        const value: NewStockCompany = Object.assign(this.formGroup.getRawValue() as NewStockCompany);
+        value.oldStockSymbol = value.stockSymbol;
+        this.marketDataService.createStockCompany(value).subscribe({
           next: () => {
             this.ref.close({ save: true });
           },
@@ -94,6 +86,16 @@ export class StockCompaniesActionDialogComponent implements OnInit {
             console.log(err);
           }
         });
-    }
+      } else if (this.dialogType === 'edit') {
+        const value = Object.assign(this.formGroup.getRawValue() as StockCompany);
+        this.marketDataService.updateStockCompany(value).subscribe({
+            next: () => {
+              this.ref.close({ save: true });
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+      }
     }
 }

@@ -1,6 +1,7 @@
 export class StockCompany {
     _id?: string;
     stockSymbol?: string;
+    oldStockSymbol?: string;
     companyName?: string;
     icon?: string;
     currentPrice?: number;
