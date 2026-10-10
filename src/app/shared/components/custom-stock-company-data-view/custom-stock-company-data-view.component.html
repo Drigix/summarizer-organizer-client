@@ -1,4 +1,7 @@
 <div class="flex justify-content-end my-3">
+        <div class="refresh-all-button mx-1">
+            <p-button [label]="'global.buttons.refreshAllStockPrices' | translate" icon="pi pi-refresh" (onClick)="onButtonClick('refresh')"></p-button>
+        </div>
         <div class="add-button mx-1">
           <p-button icon="pi pi-plus" [label]="'global.buttons.addNewStockCompany' | translate" (onClick)="onButtonClick('add')"></p-button>
         </div>

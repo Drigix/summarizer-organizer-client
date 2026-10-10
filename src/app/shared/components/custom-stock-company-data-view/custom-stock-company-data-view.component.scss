@@ -12,7 +12,14 @@
 ::ng-deep .add-button .p-button {
   border-color: var(--uwb-price-in-color) !important;
   background-color: var(--uwb-price-in-color) !important;
-    height: 30px !important;
+  height: 30px !important;
+  width: 250px !important;
+}
+
+::ng-deep .refresh-all-button .p-button {
+  border-color: var(--uwb-price-light-color) !important;
+  background-color: var(--uwb-price-light-color) !important;
+  height: 30px !important;
   width: 250px !important;
 }
 
