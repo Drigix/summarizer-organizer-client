@@ -13,6 +13,8 @@ import {TranslateService} from "@ngx-translate/core";
 import { StockCompany } from '@entities/stock-company.model';
 import { MarketDataService } from '@services/market-data.service';
 import { StringUtils } from '@shared/utils/string.utils';
+import { SAVING_TYPE_LIST } from 'src/app/models/constans/saving-type.const';
+import { DropdownItem } from 'src/app/models/dropdown-item.model';
 
 @Component({
     selector: 'app-settlement-saving-dialog',
@@ -26,15 +28,7 @@ export class SettlementSavingDialogComponent implements OnInit {
   date = new Date();
   priceType?: PriceType;
   dialogType?: ButtonClickType;
-  savingTypes: any[] = [
-    { name: 'Obligacje', code: 'bonds' },
-    { name: 'Lokata', code: 'deposit' },
-    { name: 'Akcje', code: 'stock' },
-    { name: 'Złoto', code: 'gold' },
-    { name: 'Srebro', code: 'silver' },
-    { name: 'Kryptowaluty', code: 'crypto' },
-    { name: 'Bez procentów', code: 'none' }
-  ];
+  savingTypes: DropdownItem[] = SAVING_TYPE_LIST;
   stockCompanies: StockCompany[] = [];
   isStockChoose = false;
   isCryptoChoose = false;
@@ -53,8 +47,15 @@ export class SettlementSavingDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initTranslations();
     this.createFormGroup();
     this.loadPageValues();
+  }
+
+  initTranslations(): void {
+    this.savingTypes.forEach((item) => {
+      item.name = this.translationService.instant(item.name);
+    });
   }
 
   loadPageValues(): void {

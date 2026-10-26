@@ -72,6 +72,7 @@
     },
     "savingTypes": {
       "bonds": "Obligacje",
+      "deposit": "Lokata",
       "deposits": "Lokaty",
       "stock": "Akcje giełdowe",
       "silver": "Srebro",
