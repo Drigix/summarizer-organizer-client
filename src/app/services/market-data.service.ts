@@ -34,4 +34,8 @@ export class MarketDataService {
     updateStockCompanyPrice(symbol: string): Observable<StockCompany> {
         return this.http.put(`${this.resourceUrl}/stock-price/${symbol}`, {});
     }
+
+    updateAllStockCompanyPrices(): Observable<StockCompany[]> {
+        return this.http.put<StockCompany[]>(`${this.resourceUrl}/stock-prices/all`, {});
+    }
 }

@@ -51,12 +51,21 @@ export class StockCompaniesComponent implements OnInit {
                 key: 'mainDialog'
             });
         } else if(action.clickType === 'refresh') {
-            this.marketDataService.updateStockCompanyPrice(action.stockCompany?.stockSymbol!).subscribe({
-                next: (res) => {
-                    this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'stockCompanies.messages.refreshPriceSuccess'));
-                    this.loadStockCompanies();
-                }
-            });
+            if (action.stockCompany && action.stockCompany.stockSymbol) {
+                this.marketDataService.updateStockCompanyPrice(action.stockCompany?.stockSymbol!).subscribe({
+                    next: (res) => {
+                        this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'stockCompanies.messages.refreshPriceSuccess'));
+                        this.loadStockCompanies();
+                    }
+                });
+            } else {
+                this.marketDataService.updateAllStockCompanyPrices().subscribe({
+                    next: (res) => {
+                        this.sharedMessageService.showSuccessMessage(new SharedMessage('global.messages.success', 'stockCompanies.messages.refreshPriceSuccess'));
+                        this.loadStockCompanies();
+                    }
+                });
+            }
         }
     }
 

@@ -21,6 +21,7 @@
   border: 1px solid var(--uwb-border);
   border-radius: var(--uwb-radius-lg);
   box-shadow: var(--uwb-shadow-sm);
+  padding: 0;
 }
 
 :host ::ng-deep .settlement-component .p-fieldset-legend {

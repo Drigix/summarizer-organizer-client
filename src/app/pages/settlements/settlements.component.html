@@ -1,59 +1,115 @@
 <div class="h-full">
   <app-date-changer (emitDateChange)="onDateChange($event)"></app-date-changer>
+
   <!-- <div class="flex justify-content-center m-3">
     <p-iconField class="w-93 pl-6" iconPosition="left">
       <p-inputIcon styleClass="pi pi-search" />
       <input class="w-93" type="text" pInputText placeholder="Search" />
     </p-iconField>
   </div> -->
-  <div class="flex justify-content-end mt-4">
+
+  <div class="flex justify-content-center md:justify-content-end mt-4 px-2">
     <app-data-extractor-select></app-data-extractor-select>
   </div>
+
   <div class="grid">
-    <div class="col-8 grid">
-      <app-settlement-preview class="col-6" [settlements]="settlementsIn" [priceType]="'in'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
-      <app-settlement-preview class="col-6" [settlements]="settlementsOut" [priceType]="'out'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
-      <app-sumarrizer-settlement class="col-12"  [values]="summarizeSettlements"></app-sumarrizer-settlement>
+    <div class="col-12 lg:col-8 grid m-0">
+      <app-settlement-preview
+        class="col-12 md:col-6"
+        [settlements]="settlementsIn"
+        [priceType]="'in'"
+        (emitButtonClick)="openDialog($event)">
+      </app-settlement-preview>
+
+      <app-settlement-preview
+        class="col-12 md:col-6"
+        [settlements]="settlementsOut"
+        [priceType]="'out'"
+        (emitButtonClick)="openDialog($event)">
+      </app-settlement-preview>
+
+      <app-sumarrizer-settlement
+        class="col-12"
+        [values]="summarizeSettlements">
+      </app-sumarrizer-settlement>
     </div>
-    <div class="col-4 grid ">
-      <app-settlement-preview #settlementSavingComponent class="col-12" [settlements]="settlementsSaving" [priceType]="'save'" (emitButtonClick)="openDialog($event)"></app-settlement-preview>
-      <app-settlement-saving-chart class="col-12" [data]="summarizeSavingSettlements"></app-settlement-saving-chart>
+
+    <div class="col-12 lg:col-4 grid m-0">
+      <app-settlement-preview
+        #settlementSavingComponent
+        class="col-12"
+        [settlements]="settlementsSaving"
+        [priceType]="'save'"
+        (emitButtonClick)="openDialog($event)">
+      </app-settlement-preview>
+
+      <app-settlement-saving-chart
+        class="col-12"
+        [data]="summarizeSavingSettlements">
+      </app-settlement-saving-chart>
     </div>
   </div>
+
   <div>
-    <div class="flex justify-content-center">
-      <app-date-changer [dateChangerType]="'year'" (emitDateChange)="loadSummarizeYearChartDataset($event); loadProfitForBondsAndDepositsToChart($event)"></app-date-changer>
+    <div class="flex justify-content-center px-2">
+      <app-date-changer
+        [dateChangerType]="'year'"
+        (emitDateChange)="loadSummarizeYearChartDataset($event); loadProfitForBondsAndDepositsToChart($event)">
+      </app-date-changer>
     </div>
-    <div class="grid m-2">
-      <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.moneyYearBalance' | translate">
-        <app-settlement-year-chart class="col-12" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
+
+    <div class="grid m-0 md:m-2">
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.chartHeaders.moneyYearBalance' | translate">
+        <app-settlement-year-chart class="block w-full" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.stock' | translate">
-        <app-settlement-year-chart #stockComponent class="col-12"
-                                   [investment]="true"
-                                   [showSoldInvestmentButton]="true"
-                                   [data]="summarizeActionsPricesChartDataset!"
-        (emitSoldInvestment)="openSoldInvestmentDialog($event)">
+
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.savingTypes.stock' | translate">
+        <app-settlement-year-chart
+          #stockComponent
+          class="block w-full"
+          [investment]="true"
+          [showSoldInvestmentButton]="true"
+          [data]="summarizeActionsPricesChartDataset!"
+          (emitSoldInvestment)="openSoldInvestmentDialog($event)">
         </app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.crypto' | translate">
-        <app-settlement-year-chart #cryptoComponent class="col-12" [investment]="true" [data]="summarizeCryptoPricesChartDataset!"></app-settlement-year-chart>
+
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.savingTypes.crypto' | translate">
+        <app-settlement-year-chart
+          #cryptoComponent
+          class="block w-full"
+          [investment]="true"
+          [data]="summarizeCryptoPricesChartDataset!">
+        </app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.gold' | translate">
-        <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
-        <app-settlement-year-chart #goldComponent class="col-12" [investment]="true" [data]="summarizeGoldPricesChartDataset!"></app-settlement-year-chart>
+
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.savingTypes.gold' | translate">
+        <app-sumarrizer-settlement class="block w-full" [values]="summarizeProfitGoldPrices"></app-sumarrizer-settlement>
+        <app-settlement-year-chart
+          #goldComponent
+          class="block w-full"
+          [investment]="true"
+          [data]="summarizeGoldPricesChartDataset!">
+        </app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" [header]="'settlement.savingTypes.silver' | translate">
-        <app-sumarrizer-settlement class="col-12" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
-        <app-settlement-year-chart #silverComponent class="col-12" [investment]="true" [data]="summarizeSilverPricesChartDataset!"></app-settlement-year-chart>
+
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.savingTypes.silver' | translate">
+        <app-sumarrizer-settlement class="block w-full" [values]="summarizeProfitSilverPrices"></app-sumarrizer-settlement>
+        <app-settlement-year-chart
+          #silverComponent
+          class="block w-full"
+          [investment]="true"
+          [data]="summarizeSilverPricesChartDataset!">
+        </app-settlement-year-chart>
       </p-panel>
-      <p-panel class="w-full m-2" [header]="'settlement.chartHeaders.bondsAndDeposits' | translate">
-        <app-profit-line-chart #bondsAndDepositComponent class="col-12" [data]="profitBondsAndDepositsChartDataset!"></app-profit-line-chart>
+
+      <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.chartHeaders.bondsAndDeposits' | translate">
+        <app-profit-line-chart
+          #bondsAndDepositComponent
+          class="block w-full"
+          [data]="profitBondsAndDepositsChartDataset!">
+        </app-profit-line-chart>
       </p-panel>
     </div>
   </div>
-  <!-- <div>
-    <app-profit-line-chart></app-profit-line-chart>
-  </div> -->
 </div>
-
