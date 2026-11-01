@@ -11,7 +11,8 @@
       "chooseDateRange": "Wybierz zakres dat",
       "addNewStockCompany": "Dodaj nową spółkę giełdową",
       "login": "Zaloguj się",
-      "refreshAllStockPrices": "Odśwież wszystkie ceny spółek giełdowych"
+      "refreshAllStockPrices": "Odśwież wszystkie ceny spółek giełdowych",
+      "compareYears": "Porównaj lata"
     },
     "header": {
       "addSettlementInHeader": "Nowy przychód",
@@ -22,7 +23,8 @@
       "editSettlementSaveHeader": "Edycja inwestycji",
       "confirm": "Potwierdzenie",
       "soldStock": "Sprzedane akcje",
-      "unrealizedProfit": "Aktualny niezrealizowany profit"
+      "unrealizedProfit": "Aktualny niezrealizowany profit",
+      "settlementCompareYears": "Porównanie rozliczeń z różnych lat"
     },
     "messages": {
       "success": "Sukces",
