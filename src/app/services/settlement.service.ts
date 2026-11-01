@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SERVER_URL } from '@config/url.const';
 import { Settlement } from '@entities/settlement.model';
@@ -29,6 +29,11 @@ export class SettlementsService {
 
   getSummarizeYearChartDataset(year: number): Observable<any> {
     return this.http.get<any>(`${this.resourceUrl}/chart/${year}`);
+  }
+
+  getSummarizeYearsChartDataset(years: number[]): Observable<any> {
+    const params = new HttpParams().set('years', years.sort((a, b) => a - b).join('^'));
+    return this.http.get<any>(`${this.resourceUrl}/compareYears/chart`, { params: params });
   }
 
   deleteSettlement(id: string): Observable<any> {
