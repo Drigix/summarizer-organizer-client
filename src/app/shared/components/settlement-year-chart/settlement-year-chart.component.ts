@@ -6,8 +6,8 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { VerticalBarModel } from '@entities/vertical-bar.model';
-import {SettlementSavingEnum} from "@entities/enums/settlement-saving.enum";
 import {TranslateService} from "@ngx-translate/core";
+import { ButtonClickType } from '@entities/types/button-click.types';
 
 @Component({
     selector: 'app-settlement-year-chart',
@@ -32,6 +32,7 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
 
   @Input() investment = false;
   @Input() showSoldInvestmentButton = false;
+  @Input() showCompareYearsButton = false;
 
   @Output() emitSoldInvestment = new EventEmitter();
 
@@ -110,7 +111,7 @@ export class SettlementYearChartComponent implements OnInit, OnChanges{
     }
   }
 
-  onSoldStockClicked(): void {
-    this.emitSoldInvestment.emit(SettlementSavingEnum.STOCK);
+  onActionButtonClicked(buttonClickType: ButtonClickType): void {
+    this.emitSoldInvestment.emit(buttonClickType);
   }
 }
