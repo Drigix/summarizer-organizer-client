@@ -29,6 +29,8 @@ import {
   UnrealizedProfitDialogComponent
 } from "@pages/settlements/unrealized-profit-dialog/unrealized-profit-dialog.component";
 import {UnrealizedProfitDialogModel} from "@entities/unrealized-profit-dialog.model";
+import { SettlementChartDataWrapperModel } from '@entities/settlement-chart-data-wrapper.model';
+import { CompareYearsDialogComponent } from './compare-years-dialog/compare-years-dialog.component';
 
 @Component({
     selector: 'app-settlements',
@@ -60,13 +62,7 @@ export class SettlementsComponent implements OnInit {
   summarizeSettlements: SummarizeSettlement[] = [];
   summarizeProfitGoldPrices: SummarizeSettlement[] = [];
   summarizeProfitSilverPrices: SummarizeSettlement[] = [];
-  summarizeSavingSettlements?: DoughnutChartModel;
-  summarizeYearChartDataset?: VerticalBarModel;
-  summarizeActionsPricesChartDataset?: VerticalBarModel;
-  summarizeGoldPricesChartDataset?: VerticalBarModel;
-  summarizeSilverPricesChartDataset?: VerticalBarModel;
-  summarizeCryptoPricesChartDataset?: VerticalBarModel;
-  profitBondsAndDepositsChartDataset?: ProfitLineChartModel;
+  settlementChartDataWrapperModel: SettlementChartDataWrapperModel = new SettlementChartDataWrapperModel();
   date = new Date();
 
   constructor(
@@ -86,12 +82,12 @@ export class SettlementsComponent implements OnInit {
   refreshData(): void {
     this.loadSummarizeYearChartDataset(this.date);
     this.loadProfitForBondsAndDepositsToChart(this.date);
-    this.loadSummarizeActionsPricesToChart();
-    this.loadSummarizeGoldPricesToChart();
-    this.loadSummarizeSilverPricesToChart();
-    this.loadSummarizeCryptoPricesToChart();
-    this.loadProfitGoldPrices();
-    this.loadProfitSilverPrices();
+    this.loadSummarizeSavingTypePricesToChart(SettlementSavingEnum.STOCK);
+    this.loadSummarizeSavingTypePricesToChart(SettlementSavingEnum.GOLD);
+    this.loadSummarizeSavingTypePricesToChart(SettlementSavingEnum.SILVER);
+    this.loadSummarizeSavingTypePricesToChart(SettlementSavingEnum.CRYPTO);
+    this.loadProfitSavintgTypePrices(SettlementSavingEnum.GOLD);
+    this.loadProfitSavintgTypePrices(SettlementSavingEnum.SILVER);
   }
 
   onDateChange(date: Date): void {
@@ -142,7 +138,7 @@ export class SettlementsComponent implements OnInit {
   loadSummarizeSettlementsSaving(toDate: string): void {
     this.settlementsSavingService.getSummarizeSettlementsSavingToChart(toDate).subscribe({
       next: (res) => {
-        this.summarizeSavingSettlements = res;
+        this.settlementChartDataWrapperModel.summarizeSavingSettlements = res;
       },
       error: (err) => {
         console.error(err);
@@ -153,7 +149,7 @@ export class SettlementsComponent implements OnInit {
   loadSummarizeYearChartDataset(date: Date): void {
     this.settlementsService.getSummarizeYearChartDataset(date.getFullYear()).subscribe({
       next: (res) => {
-        this.summarizeYearChartDataset = res;
+        this.settlementChartDataWrapperModel.summarizeYearChartDataset = res;
       },
       error: (err) => {
         console.log(err);
@@ -161,10 +157,27 @@ export class SettlementsComponent implements OnInit {
     });
   }
 
-  loadSummarizeActionsPricesToChart(): void {
-    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.STOCK).subscribe({
+  loadSummarizeSavingTypePricesToChart(settlementSavingEnum: SettlementSavingEnum): void {
+    this.settlementsSavingService.getSummarizePricesToChart(settlementSavingEnum).subscribe({
       next: (res) => {
-        this.summarizeActionsPricesChartDataset = res;
+        switch (settlementSavingEnum) {
+          case SettlementSavingEnum.STOCK: {
+            this.settlementChartDataWrapperModel.summarizeActionsPricesChartDataset = res;
+            break;
+          }
+          case SettlementSavingEnum.GOLD: {
+            this.settlementChartDataWrapperModel.summarizeGoldPricesChartDataset = res;
+            break;
+          }
+          case SettlementSavingEnum.SILVER: {
+            this.settlementChartDataWrapperModel.summarizeSilverPricesChartDataset = res;
+            break;
+          }
+          case SettlementSavingEnum.CRYPTO: {
+            this.settlementChartDataWrapperModel.summarizeCryptoPricesChartDataset = res;
+            break;
+          }
+        }
       },
       error: (err) => {
         console.log(err);
@@ -172,54 +185,19 @@ export class SettlementsComponent implements OnInit {
     });
   }
 
-  loadProfitGoldPrices(): void {
-    this.settlementsSavingService.getProfitSavingTypePrices(SettlementSavingEnum.GOLD).subscribe({
+  loadProfitSavintgTypePrices(settlementSavingEnum: SettlementSavingEnum): void {
+    this.settlementsSavingService.getProfitSavingTypePrices(settlementSavingEnum).subscribe({
       next: (res) => {
-        this.summarizeProfitGoldPrices = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  loadProfitSilverPrices(): void {
-    this.settlementsSavingService.getProfitSavingTypePrices(SettlementSavingEnum.SILVER).subscribe({
-      next: (res) => {
-        this.summarizeProfitSilverPrices = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  loadSummarizeGoldPricesToChart(): void {
-    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.GOLD).subscribe({
-      next: (res) => {
-        this.summarizeGoldPricesChartDataset = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
-
-  loadSummarizeSilverPricesToChart(): void {
-    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.SILVER).subscribe({
-      next: (res) => {
-        this.summarizeSilverPricesChartDataset = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
-
-  loadSummarizeCryptoPricesToChart(): void {
-    this.settlementsSavingService.getSummarizePricesToChart(SettlementSavingEnum.CRYPTO).subscribe({
-      next: (res) => {
-        this.summarizeCryptoPricesChartDataset = res;
+        switch (settlementSavingEnum) {
+          case SettlementSavingEnum.GOLD: {
+            this.summarizeProfitGoldPrices = res;
+            break;
+          }
+          case SettlementSavingEnum.SILVER: {
+            this.summarizeProfitSilverPrices = res;
+            break;
+          }
+        }
       },
       error: (err) => {
         console.log(err);
@@ -230,7 +208,7 @@ export class SettlementsComponent implements OnInit {
   loadProfitForBondsAndDepositsToChart(date: Date): void {
     this.settlementsSavingService.getProfitForBondsAndDeposits(date.getFullYear()).subscribe({
       next: (res) => {
-        this.profitBondsAndDepositsChartDataset = res;
+        this.settlementChartDataWrapperModel.profitBondsAndDepositsChartDataset = res;
       },
       error: (err) => {
         console.error(err);
@@ -279,12 +257,37 @@ export class SettlementsComponent implements OnInit {
     }
   }
 
-  openSoldInvestmentDialog(savingType: SettlementSavingEnum): void {
+  onSettlementYearChartActionButtonClicked(buttonClickType: ButtonClickType): void {
+    switch (buttonClickType) {
+      case 'sold-stock': {
+        this.openSoldInvestmentDialog(SettlementSavingEnum.STOCK);
+        break;
+      }
+      case 'compare-years': {
+        this.compareYears();
+        break;
+      }
+    }
+  }
+
+  private openSoldInvestmentDialog(savingType: SettlementSavingEnum): void {
     const ref = this.dialogService.open(SoldInvestmentDialogComponent, {
       header: this.translateService.instant('global.header.soldStock'),
       data: {
         savingType: savingType,
         year: this.date.getFullYear()
+      },
+      closable: true,
+      width: '50%',
+      focusOnShow: false
+    });
+  }
+
+  private compareYears(savingType?: SettlementSavingEnum): void {
+    const ref = this.dialogService.open(CompareYearsDialogComponent, {
+      header: this.translateService.instant('global.header.settlementCompareYears'),
+      data: {
+        savingType: savingType
       },
       closable: true,
       width: '50%',

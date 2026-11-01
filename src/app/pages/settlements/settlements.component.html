@@ -45,7 +45,7 @@
 
       <app-settlement-saving-chart
         class="col-12"
-        [data]="summarizeSavingSettlements">
+        [data]="settlementChartDataWrapperModel.summarizeSavingSettlements">
       </app-settlement-saving-chart>
     </div>
   </div>
@@ -60,7 +60,13 @@
 
     <div class="grid m-0 md:m-2">
       <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.chartHeaders.moneyYearBalance' | translate">
-        <app-settlement-year-chart class="block w-full" [data]="summarizeYearChartDataset!"></app-settlement-year-chart>
+        <app-settlement-year-chart 
+          class="block w-full" 
+          [data]="settlementChartDataWrapperModel.summarizeYearChartDataset!" 
+          [showCompareYearsButton]="true"
+          (emitSoldInvestment)="onSettlementYearChartActionButtonClicked($event)">
+          >
+          </app-settlement-year-chart>
       </p-panel>
 
       <p-panel class="col-12 p-1 md:p-2" [header]="'settlement.savingTypes.stock' | translate">
@@ -69,8 +75,8 @@
           class="block w-full"
           [investment]="true"
           [showSoldInvestmentButton]="true"
-          [data]="summarizeActionsPricesChartDataset!"
-          (emitSoldInvestment)="openSoldInvestmentDialog($event)">
+          [data]="settlementChartDataWrapperModel.summarizeActionsPricesChartDataset!"
+          (emitSoldInvestment)="onSettlementYearChartActionButtonClicked($event)">
         </app-settlement-year-chart>
       </p-panel>
 
@@ -79,7 +85,7 @@
           #cryptoComponent
           class="block w-full"
           [investment]="true"
-          [data]="summarizeCryptoPricesChartDataset!">
+          [data]="settlementChartDataWrapperModel.summarizeCryptoPricesChartDataset!">
         </app-settlement-year-chart>
       </p-panel>
 
@@ -89,7 +95,7 @@
           #goldComponent
           class="block w-full"
           [investment]="true"
-          [data]="summarizeGoldPricesChartDataset!">
+          [data]="settlementChartDataWrapperModel.summarizeGoldPricesChartDataset!">
         </app-settlement-year-chart>
       </p-panel>
 
@@ -99,7 +105,7 @@
           #silverComponent
           class="block w-full"
           [investment]="true"
-          [data]="summarizeSilverPricesChartDataset!">
+          [data]="settlementChartDataWrapperModel.summarizeSilverPricesChartDataset!">
         </app-settlement-year-chart>
       </p-panel>
 
@@ -107,7 +113,7 @@
         <app-profit-line-chart
           #bondsAndDepositComponent
           class="block w-full"
-          [data]="profitBondsAndDepositsChartDataset!">
+          [data]="settlementChartDataWrapperModel.profitBondsAndDepositsChartDataset!">
         </app-profit-line-chart>
       </p-panel>
     </div>
