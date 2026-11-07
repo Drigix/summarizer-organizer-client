@@ -17,6 +17,9 @@
     }
   </span>
   @if (showSoldInvestmentButton) {
-    <p-button [ngClass]="'ui-button_size_175'" [label]="'global.buttons.soldStock' | translate" (onClick)="onSoldStockClicked()"></p-button>
+    <p-button [ngClass]="'ui-button_size_175'" [label]="'global.buttons.soldStock' | translate" (onClick)="onActionButtonClicked('sold-stock')"></p-button>
+  }
+  @if (showCompareYearsButton) {
+    <p-button [ngClass]="'ui-button_size_175'" [label]="'global.buttons.compareYears' | translate" (onClick)="onActionButtonClicked('compare-years')"></p-button>
   }
 </div>
