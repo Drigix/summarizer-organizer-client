@@ -41,20 +41,20 @@ export class DataExtractorSelectComponent implements OnInit {
         this._selectedFileType = value;
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.initfileTypes();
     }
 
     openExtractDataDialog(fileType: FileTypeEnum): void {
         const ref = this.dialogService.open(DataExtractorDialogComponent, {
-        header: this.translateService.instant('settlement.extractData.dialogHeader'),
-        closable: true,
-        width: '50%',
-        focusOnShow: false
+            header: this.translateService.instant('settlement.extractData.dialogHeader'),
+            closable: true,
+            width: '50%',
+            focusOnShow: false
         });
         ref?.onClose.subscribe(res => {
             console.log('res', res);
-            this.extractData(fileType, res.dataType, res.dateFrom, res.dateTo)   
+            this.extractData(fileType, res.dataType, res.dateFrom, res.dateTo)
         });
     }
 
@@ -73,14 +73,21 @@ export class DataExtractorSelectComponent implements OnInit {
         }
         if (dataType === ExtractDataTypeEnum.IN_AND_OUT) {
             this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, fileType).subscribe((blob: Blob) => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `settlement_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                const fileName = `settlement_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
+                this.downloadBlob(blob, fileName);
             });
         }
+    }
+
+
+    private downloadBlob(blob: Blob, fileName: string): void {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
     }
 }
