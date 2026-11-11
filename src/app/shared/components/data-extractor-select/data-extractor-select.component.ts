@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { ExtractDataTypeEnum } from '@entities/enums/extract-data-type.enum';
+import { ReportTypeEnum } from '@entities/enums/report-type.enum';
 import { FileTypeEnum } from '@entities/enums/file-type.enum';
 import { TranslateService } from '@ngx-translate/core';
 import { DataExtractorDialogComponent } from '@pages/settlements/data-extractor-dialog/data-extractor-dialog.component';
@@ -67,12 +67,12 @@ export class DataExtractorSelectComponent implements OnInit {
         ];
     }
 
-    private extractData(fileType: FileTypeEnum, dataType?: ExtractDataTypeEnum, dateFrom?: Date, dateTo?: Date): void {
+    private extractData(fileType: FileTypeEnum, dataType?: ReportTypeEnum, dateFrom?: Date, dateTo?: Date): void {
         if (!dataType || !dateFrom || !dateTo) {
             return;
         }
-        if (dataType === ExtractDataTypeEnum.IN_AND_OUT) {
-            this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, fileType).subscribe((blob: Blob) => {
+        if (dataType === ReportTypeEnum.SETTLEMENT) {
+            this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, dataType, fileType).subscribe((blob: Blob) => {
                 const fileName = `settlement_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
                 this.downloadBlob(blob, fileName);
             });

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ExtractDataTypeEnum } from '@entities/enums/extract-data-type.enum';
+import { ReportTypeEnum } from '@entities/enums/report-type.enum';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -42,24 +42,24 @@ export class DataExtractorDialogComponent implements OnInit {
     onSave(): void {
         const object = Object.assign({}, this.formGroup.value);
         console.log('onSave', object);
-        this.ref.close({dataType: object.dataType.key, dateFrom: object.dateRange[0], dateTo: object.dateRange[1]});
+        this.ref.close({ dataType: object.dataType.key, dateFrom: object.dateRange[0], dateTo: object.dateRange[1] });
     }
 
     onCloseDialog(): void {
         this.ref.close();
     }
 
-     createFormGroup(): void {
+    createFormGroup(): void {
         this.formGroup = new FormGroup({
             dataType: new FormControl(null, Validators.required),
             dateRange: new FormControl<Date[] | null>(null, Validators.required)
         });
-     }
-    
+    }
+
     private initSettlementDataTypeToExtract(): void {
         this.settlementDataTypeToExtract = [
-            { name: 'settlement.extractOptions.inAndOut', key: ExtractDataTypeEnum.IN_AND_OUT },
-            { name: 'settlement.extractOptions.savings', key: ExtractDataTypeEnum.SAVINGS }
+            { name: 'settlement.extractOptions.inAndOut', key: ReportTypeEnum.SETTLEMENT },
+            { name: 'settlement.extractOptions.savings', key: ReportTypeEnum.INVESTMENT }
         ];
     }
 }
