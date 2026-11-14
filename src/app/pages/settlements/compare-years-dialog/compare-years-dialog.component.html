@@ -1,13 +1,6 @@
 <div>
-    <p-datepicker 
-        [ngModel]="dates" 
-        (ngModelChange)="onDateChange($event)"
-        selectionMode="multiple" 
-        view="year" 
-        dateFormat="yy" 
-        [readonlyInput]="true" 
-        appendTo="body" 
-    />
-    <p-chart type="bar" [data]="data" [options]="options"
-             ariaLabel="Roczne sumy przychodów i wydatków" class="h-[24rem]" />
+    <p-datepicker [ngModel]="dates" (ngModelChange)="onDateChange($event)" selectionMode="multiple" view="year"
+        dateFormat="yy" [readonlyInput]="true" appendTo="body" />
+    <p-chart *isLoading="loading" type="bar" [data]="data" [options]="options"
+        ariaLabel="Roczne sumy przychodów i wydatków" class="h-[24rem]" />
 </div>

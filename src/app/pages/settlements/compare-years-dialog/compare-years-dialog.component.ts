@@ -7,6 +7,7 @@ import { ChartModule } from 'primeng/chart';
 import { DatePickerModule } from 'primeng/datepicker';
 import { catchError, debounceTime, distinctUntilChanged, map, of, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { ChartData } from 'chart.js';
+import { SharedModule } from '@shared/shared.module';
 
 export interface SummarizeYearsResponse {
   labels: string[];
@@ -14,10 +15,10 @@ export interface SummarizeYearsResponse {
 }
 
 @Component({
-    selector: 'compare-years-dialog',
-    templateUrl: 'compare-years-dialog.component.html',
-    standalone: true,
-    imports: [ChartModule, DatePickerModule, FormsModule],
+  selector: 'compare-years-dialog',
+  templateUrl: 'compare-years-dialog.component.html',
+  standalone: true,
+  imports: [ChartModule, DatePickerModule, FormsModule, SharedModule],
 })
 
 export class CompareYearsDialogComponent implements OnInit, OnDestroy {
@@ -32,7 +33,7 @@ export class CompareYearsDialogComponent implements OnInit, OnDestroy {
 
   private readonly yearsChange$ = new Subject<number[]>();
   private readonly destroy$ = new Subject<void>();
-  
+
   ngOnInit(): void {
     this.loadOptions();
     this.yearsChange$
@@ -45,8 +46,8 @@ export class CompareYearsDialogComponent implements OnInit, OnDestroy {
         switchMap((years) =>
           years.length
             ? this.settlementsService
-                .getSummarizeYearsChartDataset(years)
-                .pipe(catchError(() => of(null)))
+              .getSummarizeYearsChartDataset(years)
+              .pipe(catchError(() => of(null)))
             : of(null),
         ),
         takeUntil(this.destroy$)
@@ -56,7 +57,7 @@ export class CompareYearsDialogComponent implements OnInit, OnDestroy {
         this.loading = false;
       });
   }
-  
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -69,24 +70,24 @@ export class CompareYearsDialogComponent implements OnInit, OnDestroy {
 
   private loadOptions(): void {
     this.options = {
-        maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { position: 'bottom' },
-          tooltip: {
-            callbacks: {
-              label: (ctx: any) =>
-                `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('pl-PL')} zł`,
-            },
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: (ctx: any) =>
+              `${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('pl-PL')} zł`,
           },
         },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: { callback: (v: number) => `${(v / 1000).toLocaleString('pl-PL')} tys. zł` },
-          },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: (v: number) => `${(v / 1000).toLocaleString('pl-PL')} tys. zł` },
         },
-      };
+      },
+    };
   }
 
   private toYears(dates: Date[]): number[] {
