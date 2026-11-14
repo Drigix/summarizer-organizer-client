@@ -71,11 +71,19 @@ export class DataExtractorSelectComponent implements OnInit {
         if (!dataType || !dateFrom || !dateTo) {
             return;
         }
-        if (dataType === ReportTypeEnum.SETTLEMENT) {
-            this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, dataType, fileType).subscribe((blob: Blob) => {
-                const fileName = `settlement_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
-                this.downloadBlob(blob, fileName);
-            });
+        switch (dataType) {
+            case ReportTypeEnum.SETTLEMENT:
+                this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, dataType, fileType).subscribe((blob: Blob) => {
+                    const fileName = `settlement_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
+                    this.downloadBlob(blob, fileName);
+                });
+                break;
+            case ReportTypeEnum.INVESTMENT:
+                this.dataExtractorService.extractSettlementToFile(dateFrom, dateTo, dataType, fileType).subscribe((blob: Blob) => {
+                    const fileName = `investment_${dateFrom.toISOString().split('T')[0]}_${dateTo.toISOString().split('T')[0]}.${fileType}`;
+                    this.downloadBlob(blob, fileName);
+                });
+                break;
         }
     }
 
