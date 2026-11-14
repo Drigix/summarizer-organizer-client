@@ -8,8 +8,8 @@ import { SettlementSavingService } from '@services/settlement-saving.service';
 import { SettlementsService } from '@services/settlement.service';
 import { DateUtil } from '@shared/date/date.util';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import {ConfirmationService, MessageService} from "primeng/api";
-import {TranslateService} from "@ngx-translate/core";
+import { ConfirmationService, MessageService } from "primeng/api";
+import { TranslateService } from "@ngx-translate/core";
 import { StockCompany } from '@entities/stock-company.model';
 import { MarketDataService } from '@services/market-data.service';
 import { StringUtils } from '@shared/utils/string.utils';
@@ -17,10 +17,10 @@ import { SAVING_TYPE_LIST } from 'src/app/models/constans/saving-type.const';
 import { DropdownItem } from 'src/app/models/dropdown-item.model';
 
 @Component({
-    selector: 'app-settlement-saving-dialog',
-    templateUrl: './settlement-saving-dialog.component.html',
-    styleUrls: ['./settlement-saving-dialog.component.scss'],
-    standalone: false
+  selector: 'app-settlement-saving-dialog',
+  templateUrl: './settlement-saving-dialog.component.html',
+  styleUrls: ['./settlement-saving-dialog.component.scss'],
+  standalone: false
 })
 export class SettlementSavingDialogComponent implements OnInit {
 
@@ -63,9 +63,9 @@ export class SettlementSavingDialogComponent implements OnInit {
     const priceType = this.config.data.priceType;
     const date = DateUtil.getFirstDayOfMonth(this.config.data.date);
     const settlement: SettlementSaving = this.config.data.selectedSettlement;
-    if(this.dialogType === 'edit' && settlement) {
+    if (this.dialogType === 'edit' && settlement) {
       this.formGroup.patchValue({
-        id : settlement._id,
+        id: settlement._id,
         stockSymbol: settlement.stockSymbol,
         date: new Date(settlement.date!),
         dateTo: settlement.dateTo ? new Date(settlement.dateTo) : null,
@@ -114,8 +114,8 @@ export class SettlementSavingDialogComponent implements OnInit {
     });
   }
 
-  onSavingTypeChange(value: string) {
-    if(value === 'stock' || value === 'gold' || value === 'silver') {
+  onSavingTypeChange(value?: string) {
+    if (value === 'stock' || value === 'gold' || value === 'silver') {
       this.isStockChoose = true;
       if (this.stockCompanies.length === 0) {
         this.loadStockCompanies();
@@ -127,6 +127,7 @@ export class SettlementSavingDialogComponent implements OnInit {
       this.isStockChoose = false;
       this.isCryptoChoose = false;
     }
+
   }
 
   onCloseDialog(): void {
@@ -141,7 +142,7 @@ export class SettlementSavingDialogComponent implements OnInit {
     if (this.isCryptoChoose || this.isStockChoose) {
       this.formGroup.get('dateTo')?.setValue(null);
     }
-    if(this.dialogType === 'add') {
+    if (this.dialogType === 'add') {
       const value: NewSettlementSaving = Object.assign(this.formGroup.getRawValue() as NewSettlementSaving);
       this.settlementsSavingService.createSettlementSaving(value).subscribe({
         next: () => {
@@ -204,9 +205,9 @@ export class SettlementSavingDialogComponent implements OnInit {
       header: this.translationService.instant('global.header.confirm'),
       message: this.translationService.instant('settlement.messages.sellConfirmation'),
       icon: 'pi pi-info-circle',
-      acceptIcon:"pi pi-check",
-      rejectIcon:"pi pi-times",
-      rejectButtonStyleClass:"p-button-text",
+      acceptIcon: "pi pi-check",
+      rejectIcon: "pi pi-times",
+      rejectButtonStyleClass: "p-button-text",
       accept: () => {
         this.settlementsSavingService.sellSettlementSaving(value.id, value).subscribe({
           next: () => {
